@@ -15,7 +15,6 @@ const Splash = () => {
         <Pagination DotsLength={4} activeDot={slider} />
         <TouchableOpacity style={styles.button}>
           <Text style={styles.text}>Next</Text>
-
           <RightArrow height={14} width={14} />
         </TouchableOpacity>
       </View>
