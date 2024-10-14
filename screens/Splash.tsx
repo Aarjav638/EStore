@@ -5,7 +5,12 @@ import Header from '../components/splash/Header';
 import Slider from '../components/splash/Slider';
 import Pagination from '../components/splash/Pagination';
 import RightArrow from '../assets/arrow-right.svg';
-const Splash = () => {
+import {NativeStackScreenProps} from '@react-navigation/native-stack';
+import {RootStackParamList} from '../constants/types';
+
+type splashProps = NativeStackScreenProps<RootStackParamList, 'SignIn'>;
+
+const Splash = ({navigation}: splashProps) => {
   const [slider, setSlider] = React.useState(0);
   return (
     <SafeAreaView style={styles.container}>
@@ -13,7 +18,9 @@ const Splash = () => {
       <Slider slider={slider} setSlider={setSlider} />
       <View style={styles.but_Dot_Conatiner}>
         <Pagination DotsLength={4} activeDot={slider} />
-        <TouchableOpacity style={styles.button}>
+        <TouchableOpacity
+          style={styles.button}
+          onPress={() => navigation.navigate('SignIn')}>
           <Text style={styles.text}>Next</Text>
           <RightArrow height={14} width={14} />
         </TouchableOpacity>
