@@ -1,5 +1,6 @@
 node_modules
 
+
 *.config.js
 *.config.*.js
 *.config/*.js
@@ -18,4 +19,5 @@ build/*.js
 test/*.js
 tests/*.js
 jest/*.js
-
+android/*
+ios/*
