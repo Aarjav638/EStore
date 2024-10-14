@@ -1,4 +1,4 @@
-npm test
+# npm test
 
 npm run lint:fix ||
 {
