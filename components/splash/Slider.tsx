@@ -37,7 +37,7 @@ const Slider = ({
   const handleScroll = (event: NativeSyntheticEvent<NativeScrollEvent>) => {
     const {contentOffset} = event.nativeEvent;
     const currentIndex = Math.round(
-      contentOffset.x / Dimensions.get('window').width,
+      contentOffset.x / Dimensions.get('screen').width,
     );
     setSlider(currentIndex);
   };
@@ -57,7 +57,7 @@ const Slider = ({
         ref={flatListRef}
         data={data}
         horizontal
-        keyExtractor={(item, index) => index.toString()}
+        keyExtractor={(_, index) => index.toString()}
         pagingEnabled
         bounces={false}
         showsHorizontalScrollIndicator={false}
@@ -78,7 +78,7 @@ export default Slider;
 const styles = StyleSheet.create({
   container: {
     flex: 0.7,
-
+    width: Dimensions.get('window').width,
     backgroundColor: 'transparent',
   },
   flatlistContainer: {
