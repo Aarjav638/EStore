@@ -6,7 +6,7 @@ const App = () => {
   return (
     <View style={styles.container}>
       <StatusBar
-        barStyle="light-content"
+        barStyle="dark-content"
         translucent={true}
         backgroundColor={'transparent'}
       />

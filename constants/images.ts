@@ -1,9 +1,11 @@
 /* eslint-disable @typescript-eslint/no-require-imports */
 import {Images} from './types';
 
-const Image: Images = {
+const Assets: Images = {
   google: require('../assets/google.png'),
   facebook: require('../assets/facebook.png'),
+  questionMark: require('../assets/questionMark.png'),
+  back: require('../assets/left-arrow.png'),
 };
 
-export default Image;
+export default Assets;
