@@ -2,7 +2,14 @@ import {View, Text, StyleSheet, TextInput, Dimensions} from 'react-native';
 import React from 'react';
 import CustomButton from './CustomButton';
 
-const Modal = () => {
+import {NavigationProp} from '@react-navigation/native';
+import {RootStackParamList} from '../../../constants/types';
+
+const Modal = ({
+  navigation,
+}: {
+  navigation: NavigationProp<RootStackParamList>;
+}) => {
   const [focused, setFocused] = React.useState({
     username: false,
     password: false,
@@ -65,7 +72,7 @@ const Modal = () => {
         onChangeText={setPassword}
       />
       <CustomButton
-        onPress={() => console.log('pressed')}
+        onPress={() => navigation.navigate('Verification')}
         text="Sign In"
         styles={styles.button}
         textStyle={styles.buttonText}

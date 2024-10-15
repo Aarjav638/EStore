@@ -1,7 +1,7 @@
 import {StyleSheet, Text, View} from 'react-native';
 import React from 'react';
 import CustomButton from './CustomButton';
-import Image from '../../../constants/images';
+import Assets from '../../../constants/images';
 
 const SocialLogin = () => {
   return (
@@ -11,7 +11,7 @@ const SocialLogin = () => {
         <CustomButton
           styles={styles.button}
           text="Sign In with Google"
-          icon={Image.google}
+          icon={Assets.google}
           textStyle={styles.buttonTextStyle}
           onPress={() => console.log('pressed')}
         />
@@ -19,7 +19,7 @@ const SocialLogin = () => {
           styles={styles.button}
           text="Sign In with Facebook"
           textStyle={styles.buttonTextStyle}
-          icon={Image.facebook}
+          icon={Assets.facebook}
           onPress={() => console.log('pressed >>')}
         />
       </View>
@@ -38,7 +38,7 @@ export default SocialLogin;
 const styles = StyleSheet.create({
   mainContainer: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: '#FBFBFB',
     justifyContent: 'flex-end',
     alignItems: 'center',
     padding: 20,

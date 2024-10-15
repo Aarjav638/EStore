@@ -8,6 +8,7 @@ import Home from '../../screens/Home';
 import Splash from '../../screens/Splash';
 import Filter from '../../screens/Filter';
 import {RootStackParamList} from '../../constants/types';
+import Verification from '../../screens/Auth/Verification';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
@@ -31,6 +32,7 @@ const Navigation = () => {
             presentation: 'fullScreenModal',
           }}
         />
+        <Stack.Screen name="Verification" component={Verification} />
       </Stack.Navigator>
     </NavigationContainer>
   );

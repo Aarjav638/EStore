@@ -1,20 +1,27 @@
-import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import {
+  StatusBar,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 import React from 'react';
 import {SafeAreaView} from 'react-native-safe-area-context';
-import Header from '../components/splash/Header';
-import Slider from '../components/splash/Slider';
-import Pagination from '../components/splash/Pagination';
+import Header from '../components/Splash/Header';
+import Slider from '../components/Splash/Slider';
+import Pagination from '../components/Splash/Pagination';
 import RightArrow from '../assets/arrow-right.svg';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import {RootStackParamList} from '../constants/types';
 
-type splashProps = NativeStackScreenProps<RootStackParamList, 'SignIn'>;
+type splashProps = NativeStackScreenProps<RootStackParamList, 'Splash'>;
 
 const Splash = ({navigation}: splashProps) => {
   const [slider, setSlider] = React.useState(0);
   return (
     <SafeAreaView style={styles.container}>
-      <Header />
+      <StatusBar barStyle="light-content" />
+      <Header marginTop={'6%'} />
       <Slider slider={slider} setSlider={setSlider} />
       <View style={styles.but_Dot_Conatiner}>
         <Pagination DotsLength={4} activeDot={slider} />
