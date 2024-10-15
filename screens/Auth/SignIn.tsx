@@ -16,9 +16,7 @@ const SignIn = ({navigation}: SignInProps) => {
       <StatusBar barStyle="light-content" />
       <KeyboardAwareScrollView
         contentContainerStyle={{flexGrow: 1}}
-        enableOnAndroid={true}
-        extraScrollHeight={120}
-        keyboardShouldPersistTaps="handled">
+        showsVerticalScrollIndicator={false}>
         <Header marginTop="6%" />
         <View style={styles.modalWrapper}>
           <Modal navigation={navigation} />
