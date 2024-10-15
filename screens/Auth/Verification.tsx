@@ -79,6 +79,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
     bottom: 20,
     color: '#404040',
+    fontSize: 12,
   },
   subText: {
     color: '#E21E1E',

@@ -80,6 +80,7 @@ const styles = StyleSheet.create({
     marginTop: 10,
     textAlign: 'center',
     color: '#404040',
+    fontSize: 12,
   },
   subText: {
     color: '#E21E1E',

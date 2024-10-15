@@ -1,6 +1,5 @@
-import {View, StyleSheet} from 'react-native';
+import {View, StyleSheet, Text} from 'react-native';
 import React from 'react';
-import {Text} from 'react-native-svg';
 const SignUp = () => {
   return (
     <View style={styles.container}>
