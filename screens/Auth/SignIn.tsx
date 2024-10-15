@@ -1,4 +1,4 @@
-import {Dimensions, StatusBar, StyleSheet, View} from 'react-native';
+import {Dimensions, StyleSheet, View} from 'react-native';
 import React from 'react';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import Header from '../../components/Splash/Header';
@@ -13,7 +13,6 @@ export type SignInProps = NativeStackScreenProps<RootStackParamList, 'SignIn'>;
 const SignIn = ({navigation}: SignInProps) => {
   return (
     <SafeAreaView style={styles.container}>
-      <StatusBar barStyle="light-content" />
       <KeyboardAwareScrollView
         contentContainerStyle={{flexGrow: 1}}
         showsVerticalScrollIndicator={false}>

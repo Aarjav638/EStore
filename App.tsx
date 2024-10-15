@@ -5,11 +5,7 @@ import Navigation from './components/Navigation/Navigation';
 const App = () => {
   return (
     <View style={styles.container}>
-      <StatusBar
-        barStyle="dark-content"
-        translucent={true}
-        backgroundColor={'transparent'}
-      />
+      <StatusBar translucent={true} backgroundColor={'transparent'} />
       <Navigation />
     </View>
   );

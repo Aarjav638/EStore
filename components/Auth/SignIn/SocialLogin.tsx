@@ -9,14 +9,14 @@ const SocialLogin = () => {
       <Text style={styles.or}>- OR -</Text>
       <View style={styles.buttonContainer}>
         <CustomButton
-          styles={styles.button}
+          customStyles={styles.button}
           text="Sign In with Google"
           icon={Assets.google}
           textStyle={styles.buttonTextStyle}
           onPress={() => console.log('pressed')}
         />
         <CustomButton
-          styles={styles.button}
+          customStyles={styles.button}
           text="Sign In with Facebook"
           textStyle={styles.buttonTextStyle}
           icon={Assets.facebook}
@@ -39,11 +39,12 @@ const styles = StyleSheet.create({
   mainContainer: {
     flex: 1,
     backgroundColor: '#FBFBFB',
-    justifyContent: 'flex-end',
     alignItems: 'center',
     padding: 20,
   },
   or: {
+    position: 'relative',
+    top: 110,
     marginVertical: 20,
     textAlign: 'center',
     fontSize: 18,
@@ -51,6 +52,8 @@ const styles = StyleSheet.create({
     color: '#707070',
   },
   buttonContainer: {
+    position: 'relative',
+    top: 100,
     width: '100%',
     alignItems: 'center',
     rowGap: 10,
@@ -60,24 +63,16 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     elevation: 5,
     borderColor: 'grey',
-    padding: 10,
     paddingHorizontal: 20,
-    borderRadius: 20,
-    width: '80%',
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginBottom: 10,
   },
   buttonTextStyle: {
     color: '#000',
-    fontSize: 14,
-    fontWeight: 'bold',
-    textAlign: 'center',
     textTransform: 'capitalize',
     flex: 1,
   },
   accountText: {
-    marginTop: 10,
+    position: 'absolute',
+    bottom: 20,
     textAlign: 'center',
     color: '#404040',
     fontSize: 12,

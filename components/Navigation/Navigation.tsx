@@ -9,6 +9,7 @@ import Splash from '../../screens/Splash';
 import Filter from '../../screens/Filter';
 import {RootStackParamList} from '../../constants/types';
 import Verification from '../../screens/Auth/Verification';
+import Welcome from '../../screens/Welcome';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
@@ -21,9 +22,11 @@ const Navigation = () => {
           headerShown: false,
         }}>
         <Stack.Screen name="Splash" component={Splash} />
-        <Stack.Screen name="Home" component={Home} />
         <Stack.Screen name="SignUp" component={SignUp} />
         <Stack.Screen name="SignIn" component={SignIn} />
+        <Stack.Screen name="Verification" component={Verification} />
+        <Stack.Screen name="Welcome" component={Welcome} />
+        <Stack.Screen name="Home" component={Home} />
         <Stack.Screen
           name="Filter"
           component={Filter}
@@ -32,7 +35,6 @@ const Navigation = () => {
             presentation: 'fullScreenModal',
           }}
         />
-        <Stack.Screen name="Verification" component={Verification} />
       </Stack.Navigator>
     </NavigationContainer>
   );

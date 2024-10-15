@@ -7,6 +7,7 @@ export type RootStackParamList = {
   SignIn: undefined;
   Filter: undefined;
   Verification: undefined;
+  Welcome: undefined;
 };
 
 export type Images = {
@@ -14,4 +15,5 @@ export type Images = {
   facebook: ImageSourcePropType;
   questionMark: ImageSourcePropType;
   back: ImageSourcePropType;
+  avatar: ImageSourcePropType;
 };

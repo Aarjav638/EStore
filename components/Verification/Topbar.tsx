@@ -6,7 +6,13 @@ import {RootStackParamList} from '../../constants/types';
 
 type TopbarNavigationProp = NavigationProp<RootStackParamList>;
 
-const Topbar = ({navigation}: {navigation: TopbarNavigationProp}) => {
+const Topbar = ({
+  navigation,
+  text,
+}: {
+  navigation: TopbarNavigationProp;
+  text: string;
+}) => {
   return (
     <View style={styles.container}>
       <TouchableOpacity
@@ -16,7 +22,7 @@ const Topbar = ({navigation}: {navigation: TopbarNavigationProp}) => {
         <Image source={Assets.back} style={styles.Image} />
       </TouchableOpacity>
       <Text style={styles.signUp} onPress={() => navigation.navigate('SignUp')}>
-        Sign Up
+        {text}
       </Text>
     </View>
   );
@@ -27,8 +33,8 @@ export default Topbar;
 const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
-    flex: 0.08,
-    marginTop: '5%',
+    height: '5%',
+    marginTop: 10,
     width: '100%',
     paddingHorizontal: 28,
     justifyContent: 'space-between',
