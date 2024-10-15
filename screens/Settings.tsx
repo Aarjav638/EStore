@@ -1,15 +1,16 @@
-import {View, Text, StyleSheet} from 'react-native';
+import {StyleSheet, Text, View} from 'react-native';
 import React from 'react';
 
-const Filter = () => {
+const Settings = () => {
   return (
     <View style={styles.container}>
-      <Text style={{color: '#111'}}>Filter</Text>
+      <Text style={{color: '#111'}}>Settings</Text>
     </View>
   );
 };
 
-export default Filter;
+export default Settings;
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,

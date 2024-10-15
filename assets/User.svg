@@ -1,7 +1,7 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-  <g id="User" transform="translate(0.739)" opacity="0.298">
-    <g id="Group_9197" data-name="Group 9197" transform="translate(-0.739)">
-      <path id="Path_3694" data-name="Path 3694" d="M20.485,15.515a11.954,11.954,0,0,0-4.56-2.86,6.938,6.938,0,1,0-7.85,0A12.019,12.019,0,0,0,0,24H1.875a10.125,10.125,0,0,1,20.25,0H24A11.922,11.922,0,0,0,20.485,15.515ZM12,12a5.062,5.062,0,1,1,5.063-5.062A5.068,5.068,0,0,1,12,12Z" transform="translate(0 0)"/>
-    </g>
-  </g>
-</svg>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<!-- Uploaded to: SVG Repo, www.svgrepo.com, Transformed by: SVG Repo Mixer Tools -->
+<svg width="167px" height="167px" viewBox="-2.4 -2.4 28.80 28.80" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="#ddd">
+<g id="SVGRepo_bgCarrier" stroke-width="0"/>
+<g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round" stroke="#CCCCCC" stroke-width="0.048"/>
+<g id="SVGRepo_iconCarrier"> <path d="M5 21C5 17.134 8.13401 14 12 14C15.866 14 19 17.134 19 21M16 7C16 9.20914 14.2091 11 12 11C9.79086 11 8 9.20914 8 7C8 4.79086 9.79086 3 12 3C14.2091 3 16 4.79086 16 7Z" stroke="#ddd" stroke-width="0.72" stroke-linecap="round" stroke-linejoin="round"/> </g>
+</svg>

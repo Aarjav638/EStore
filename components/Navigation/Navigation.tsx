@@ -4,12 +4,11 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import React from 'react';
 import SignIn from '../../screens/Auth/SignIn';
 import SignUp from '../../screens/Auth/SignUp';
-import Home from '../../screens/Home';
 import Splash from '../../screens/Splash';
-import Filter from '../../screens/Filter';
 import {RootStackParamList} from '../../constants/types';
 import Verification from '../../screens/Auth/Verification';
 import Welcome from '../../screens/Welcome';
+import BottomTabNavigation from '../BottomTabNavigation';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
@@ -26,15 +25,7 @@ const Navigation = () => {
         <Stack.Screen name="SignIn" component={SignIn} />
         <Stack.Screen name="Verification" component={Verification} />
         <Stack.Screen name="Welcome" component={Welcome} />
-        <Stack.Screen name="Home" component={Home} />
-        <Stack.Screen
-          name="Filter"
-          component={Filter}
-          options={{
-            animation: 'slide_from_bottom',
-            presentation: 'fullScreenModal',
-          }}
-        />
+        <Stack.Screen name="bottomNavigator" component={BottomTabNavigation} />
       </Stack.Navigator>
     </NavigationContainer>
   );

@@ -16,6 +16,7 @@ const Otp = () => {
       theme={{
         containerStyle: styles.container,
         pinCodeContainerStyle: styles.pinCodeContainer,
+        pinCodeTextStyle: {color: '#1b1b1bb3'},
       }}
     />
   );
