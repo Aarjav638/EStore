@@ -1,22 +1,21 @@
-import {StyleSheet} from 'react-native';
+import {Keyboard, StyleSheet} from 'react-native';
 import React from 'react';
 import {OtpInput} from 'react-native-otp-entry';
 const Otp = () => {
-  const handleFilledOtp = (text: string) => console.log(text);
+  const handleFilledOtp = (text: string) => {
+    console.log(text);
+    Keyboard.dismiss();
+  };
 
   return (
     <OtpInput
       numberOfDigits={5}
       focusColor="#FA4248"
       hideStick={true}
-      onTextChange={(text: string) => console.log(text)}
       onFilled={(text: string) => handleFilledOtp(text)}
       theme={{
         containerStyle: styles.container,
         pinCodeContainerStyle: styles.pinCodeContainer,
-        // pinCodeTextStyle: styles.pinCodeText,
-        // focusStickStyle: styles.focusStick,
-        // focusedPinCodeContainerStyle: styles.activePinCodeContainer,
       }}
     />
   );
