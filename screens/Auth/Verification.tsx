@@ -1,4 +1,4 @@
-import {Dimensions, Image, StyleSheet, Text} from 'react-native';
+import {Dimensions, Image, StatusBar, StyleSheet, Text} from 'react-native';
 import React from 'react';
 import Assets from '../../constants/images';
 import Header from '../../components/Splash/Header';
@@ -19,18 +19,17 @@ type VerificationProps = NativeStackScreenProps<
 const Verification = ({navigation}: VerificationProps) => {
   return (
     <SafeAreaView style={styles.container}>
+      <StatusBar barStyle="dark-content" />
       <KeyboardAwareScrollView
         contentContainerStyle={{flexGrow: 1, alignItems: 'center'}}>
-        <Topbar navigation={navigation} />
+        <Topbar navigation={navigation} text="Sign Up" />
         <Header color="#151515" />
         <Image source={Assets.questionMark} style={styles.Image} />
         <VerificationText />
         <Otp />
         <CustomButton
-          onPress={() => navigation.navigate('Home')}
+          onPress={() => navigation.navigate('Welcome')}
           text="Continue"
-          styles={styles.button}
-          textStyle={styles.buttonText}
         />
         <Text style={styles.accountText}>
           Don&apos;t Have an Account?{' '}
@@ -57,22 +56,7 @@ const styles = StyleSheet.create({
     width: '60%',
     resizeMode: 'contain',
   },
-  button: {
-    backgroundColor: '#FA4248',
-    padding: 10,
-    marginTop: 8,
-    borderRadius: 20,
-    width: '80%',
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  buttonText: {
-    color: '#fff',
-    fontSize: 16,
-    fontWeight: 'bold',
-    textAlign: 'center',
-  },
+
   accountText: {
     marginTop: 10,
     textAlign: 'center',

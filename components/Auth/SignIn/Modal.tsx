@@ -74,8 +74,7 @@ const Modal = ({
       <CustomButton
         onPress={() => navigation.navigate('Verification')}
         text="Sign In"
-        styles={styles.button}
-        textStyle={styles.buttonText}
+        customStyles={styles.button}
       />
     </View>
   );
@@ -115,19 +114,6 @@ const styles = StyleSheet.create({
     padding: 10,
   },
   button: {
-    backgroundColor: '#FA4248',
-    padding: 14,
     marginTop: 20,
-    borderRadius: 20,
-    width: '80%',
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  buttonText: {
-    color: '#fff',
-    fontSize: 16,
-    fontWeight: 'bold',
-    textAlign: 'center',
   },
 });

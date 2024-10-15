@@ -6,6 +6,7 @@ const Assets: Images = {
   facebook: require('../assets/facebook.png'),
   questionMark: require('../assets/questionMark.png'),
   back: require('../assets/left-arrow.png'),
+  avatar: require('../assets/avatar.png'),
 };
 
 export default Assets;
