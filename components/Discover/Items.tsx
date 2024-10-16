@@ -12,37 +12,41 @@ import Assets from '../../constants/images';
 
 import {Item} from '../../constants/types';
 
-const ItemView = ({
-  item,
-  index,
-  handleHeartClick,
-  clickedItems,
-}: {
-  item: Item;
-  index: number;
-  handleHeartClick: (index: number) => void;
-  clickedItems: {
-    [key: number]: boolean;
-  };
-}) => {
-  return (
-    <View style={styles.itemContainer}>
-      <Image source={{uri: item.image_url}} style={styles.image} />
-      <Text style={styles.itemName}>{item.name}</Text>
-      <Text style={styles.itemCategory}>{item.category}</Text>
-      <Text style={styles.itemPrice}>${item.price}</Text>
-      <Image style={styles.basket} source={Assets.basket} />
-      <TouchableOpacity
-        style={styles.heartWrapper}
-        onPress={() => handleHeartClick(index)}>
-        <Image
-          style={styles.heart}
-          source={clickedItems[index] ? Assets.heart : Assets.heartUnfilled}
-        />
-      </TouchableOpacity>
-    </View>
-  );
-};
+const ItemView = React.memo(
+  ({
+    item,
+    index,
+    handleHeartClick,
+    clickedItems,
+  }: {
+    item: Item;
+    index: number;
+    handleHeartClick: (index: number) => void;
+    clickedItems: {
+      [key: number]: boolean;
+    };
+  }) => {
+    return (
+      <View style={styles.itemContainer}>
+        <Image source={{uri: item.image_url}} style={styles.image} />
+        <Text style={styles.itemName}>{item.name}</Text>
+        <Text style={styles.itemCategory}>{item.category}</Text>
+        <Text style={styles.itemPrice}>${item.price}</Text>
+        <Image style={styles.basket} source={Assets.basket} />
+        <TouchableOpacity
+          style={styles.heartWrapper}
+          onPress={() => handleHeartClick(index)}>
+          <Image
+            style={styles.heart}
+            source={clickedItems[index] ? Assets.heart : Assets.heartUnfilled}
+          />
+        </TouchableOpacity>
+      </View>
+    );
+  },
+);
+
+ItemView.displayName = 'ItemView';
 
 const Items = ({
   selected,
@@ -104,6 +108,7 @@ const Items = ({
         bounces={false}
         columnWrapperStyle={styles.column}
         data={filteredData}
+        windowSize={10}
         renderItem={renderItem}
         maxToRenderPerBatch={6}
         initialNumToRender={6}
