@@ -10,10 +10,32 @@ export type RootStackParamList = {
   bottomNavigator: undefined;
 };
 
+export type BottomNavigationList = {
+  Home: undefined;
+  Cart: undefined;
+  Settings: undefined;
+  User: undefined;
+};
+
 export type Images = {
   google: ImageSourcePropType;
   facebook: ImageSourcePropType;
   questionMark: ImageSourcePropType;
   back: ImageSourcePropType;
   avatar: ImageSourcePropType;
+  menu: ImageSourcePropType;
+  search: ImageSourcePropType;
+  filter: ImageSourcePropType;
+  heart: ImageSourcePropType;
+  heartUnfilled: ImageSourcePropType;
+  basket: ImageSourcePropType;
+};
+
+export type Item = {
+  name: string;
+  category: string;
+  brand: string;
+  price: number;
+  rating: number;
+  image_url: string;
 };

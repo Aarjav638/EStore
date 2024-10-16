@@ -8,8 +8,9 @@ import Filter from '../screens/Filter';
 import Cart from '../assets/cart.svg';
 import Gear from '../assets/Settings.svg';
 import Settings from '../screens/Settings';
+import {BottomNavigationList} from '../constants/types';
 
-const Tab = createBottomTabNavigator();
+const Tab = createBottomTabNavigator<BottomNavigationList>();
 const BottomTabNavigation = () => {
   return (
     <Tab.Navigator
@@ -40,7 +41,7 @@ const BottomTabNavigation = () => {
         }}
       />
       <Tab.Screen
-        name="Filter"
+        name="Cart"
         component={Filter}
         options={{
           tabBarIcon: ({focused, color}) => (
@@ -139,7 +140,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-around',
     width: '100%',
-    height: 67,
+    height: 70,
     padding: 20,
     paddingHorizontal: 25,
     backgroundColor: 'white',

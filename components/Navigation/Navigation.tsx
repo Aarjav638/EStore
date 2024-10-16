@@ -9,6 +9,7 @@ import {RootStackParamList} from '../../constants/types';
 import Verification from '../../screens/Auth/Verification';
 import Welcome from '../../screens/Welcome';
 import BottomTabNavigation from '../BottomTabNavigation';
+import Filter from '../../screens/Filter';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
@@ -25,6 +26,14 @@ const Navigation = () => {
         <Stack.Screen name="SignIn" component={SignIn} />
         <Stack.Screen name="Verification" component={Verification} />
         <Stack.Screen name="Welcome" component={Welcome} />
+        <Stack.Screen
+          name="Filter"
+          component={Filter}
+          options={{
+            animation: 'slide_from_bottom',
+            presentation: 'fullScreenModal',
+          }}
+        />
         <Stack.Screen name="bottomNavigator" component={BottomTabNavigation} />
       </Stack.Navigator>
     </NavigationContainer>
