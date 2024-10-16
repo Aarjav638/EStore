@@ -82,7 +82,7 @@ const Items = ({
   };
   const renderFooter = () => {
     if (!loading) return null;
-    return <ActivityIndicator size="large" color="#0000ff" />;
+    return <ActivityIndicator size="large" color="#FA4248" />;
   };
   const renderItem = useCallback(
     ({item, index}: {item: Item; index: number}) => (
