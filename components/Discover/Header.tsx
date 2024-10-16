@@ -1,21 +1,20 @@
 import {View, Text, StyleSheet, Image, ImageSourcePropType} from 'react-native';
 import React from 'react';
+import Assets from '../../constants/images';
 
 const Header = ({
   text,
   Searchasset,
-  menuAsset,
   filterAsset,
 }: {
   text: string;
   Searchasset?: ImageSourcePropType;
-  menuAsset: ImageSourcePropType;
   filterAsset?: ImageSourcePropType;
 }) => {
   return (
     <View style={styles.container}>
       <Image
-        source={menuAsset}
+        source={Assets.menu}
         style={{...styles.image, tintColor: '#111', height: 28, width: 30}}
       />
       <Text style={styles.text}>{text}</Text>

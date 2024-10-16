@@ -34,6 +34,7 @@ export type Images = {
 export type Item = {
   name: string;
   category: string;
+  color?: string;
   brand: string;
   price: number;
   rating: number;

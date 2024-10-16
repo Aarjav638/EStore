@@ -8,13 +8,14 @@ import Items from '../components/Discover/Items';
 import FilterView from '../components/Discover/FilterView';
 import {RootStackParamList} from '../constants/types';
 import {NavigationProp} from '@react-navigation/native';
-const data = [
+export const data = [
   {
     name: 'Classic T-Shirt',
     category: 'Men',
     brand: "Levi's",
     price: 25.99,
     rating: 4.5,
+    color: 'black',
     image_url: 'https://dummyimage.com/200x200/000/fff&text=Classic+T-Shirt',
   },
   {
@@ -23,6 +24,7 @@ const data = [
     brand: 'Wrangler',
     price: 45.99,
     rating: 4.3,
+    color: 'blue',
     image_url: 'https://dummyimage.com/200x200/000/fff&text=Slim+Fit+Jeans',
   },
   {
@@ -31,6 +33,7 @@ const data = [
     brand: 'Zara',
     price: 39.99,
     rating: 4.6,
+    color: 'floral',
     image_url: 'https://dummyimage.com/200x200/000/fff&text=Floral+Dress',
   },
   {
@@ -39,6 +42,7 @@ const data = [
     brand: 'Nike',
     price: 59.99,
     rating: 4.8,
+    color: 'black',
     image_url: 'https://dummyimage.com/200x200/000/fff&text=Oversized+Hoodie',
   },
   {
@@ -47,6 +51,7 @@ const data = [
     brand: 'Gap',
     price: 29.99,
     rating: 4.2,
+    color: 'khaki',
     image_url: 'https://dummyimage.com/200x200/000/fff&text=Chino+Shorts',
   },
   {
@@ -55,6 +60,7 @@ const data = [
     brand: 'H&M',
     price: 34.99,
     rating: 4.4,
+    color: 'white',
     image_url: 'https://dummyimage.com/200x200/000/fff&text=Silk+Blouse',
   },
   {
@@ -63,6 +69,7 @@ const data = [
     brand: 'Adidas',
     price: 89.99,
     rating: 4.9,
+    color: 'white',
     image_url: 'https://dummyimage.com/200x200/000/fff&text=Running+Shoes',
   },
   {
@@ -71,6 +78,7 @@ const data = [
     brand: 'Ralph Lauren',
     price: 49.99,
     rating: 4.7,
+    color: 'blue',
     image_url: 'https://dummyimage.com/200x200/000/fff&text=Polo+Shirt',
   },
   {
@@ -79,6 +87,7 @@ const data = [
     brand: "Levi's",
     price: 69.99,
     rating: 4.5,
+    color: 'blue',
     image_url: 'https://dummyimage.com/200x200/000/fff&text=Denim+Jacket',
   },
   {
@@ -87,6 +96,7 @@ const data = [
     brand: 'Lululemon',
     price: 79.99,
     rating: 4.8,
+    color: 'black',
     image_url: 'https://dummyimage.com/200x200/000/fff&text=Yoga+Pants',
   },
   {
@@ -94,6 +104,7 @@ const data = [
     category: 'Men',
     brand: 'Supreme',
     price: 39.99,
+    color: 'white',
     rating: 4.6,
     image_url: 'https://dummyimage.com/200x200/000/fff&text=Graphic+T-Shirt',
   },
@@ -103,6 +114,7 @@ const data = [
     brand: 'Free People',
     price: 59.99,
     rating: 4.3,
+    color: 'floral',
     image_url: 'https://dummyimage.com/200x200/000/fff&text=Maxi+Skirt',
   },
   {
@@ -110,6 +122,7 @@ const data = [
     category: 'Best Sellers',
     brand: 'Converse',
     price: 69.99,
+    color: 'white',
     rating: 4.7,
     image_url: 'https://dummyimage.com/200x200/000/fff&text=High-Top+Sneakers',
   },
@@ -118,6 +131,7 @@ const data = [
     category: 'Men',
     brand: 'Dockers',
     price: 44.99,
+    color: 'khaki',
     rating: 4.2,
     image_url: 'https://dummyimage.com/200x200/000/fff&text=Cargo+Pants',
   },
@@ -127,6 +141,7 @@ const data = [
     brand: 'Michael Kors',
     price: 129.99,
     rating: 4.6,
+    color: 'black',
     image_url: 'https://dummyimage.com/200x200/000/fff&text=Leather+Jacket',
   },
   {
@@ -134,6 +149,7 @@ const data = [
     category: 'Best Sellers',
     brand: 'Champion',
     price: 34.99,
+    color: 'black',
     rating: 4.5,
     image_url: 'https://dummyimage.com/200x200/000/fff&text=Sweatpants',
   },
@@ -143,6 +159,7 @@ const data = [
     brand: 'Zara',
     price: 99.99,
     rating: 4.4,
+    color: 'black',
     image_url: 'https://dummyimage.com/200x200/000/fff&text=Casual+Blazer',
   },
   {
@@ -151,6 +168,7 @@ const data = [
     brand: 'Gucci',
     price: 249.99,
     rating: 4.9,
+    color: 'red',
     image_url: 'https://dummyimage.com/200x200/000/fff&text=Evening+Gown',
   },
   {
@@ -158,6 +176,7 @@ const data = [
     category: 'Best Sellers',
     brand: 'New Era',
     price: 24.99,
+    color: 'black',
     rating: 4.7,
     image_url: 'https://dummyimage.com/200x200/000/fff&text=Baseball+Cap',
   },
@@ -167,10 +186,11 @@ const data = [
     brand: 'Tommy Hilfiger',
     price: 54.99,
     rating: 4.5,
+    color: 'blue',
     image_url: 'https://dummyimage.com/200x200/000/fff&text=Button-Down+Shirt',
   },
 ];
-const menuItems = [
+export const menuItems = [
   {
     name: 'All',
     id: 0,
@@ -196,11 +216,7 @@ const Discover = ({navigation}: {navigation: DiscoverProps}) => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <Header
-        text={'Discover'}
-        Searchasset={Assets.search}
-        menuAsset={Assets.menu}
-      />
+      <Header text={'Discover'} Searchasset={Assets.search} />
       <MenuSection
         menuItems={menuItems}
         setSelected={setSelected}
@@ -219,6 +235,7 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     height: '100%',
+    backgroundColor: '#fff',
     width: Dimensions.get('window').width,
   },
 });
