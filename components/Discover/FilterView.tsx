@@ -2,11 +2,11 @@ import {StyleSheet, Text, View} from 'react-native';
 import React from 'react';
 import CustomButton from '../Auth/SignIn/CustomButton';
 import {NavigationProp} from '@react-navigation/native';
-import {RootStackParamList} from '../../constants/types';
+import {DiscoverStackParams} from '../../constants/types';
 const FilterView = ({
   navigation,
 }: {
-  navigation: NavigationProp<RootStackParamList, 'bottomNavigator'>;
+  navigation: NavigationProp<DiscoverStackParams, 'Home'>;
 }) => {
   return (
     <View style={styles.container}>

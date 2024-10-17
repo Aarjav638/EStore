@@ -10,6 +10,8 @@ import Popularity from '../components/Filter/Popularity';
 import ShippedFrom from '../components/Filter/ShippedFrom';
 import Sections from '../components/Filter/Section';
 import CustomButton from '../components/Auth/SignIn/CustomButton';
+import {NavigationProp} from '@react-navigation/native';
+import {DiscoverStackParams} from '../constants/types';
 
 const brands = new Set<string>();
 data.forEach(item => {
@@ -35,7 +37,11 @@ function joinRatings(selectedRatings: number[]) {
   return `${selectedRatings.slice(0, 3).join(' star, ')} star`;
 }
 
-const Filter = () => {
+const Filter = ({
+  navigation,
+}: {
+  navigation: NavigationProp<DiscoverStackParams, 'Home'>;
+}) => {
   const [selected, setSelected] = useState(0);
   const [values, setValues] = useState([120, 1200]);
   const [selectedBrands, setSelectedBrands] = useState<string[]>([]);
@@ -43,7 +49,11 @@ const Filter = () => {
   const [selectedRatings, setSelectedRatings] = useState<number[]>([]);
   return (
     <SafeAreaView style={styles.container}>
-      <Header text="Filter" Searchasset={Assets.search} />
+      <Header
+        text="Filter"
+        Searchasset={Assets.search}
+        navigation={navigation}
+      />
       <MenuSection
         menuItems={menuItems}
         selected={selected}

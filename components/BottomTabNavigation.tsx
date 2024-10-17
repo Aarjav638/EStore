@@ -9,6 +9,7 @@ import Cart from '../assets/cart.svg';
 import Gear from '../assets/Settings.svg';
 import Settings from '../screens/Settings';
 import {BottomNavigationList} from '../constants/types';
+import DiscoverStack from './Navigation/DiscoverStack';
 
 const Tab = createBottomTabNavigator<BottomNavigationList>();
 const BottomTabNavigation = () => {
@@ -23,8 +24,8 @@ const BottomTabNavigation = () => {
           headerShown: false,
         }}>
         <Tab.Screen
-          name="Home"
-          component={Discover}
+          name="Discover"
+          component={DiscoverStack}
           options={{
             tabBarIcon: ({focused, color}) => (
               <View

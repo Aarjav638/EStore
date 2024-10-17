@@ -6,7 +6,7 @@ import Assets from '../constants/images';
 import MenuSection from '../components/Discover/MenuSection';
 import Items from '../components/Discover/Items';
 import FilterView from '../components/Discover/FilterView';
-import {RootStackParamList} from '../constants/types';
+import {DiscoverStackParams} from '../constants/types';
 import {NavigationProp} from '@react-navigation/native';
 export const data = [
   {
@@ -14,6 +14,24 @@ export const data = [
     category: 'Men',
     brand: "Levi's",
     price: 25.99,
+    rating: 4.5,
+    color: 'black',
+    image_url: 'https://dummyimage.com/200x200/000/fff&text=Classic+T-Shirt',
+  },
+  {
+    name: 'Classic T-Shirt',
+    category: 'Men',
+    brand: "Levi's",
+    price: 45.99,
+    rating: 4.5,
+    color: 'black',
+    image_url: 'https://dummyimage.com/200x200/000/fff&text=Classic+T-Shirt',
+  },
+  {
+    name: 'Classic T-Shirt',
+    category: 'Men',
+    brand: "Levi's",
+    price: 55.99,
     rating: 4.5,
     color: 'black',
     image_url: 'https://dummyimage.com/200x200/000/fff&text=Classic+T-Shirt',
@@ -209,14 +227,18 @@ export const menuItems = [
   },
 ];
 
-type DiscoverProps = NavigationProp<RootStackParamList, 'bottomNavigator'>;
+type DiscoverProps = NavigationProp<DiscoverStackParams, 'Home'>;
 
 const Discover = ({navigation}: {navigation: DiscoverProps}) => {
   const [selected, setSelected] = React.useState(0);
 
   return (
     <SafeAreaView style={styles.container}>
-      <Header text={'Discover'} Searchasset={Assets.search} />
+      <Header
+        navigation={navigation}
+        text={'Discover'}
+        Searchasset={Assets.search}
+      />
       <MenuSection
         menuItems={menuItems}
         setSelected={setSelected}
