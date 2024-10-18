@@ -20,7 +20,7 @@ import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 const Search = ({
   navigation,
 }: {
-  navigation: NavigationProp<DiscoverStackParams, 'Home'>;
+  navigation: NavigationProp<DiscoverStackParams, 'Search'>;
 }) => {
   const [searchQuery, setSearchQuery] = React.useState<string>('');
   const decounceSearchQuery = useDebounce(searchQuery, 300);

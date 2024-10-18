@@ -10,11 +10,18 @@ export type RootStackParamList = {
 };
 
 export type BottomNavigationList = {
-  Discover: undefined;
   Cart: undefined;
   Settings: undefined;
   User: undefined;
+  Drawer: undefined;
 };
+
+export type DrawerParamList = {
+  Discover: undefined;
+  Categories: undefined;
+  Search: undefined;
+};
+
 export type DiscoverStackParams = {
   Home: undefined;
 
@@ -23,9 +30,18 @@ export type DiscoverStackParams = {
   SearchResults: {
     result: string;
   };
-
   Filter: undefined;
 };
+
+export type CategoryStackParams = {
+  Category: undefined;
+  Category1: {
+    title: string;
+  };
+  Products: undefined;
+  Search: undefined;
+};
+
 export type Images = {
   google: ImageSourcePropType;
   facebook: ImageSourcePropType;

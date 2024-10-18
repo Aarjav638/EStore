@@ -24,7 +24,6 @@ const DiscoverStack = () => {
         component={Filter}
         options={{
           animation: 'slide_from_bottom',
-          headerShown: false,
         }}
       />
     </Stack.Navigator>

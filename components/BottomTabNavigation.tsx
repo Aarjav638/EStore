@@ -9,7 +9,7 @@ import Cart from '../assets/cart.svg';
 import Gear from '../assets/Settings.svg';
 import Settings from '../screens/Settings';
 import {BottomNavigationList} from '../constants/types';
-import DiscoverStack from './Navigation/DiscoverStack';
+import MyDrawer from './Navigation/Drawer';
 
 const Tab = createBottomTabNavigator<BottomNavigationList>();
 const BottomTabNavigation = () => {
@@ -24,8 +24,8 @@ const BottomTabNavigation = () => {
           headerShown: false,
         }}>
         <Tab.Screen
-          name="Discover"
-          component={DiscoverStack}
+          name="Drawer"
+          component={MyDrawer}
           options={{
             tabBarIcon: ({focused, color}) => (
               <View
@@ -113,23 +113,18 @@ const BottomTabNavigation = () => {
           component={Settings}
           options={{
             tabBarIcon: ({focused, color}) => (
-              console.log(color),
-              (
-                <View
-                  style={{
-                    flexDirection: 'row',
-                    columnGap: 5,
+              <View
+                style={{
+                  flexDirection: 'row',
+                  columnGap: 5,
 
-                    width: 52,
-                    alignItems: 'center',
-                    marginBottom: 10,
-                  }}>
-                  <Gear fill={color} height={20} width={20} />
-                  <Text style={{color: color}}>
-                    {focused ? 'Settings' : ''}
-                  </Text>
-                </View>
-              )
+                  width: 52,
+                  alignItems: 'center',
+                  marginBottom: 10,
+                }}>
+                <Gear fill={color} height={20} width={20} />
+                <Text style={{color: color}}>{focused ? 'Settings' : ''}</Text>
+              </View>
             ),
           }}
         />

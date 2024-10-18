@@ -25,7 +25,6 @@ const Navigation = () => {
         <Stack.Screen name="SignIn" component={SignIn} />
         <Stack.Screen name="Verification" component={Verification} />
         <Stack.Screen name="Welcome" component={Welcome} />
-
         <Stack.Screen name="bottomNavigator" component={BottomTabNavigation} />
       </Stack.Navigator>
     </NavigationContainer>

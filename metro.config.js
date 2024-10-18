@@ -1,6 +1,9 @@
-// eslint-disable-next-line @typescript-eslint/no-require-imports
+/* eslint-disable @typescript-eslint/no-require-imports */
 const { getDefaultConfig, mergeConfig } = require('@react-native/metro-config');
 const svgTransformer = require.resolve('react-native-svg-transformer');
+const {
+  wrapWithReanimatedMetroConfig} = require('react-native-reanimated/metro-config');
+
 
 /**
  * Metro configuration
@@ -18,4 +21,4 @@ const config = {
   },
 };
 
-module.exports = mergeConfig(getDefaultConfig(__dirname), config);
+module.exports = mergeConfig(getDefaultConfig(__dirname), wrapWithReanimatedMetroConfig(config));
