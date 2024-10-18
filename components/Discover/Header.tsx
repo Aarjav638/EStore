@@ -8,41 +8,60 @@ import {
 } from 'react-native';
 import React from 'react';
 import Assets from '../../constants/images';
-import {NavigationProp} from '@react-navigation/native';
-import {DiscoverStackParams} from '../../constants/types';
+import {DrawerActions} from '@react-navigation/native';
 
 const Header = ({
   text,
   Searchasset,
   filterAsset,
+  textStyle,
+  imageStyle,
+  menuIconStyle,
   navigation,
 }: {
   text: string;
   Searchasset?: ImageSourcePropType;
   filterAsset?: ImageSourcePropType;
-  navigation?:
-    | NavigationProp<DiscoverStackParams, 'Home'>
-    | NavigationProp<DiscoverStackParams, 'SearchResults'>;
+  textStyle?: Record<string, string | number>;
+  imageStyle?: Record<string, string | number>;
+  menuIconStyle?: Record<string, string | number>;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  navigation?: any;
 }) => {
   return (
     <View style={styles.container}>
-      <Image
-        source={Assets.menu}
-        style={{...styles.image, tintColor: '#111', height: 28, width: 30}}
-      />
-      <Text style={styles.text}>{text}</Text>
+      <TouchableOpacity
+        onPress={() => navigation?.dispatch(DrawerActions.openDrawer())}>
+        <Image
+          source={Assets.menu}
+          style={{
+            ...styles.image,
+            tintColor: '#111',
+            height: 28,
+            width: 30,
+            ...menuIconStyle,
+          }}
+        />
+      </TouchableOpacity>
+      <Text style={{...styles.text, ...textStyle}}>{text}</Text>
       <View style={{flexDirection: 'row', columnGap: 8}}>
         {Searchasset && (
           <TouchableOpacity
             onPress={() => (
               console.log('search presssed'), navigation?.navigate('Search')
             )}>
-            <Image source={Searchasset} style={styles.image} />
+            <Image
+              source={Searchasset}
+              style={{...styles.image, ...imageStyle}}
+            />
           </TouchableOpacity>
         )}
         {filterAsset && (
           <TouchableOpacity onPress={() => navigation?.navigate('Filter')}>
-            <Image source={filterAsset} style={styles.image} />
+            <Image
+              source={filterAsset}
+              style={{...styles.image, ...imageStyle}}
+            />
           </TouchableOpacity>
         )}
       </View>
