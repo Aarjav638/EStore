@@ -12,6 +12,8 @@ const CategoryStack = () => {
     <Stack.Navigator
       screenOptions={{
         headerShown: false,
+        animation: 'slide_from_right',
+        animationDuration: 300,
       }}>
       <Stack.Screen name="Category" component={Category} />
       <Stack.Screen name="Category1" component={CategoryCollection} />

@@ -100,7 +100,9 @@ const Category = ({navigation}: CategoryProps) => {
                   {item.title}
                 </Text>
                 <TouchableOpacity
-                  onPress={() => console.log('Arrow pressed')}
+                  onPress={() =>
+                    navigation.navigate('Category1', {title: item.title})
+                  }
                   style={{
                     width: 40,
                     height: 40,
