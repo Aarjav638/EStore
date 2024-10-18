@@ -11,6 +11,7 @@ function MyDrawer() {
     <Drawer.Navigator
       screenOptions={{
         headerShown: false,
+        drawerStatusBarAnimation: 'slide',
       }}>
       <Drawer.Screen name="Discover" component={DiscoverStack} />
       <Drawer.Screen name="Categories" component={CategoryStack} />
