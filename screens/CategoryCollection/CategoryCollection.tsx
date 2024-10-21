@@ -104,7 +104,11 @@ const CategoryCollection = ({route, navigation}: CategoryCollectionProps) => {
                 flexDirection: 'row',
                 justifyContent: 'space-between',
               }}
-              onPress={() => console.log('Item pressed')}>
+              onPress={() =>
+                navigation.navigate('Products', {
+                  title: title,
+                })
+              }>
               <Image
                 style={{
                   width: Dimensions.get('window').width / 3,
