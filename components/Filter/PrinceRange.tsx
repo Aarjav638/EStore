@@ -52,8 +52,10 @@ CustomLabel.displayName = 'CustomLabel';
 const PriceRange = ({
   values,
   setValues,
+  max,
 }: {
   values: number[];
+  max: number;
   setValues: (values: number[]) => void;
 }) => {
   const onValuesChange = (newValues: number[]) => setValues(newValues);
@@ -65,7 +67,7 @@ const PriceRange = ({
         <MultiSlider
           values={values}
           min={0}
-          max={2000}
+          max={max}
           step={1}
           enableLabel={true}
           onValuesChange={onValuesChange}

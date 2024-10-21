@@ -1,8 +1,8 @@
 import React from 'react';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {CategoryStackParams} from '../../constants/types';
-import Category from '../../screens/Category';
-import CategoryCollection from '../../screens/CategoryCollection';
+import Category from '../../screens/Category/Category';
+import CategoryCollection from '../../screens/CategoryCollection/CategoryCollection';
 import Search from '../../screens/Search/Search';
 
 const Stack = createNativeStackNavigator<CategoryStackParams>();

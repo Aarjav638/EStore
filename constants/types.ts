@@ -30,7 +30,6 @@ export type DiscoverStackParams = {
   SearchResults: {
     result: string;
   };
-  Filter: undefined;
 };
 
 export type CategoryStackParams = {

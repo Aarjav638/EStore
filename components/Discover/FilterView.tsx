@@ -1,12 +1,10 @@
 import {StyleSheet, Text, View} from 'react-native';
 import React from 'react';
 import CustomButton from '../Auth/SignIn/CustomButton';
-import {NavigationProp} from '@react-navigation/native';
-import {DiscoverStackParams} from '../../constants/types';
 const FilterView = ({
-  navigation,
+  setModalVisible,
 }: {
-  navigation: NavigationProp<DiscoverStackParams, 'Home'>;
+  setModalVisible: React.Dispatch<React.SetStateAction<boolean>>;
 }) => {
   return (
     <View style={styles.container}>
@@ -14,7 +12,7 @@ const FilterView = ({
       <CustomButton
         customStyles={styles.button}
         text="Filter"
-        onPress={() => navigation.navigate('Filter')}
+        onPress={() => setModalVisible(true)}
       />
     </View>
   );

@@ -5,7 +5,7 @@ import {SafeAreaView} from 'react-native-safe-area-context';
 import Header from '../components/Discover/Header';
 import Assets from '../constants/images';
 import MenuSection from '../components/Discover/MenuSection';
-import {data, menuItems} from './Discover';
+import {data, menuItems} from '../constants/data';
 import Popularity from '../components/Filter/Popularity';
 import ShippedFrom from '../components/Filter/ShippedFrom';
 import Sections from '../components/Filter/Section';
@@ -20,7 +20,9 @@ data.forEach(item => {
 
 const colors = new Set<string>();
 data.forEach(item => {
-  colors.add(item.color);
+  if (item.color) {
+    colors.add(item.color);
+  }
 });
 
 const ratings = new Set<number>();
@@ -37,16 +39,49 @@ function joinRatings(selectedRatings: number[]) {
   return `${selectedRatings.slice(0, 3).join(' star, ')} star`;
 }
 
+const price = data.map(item => item.price);
+const minPrice = Math.min(...price);
+const maxPrice = Math.max(...price);
+
 const Filter = ({
+  setModalVisible,
+  applyFilters,
   navigation,
 }: {
+  setModalVisible: React.Dispatch<React.SetStateAction<boolean>>;
+  applyFilters: (arg0: {
+    brands: string[];
+    colors: string[];
+    ratings: number[];
+    price: number[];
+  }) => void;
   navigation: NavigationProp<DiscoverStackParams, 'Home'>;
 }) => {
   const [selected, setSelected] = useState(0);
-  const [values, setValues] = useState([120, 1200]);
+  const [values, setValues] = useState([minPrice, maxPrice]);
   const [selectedBrands, setSelectedBrands] = useState<string[]>([]);
   const [selectedColors, setSelectedColors] = useState<string[]>([]);
   const [selectedRatings, setSelectedRatings] = useState<number[]>([]);
+
+  const handleClear = () => {
+    setSelectedBrands([]);
+    setSelectedColors([]);
+    setSelectedRatings([]);
+    setValues([0, 2000]);
+  };
+
+  const handleFilter = () => {
+    const filterData = {
+      brands: selectedBrands,
+      colors: selectedColors,
+      ratings: selectedRatings,
+      price: values,
+    };
+    console.log(filterData);
+    applyFilters(filterData);
+
+    setModalVisible(false);
+  };
   return (
     <SafeAreaView style={styles.container}>
       <Header
@@ -76,7 +111,7 @@ const Filter = ({
           selectedItems={selectedBrands}
           setSelectedItems={setSelectedBrands}
         />
-        <PrinceRange values={values} setValues={setValues} />
+        <PrinceRange max={maxPrice} values={values} setValues={setValues} />
         <Sections<string>
           title="Colors"
           items={colors}
@@ -111,14 +146,14 @@ const Filter = ({
             color: '#000',
           }}
           text="Clear"
-          onPress={() => console.log('pressed')}
+          onPress={handleClear}
         />
         <CustomButton
           customStyles={{
             width: '40%',
           }}
           text="Apply"
-          onPress={() => console.log('pressed')}
+          onPress={handleFilter}
         />
       </View>
     </SafeAreaView>

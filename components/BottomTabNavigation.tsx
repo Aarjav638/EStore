@@ -2,14 +2,14 @@ import {Image, StyleSheet, Text, View} from 'react-native';
 import React from 'react';
 
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import Discover from '../screens/Discover';
 import Home from '../assets/home.svg';
-import Filter from '../screens/Filter';
-import Cart from '../assets/cart.svg';
+import Cart from '../screens/Cart';
+import CartSvg from '../assets/cart.svg';
 import Gear from '../assets/Settings.svg';
 import Settings from '../screens/Settings';
 import {BottomNavigationList} from '../constants/types';
 import MyDrawer from './Navigation/Drawer';
+import User from '../screens/User';
 
 const Tab = createBottomTabNavigator<BottomNavigationList>();
 const BottomTabNavigation = () => {
@@ -44,7 +44,7 @@ const BottomTabNavigation = () => {
         />
         <Tab.Screen
           name="Cart"
-          component={Filter}
+          component={Cart}
           options={{
             tabBarIcon: ({focused, color}) => (
               <View
@@ -74,7 +74,7 @@ const BottomTabNavigation = () => {
                       3
                     </Text>
                   </View>
-                  <Cart
+                  <CartSvg
                     height={20}
                     width={20}
                     stroke={focused ? '#FA4248' : '#bbbb'}
@@ -87,7 +87,7 @@ const BottomTabNavigation = () => {
         />
         <Tab.Screen
           name="User"
-          component={Discover}
+          component={User}
           options={{
             tabBarIcon: ({focused, color}) => (
               <View

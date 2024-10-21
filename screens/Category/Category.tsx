@@ -9,11 +9,12 @@ import {
 } from 'react-native';
 import React from 'react';
 import {SafeAreaView} from 'react-native-safe-area-context';
-import Header from '../components/Discover/Header';
-import Assets from '../constants/images';
-import Arrow from '../assets/chevron-right.svg';
+import Header from '../../components/Discover/Header';
+import Assets from '../../constants/images';
+import Arrow from '../../assets/chevron-right.svg';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
-import {CategoryStackParams} from '../constants/types';
+import {CategoryStackParams} from '../../constants/types';
+import CategorySkeleton from './CategorySkeleton';
 const data = [
   {
     title: 'Collections',
@@ -45,6 +46,18 @@ const data = [
 type CategoryProps = NativeStackScreenProps<CategoryStackParams, 'Category'>;
 
 const Category = ({navigation}: CategoryProps) => {
+  const [loading, setLoading] = React.useState(true);
+
+  React.useEffect(() => {
+    setTimeout(() => {
+      setLoading(false);
+    }, 2000);
+  }, []);
+
+  if (loading) {
+    return <CategorySkeleton />;
+  }
+
   return (
     <SafeAreaView style={styles.container}>
       <Header

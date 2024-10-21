@@ -7,13 +7,14 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import React from 'react';
+import React, {useEffect} from 'react';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
-import {CategoryStackParams} from '../constants/types';
+import {CategoryStackParams} from '../../constants/types';
 import {SafeAreaView} from 'react-native-safe-area-context';
-import Header from '../components/Discover/Header';
-import Assets from '../constants/images';
-import Arrow from '../assets/chevron-right.svg';
+import Header from '../../components/Discover/Header';
+import Assets from '../../constants/images';
+import Arrow from '../../assets/chevron-right.svg';
+import CategorySkeleton from './CategorySkeleton';
 type CategoryCollectionProps = NativeStackScreenProps<
   CategoryStackParams,
   'Category1'
@@ -62,6 +63,20 @@ const data = [
 ];
 const CategoryCollection = ({route, navigation}: CategoryCollectionProps) => {
   const {title} = route.params;
+
+  const [loading, setLoading] = React.useState(true);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setLoading(false);
+    }, 2000);
+    return () => clearTimeout(timer);
+  }, []);
+
+  if (loading) {
+    return <CategorySkeleton title={title} />;
+  }
+
   return (
     <SafeAreaView style={styles.container}>
       <Header
@@ -163,6 +178,11 @@ const styles = StyleSheet.create({
     backgroundColor: '#04040494',
     width: Dimensions.get('window').width,
     height: '100%',
+  },
+  header: {
+    padding: 20,
+    backgroundColor: '#000',
+    alignItems: 'center',
   },
   offerText: {
     color: '#FFFFFF',

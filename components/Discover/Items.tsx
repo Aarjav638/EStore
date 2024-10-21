@@ -18,6 +18,7 @@ const ItemView = React.memo(
     index,
     handleHeartClick,
     clickedItems,
+    dataLoading,
   }: {
     item: Item;
     index: number;
@@ -25,22 +26,61 @@ const ItemView = React.memo(
     clickedItems: {
       [key: number]: boolean;
     };
+    dataLoading: boolean;
   }) => {
     return (
       <View style={styles.itemContainer}>
-        <Image source={{uri: item.image_url}} style={styles.image} />
-        <Text style={styles.itemName}>{item.name}</Text>
-        <Text style={styles.itemCategory}>{item.category}</Text>
-        <Text style={styles.itemPrice}>${item.price}</Text>
-        <Image style={styles.basket} source={Assets.basket} />
-        <TouchableOpacity
-          style={styles.heartWrapper}
-          onPress={() => handleHeartClick(index)}>
-          <Image
-            style={styles.heart}
-            source={clickedItems[index] ? Assets.heart : Assets.heartUnfilled}
-          />
-        </TouchableOpacity>
+        {dataLoading ? (
+          <>
+            <View
+              style={{
+                backgroundColor: '#CECECE',
+                height: '70%',
+                width: '100%',
+                borderRadius: 10,
+              }}
+            />
+            <View
+              style={{
+                height: 20,
+                width: '80%',
+                backgroundColor: '#CECECE',
+              }}
+            />
+            <View
+              style={{
+                height: 10,
+                width: '20%',
+                backgroundColor: '#CECECE',
+              }}
+            />
+            <View
+              style={{
+                height: 20,
+                width: '30%',
+                backgroundColor: '#CECECE',
+              }}
+            />
+          </>
+        ) : (
+          <>
+            <Image source={{uri: item.image_url}} style={styles.image} />
+            <Text style={styles.itemName}>{item.name}</Text>
+            <Text style={styles.itemCategory}>{item.category}</Text>
+            <Text style={styles.itemPrice}>${item.price}</Text>
+            <Image style={styles.basket} source={Assets.basket} />
+            <TouchableOpacity
+              style={styles.heartWrapper}
+              onPress={() => handleHeartClick(index)}>
+              <Image
+                style={styles.heart}
+                source={
+                  clickedItems[index] ? Assets.heart : Assets.heartUnfilled
+                }
+              />
+            </TouchableOpacity>
+          </>
+        )}
       </View>
     );
   },
@@ -52,10 +92,12 @@ const Items = ({
   selected,
   menuItems,
   data,
+  dataLoading,
 }: {
   selected: number;
   menuItems: {name: string; id: number}[];
   data: Item[];
+  dataLoading: boolean;
 }) => {
   const [loading, setLoading] = useState(false);
   const [clickedItems, setClickedItems] = useState<{
@@ -66,7 +108,7 @@ const Items = ({
       return data;
     }
     return data.filter(item => item.category === menuItems[selected].name);
-  }, [selected, menuItems]);
+  }, [selected, menuItems, data]);
 
   const handleHeartClick = useCallback((index: number) => {
     setClickedItems(prev => {
@@ -77,7 +119,7 @@ const Items = ({
     });
   }, []);
   const handleEndReached = () => {
-    if (!loading) {
+    if (!loading && filteredData.length >= 6) {
       setLoading(true);
       setTimeout(() => {
         setLoading(false);
@@ -91,13 +133,14 @@ const Items = ({
   const renderItem = useCallback(
     ({item, index}: {item: Item; index: number}) => (
       <ItemView
+        dataLoading={dataLoading}
         item={item}
         index={index}
         handleHeartClick={handleHeartClick}
         clickedItems={clickedItems}
       />
     ),
-    [clickedItems],
+    [clickedItems, dataLoading],
   );
 
   return (
@@ -114,7 +157,7 @@ const Items = ({
         initialNumToRender={6}
         onEndReached={handleEndReached}
         onEndReachedThreshold={0.1}
-        keyExtractor={(item, index) => item + index.toString()}
+        keyExtractor={(_, index) => index.toString()}
         ListFooterComponent={renderFooter}
       />
     </View>

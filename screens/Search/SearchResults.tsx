@@ -13,7 +13,8 @@ import Assets from '../../constants/images';
 import MenuSection from '../../components/Discover/MenuSection';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import {DiscoverStackParams} from '../../constants/types';
-import {data as dummyData} from '../Discover';
+import {data as dummyData} from '../../constants/data';
+import SearchResultsSkeleton from './SearchResultSkeleton';
 const menuItems = [
   {
     name: 'All',
@@ -48,6 +49,18 @@ const SearchResults = ({route, navigation}: SearchResultProp) => {
           .toLowerCase()
           .includes(menuItems[selected].name.toLowerCase()),
   );
+
+  const [loading, setLoading] = React.useState(true);
+
+  React.useEffect(() => {
+    setTimeout(() => {
+      setLoading(false);
+    }, 2000);
+  }, []);
+
+  if (loading) {
+    return <SearchResultsSkeleton />;
+  }
 
   return (
     <SafeAreaView style={styles.container}>
