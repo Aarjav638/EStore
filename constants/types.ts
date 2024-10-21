@@ -37,7 +37,9 @@ export type CategoryStackParams = {
   Category1: {
     title: string;
   };
-  Products: undefined;
+  Products: {
+    title: string;
+  };
   Search: undefined;
 };
 
@@ -53,6 +55,7 @@ export type Images = {
   heart: ImageSourcePropType;
   heartUnfilled: ImageSourcePropType;
   basket: ImageSourcePropType;
+  star: ImageSourcePropType;
 };
 
 export type Item = {

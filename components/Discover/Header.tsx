@@ -16,18 +16,21 @@ const Header = ({
   filterAsset,
   textStyle,
   imageStyle,
+  heartAsset,
   menuIconStyle,
   navigation,
 }: {
   text: string;
   Searchasset?: ImageSourcePropType;
   filterAsset?: ImageSourcePropType;
+  heartAsset?: ImageSourcePropType;
   textStyle?: Record<string, string | number>;
   imageStyle?: Record<string, string | number>;
   menuIconStyle?: Record<string, string | number>;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   navigation?: any;
 }) => {
+  const [heartClicked, setHeartClicked] = React.useState(false);
   return (
     <View style={styles.container}>
       <TouchableOpacity
@@ -61,6 +64,17 @@ const Header = ({
             <Image
               source={filterAsset}
               style={{...styles.image, ...imageStyle}}
+            />
+          </TouchableOpacity>
+        )}
+        {heartAsset && (
+          <TouchableOpacity onPress={() => setHeartClicked(!heartClicked)}>
+            <Image
+              source={heartClicked ? Assets.heart : Assets.heartUnfilled}
+              style={{
+                ...styles.image,
+                ...imageStyle,
+              }}
             />
           </TouchableOpacity>
         )}

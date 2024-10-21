@@ -4,6 +4,7 @@ import {CategoryStackParams} from '../../constants/types';
 import Category from '../../screens/Category/Category';
 import CategoryCollection from '../../screens/CategoryCollection/CategoryCollection';
 import Search from '../../screens/Search/Search';
+import Products from '../../screens/Products/Products';
 
 const Stack = createNativeStackNavigator<CategoryStackParams>();
 
@@ -18,6 +19,7 @@ const CategoryStack = () => {
       <Stack.Screen name="Category" component={Category} />
       <Stack.Screen name="Category1" component={CategoryCollection} />
       <Stack.Screen name="Search" component={Search} />
+      <Stack.Screen name="Products" component={Products} />
     </Stack.Navigator>
   );
 };

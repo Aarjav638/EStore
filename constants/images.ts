@@ -13,6 +13,7 @@ const Assets: Images = {
   heart: require('../assets/heart.png'),
   heartUnfilled: require('../assets/heart-outline.png'),
   basket: require('../assets/basket.png'),
+  star: require('../assets/star.png'),
 };
 
 export default Assets;
