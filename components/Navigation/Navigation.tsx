@@ -8,7 +8,7 @@ import Splash from '../../screens/Splash';
 import {RootStackParamList} from '../../constants/types';
 import Verification from '../../screens/Auth/Verification';
 import Welcome from '../../screens/Welcome';
-import BottomTabNavigation from '../BottomTabNavigation';
+import MyDrawer from './Drawer';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
@@ -25,7 +25,7 @@ const Navigation = () => {
         <Stack.Screen name="SignIn" component={SignIn} />
         <Stack.Screen name="Verification" component={Verification} />
         <Stack.Screen name="Welcome" component={Welcome} />
-        <Stack.Screen name="bottomNavigator" component={BottomTabNavigation} />
+        <Stack.Screen name="Drawer" component={MyDrawer} />
       </Stack.Navigator>
     </NavigationContainer>
   );

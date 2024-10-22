@@ -91,6 +91,7 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     height: '100%',
+    zIndex: 2,
     backgroundColor: '#fff',
     width: Dimensions.get('window').width,
   },
