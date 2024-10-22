@@ -6,14 +6,14 @@ export type RootStackParamList = {
   SignIn: undefined;
   Verification: undefined;
   Welcome: undefined;
-  bottomNavigator: undefined;
+  Drawer: undefined;
 };
 
 export type BottomNavigationList = {
   Cart: undefined;
   Settings: undefined;
   User: undefined;
-  Drawer: undefined;
+  DiscoverStack: undefined;
 };
 
 export type DrawerParamList = {
@@ -30,6 +30,12 @@ export type DiscoverStackParams = {
   SearchResults: {
     result: string;
   };
+};
+
+export type CheckoutParam = {
+  Checkout: undefined;
+  cart: undefined;
+  Search: undefined;
 };
 
 export type CategoryStackParams = {
@@ -56,6 +62,12 @@ export type Images = {
   heartUnfilled: ImageSourcePropType;
   basket: ImageSourcePropType;
   star: ImageSourcePropType;
+  sunglasses: ImageSourcePropType;
+  whiteDress: ImageSourcePropType;
+  redDress: ImageSourcePropType;
+  bin: ImageSourcePropType;
+  check: ImageSourcePropType;
+  oval: ImageSourcePropType;
 };
 
 export type Item = {

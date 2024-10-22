@@ -46,11 +46,6 @@ const Products = ({navigation, route}: ProductsProps) => {
     outputRange: ['#808080', '#555555'],
     extrapolate: 'clamp',
   });
-  const contentFadeInOpacity = scrollY.interpolate({
-    inputRange: [SCREEN_HEIGHT * 0.3, SCREEN_HEIGHT * 0.65],
-    outputRange: [1, 0],
-    extrapolate: 'clamp',
-  });
   const oldContentOpacity = scrollY.interpolate({
     inputRange: [0, SCREEN_HEIGHT * 0.4],
     outputRange: [1, 0],
@@ -136,9 +131,8 @@ const Products = ({navigation, route}: ProductsProps) => {
             justifyContent: 'space-between',
             alignItems: 'center',
             paddingHorizontal: 20,
-            opacity: headerOpacity,
           }}>
-          <View style={{gap: 10}}>
+          <Animated.View style={{gap: 10, opacity: headerOpacity}}>
             <TouchableOpacity
               style={{
                 backgroundColor: '#C92636',
@@ -170,8 +164,16 @@ const Products = ({navigation, route}: ProductsProps) => {
                 width: 25,
               }}
             />
-          </View>
-          <View style={{gap: 12}}>
+          </Animated.View>
+          <Image
+            source={Assets.sunglasses}
+            style={{
+              height: 200,
+              width: 200,
+              objectFit: 'contain',
+            }}
+          />
+          <Animated.View style={{gap: 12, opacity: headerOpacity}}>
             <TouchableOpacity
               style={{
                 backgroundColor: 'transparent',
@@ -211,7 +213,7 @@ const Products = ({navigation, route}: ProductsProps) => {
               }}>
               <Text style={{color: '#FEFEFE', fontSize: 24}}>S</Text>
             </TouchableOpacity>
-          </View>
+          </Animated.View>
         </Animated.View>
         <Animated.View
           style={{
@@ -269,7 +271,7 @@ const Products = ({navigation, route}: ProductsProps) => {
             justifyContent: 'space-between',
             alignItems: 'center',
             marginTop: '15%',
-            opacity: contentFadeInOpacity,
+            opacity: oldContentOpacity,
           }}>
           <CustomButton
             onPress={() => console.log('Add to cart')}
@@ -489,14 +491,13 @@ const Products = ({navigation, route}: ProductsProps) => {
                 marginBottom: 20,
                 flexDirection: 'row',
               }}>
-              <View
+              <Image
+                source={Assets.whiteDress}
                 style={{
                   height: 120,
                   width: 120,
                   borderRadius: 20,
-                  backgroundColor: '#0000000F',
-                  justifyContent: 'center',
-                  alignItems: 'center',
+                  objectFit: 'contain',
                 }}
               />
 
@@ -559,14 +560,13 @@ const Products = ({navigation, route}: ProductsProps) => {
                 marginBottom: 20,
                 flexDirection: 'row',
               }}>
-              <View
+              <Image
+                source={Assets.redDress}
                 style={{
                   height: 120,
                   width: 120,
                   borderRadius: 20,
-                  backgroundColor: '#0000000F',
-                  justifyContent: 'center',
-                  alignItems: 'center',
+                  objectFit: 'contain',
                 }}
               />
 

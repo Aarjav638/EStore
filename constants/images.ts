@@ -14,6 +14,12 @@ const Assets: Images = {
   heartUnfilled: require('../assets/heart-outline.png'),
   basket: require('../assets/basket.png'),
   star: require('../assets/star.png'),
+  sunglasses: require('../assets/GucciSunglases.png'),
+  whiteDress: require('../assets/whitedress.png'),
+  redDress: require('../assets/reddress.png'),
+  bin: require('../assets/bin.png'),
+  check: require('../assets/check.png'),
+  oval: require('../assets/oval.png'),
 };
 
 export default Assets;

@@ -22,7 +22,7 @@ const Welcome = ({navigation}: WelcomeProps) => {
       </View>
       <View style={styles.buttonWrapper}>
         <CustomButton
-          onPress={() => navigation.navigate('bottomNavigator')}
+          onPress={() => navigation.navigate('Drawer')}
           text="CONTINUE AS JAMESON"
         />
         <CustomButton

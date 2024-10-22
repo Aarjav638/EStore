@@ -14,8 +14,9 @@ import SearchBar from '../../components/Search/SearchBar';
 import {NavigationProp} from '@react-navigation/native';
 import {DiscoverStackParams} from '../../constants/types';
 import useDebounce from '../../utils/useDebounce';
-import {data} from '../Discover';
+
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
+import {data} from '../../constants/data';
 
 const Search = ({
   navigation,

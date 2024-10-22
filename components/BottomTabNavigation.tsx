@@ -3,13 +3,13 @@ import React from 'react';
 
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import Home from '../assets/home.svg';
-import Cart from '../screens/Cart';
 import CartSvg from '../assets/cart.svg';
 import Gear from '../assets/Settings.svg';
 import Settings from '../screens/Settings';
 import {BottomNavigationList} from '../constants/types';
-import MyDrawer from './Navigation/Drawer';
 import User from '../screens/User';
+import DiscoverStack from './Navigation/DiscoverStack';
+import CartStack from './Navigation/CartStack';
 
 const Tab = createBottomTabNavigator<BottomNavigationList>();
 const BottomTabNavigation = () => {
@@ -24,8 +24,8 @@ const BottomTabNavigation = () => {
           headerShown: false,
         }}>
         <Tab.Screen
-          name="Drawer"
-          component={MyDrawer}
+          name="DiscoverStack"
+          component={DiscoverStack}
           options={{
             tabBarIcon: ({focused, color}) => (
               <View
@@ -44,7 +44,7 @@ const BottomTabNavigation = () => {
         />
         <Tab.Screen
           name="Cart"
-          component={Cart}
+          component={CartStack}
           options={{
             tabBarIcon: ({focused, color}) => (
               <View
@@ -139,6 +139,7 @@ const styles = StyleSheet.create({
   Wrapper: {
     flex: 1,
     backgroundColor: '#fff',
+    zIndex: 1,
   },
   container: {
     flexDirection: 'row',
