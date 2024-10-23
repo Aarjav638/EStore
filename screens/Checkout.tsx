@@ -8,6 +8,7 @@ import {CheckoutParam} from '../constants/types';
 import ProgressBar from '../components/Checkout/ProgressBar';
 import AddressForm from '../components/Checkout/AddressForm';
 import CustomButton from '../components/Auth/SignIn/CustomButton';
+import Payment from '../components/Checkout/Payment/Payment';
 
 type CheckoutProps = NativeStackScreenProps<CheckoutParam, 'Checkout'>;
 
@@ -77,9 +78,7 @@ const Checkout = ({navigation}: CheckoutProps) => {
             />
           </>
         )}
-        {currentStep === 2 && (
-          <Text style={{color: '#000'}}>Content for Step 2</Text>
-        )}
+        {currentStep === 2 && <Payment />}
         {currentStep === 3 && (
           <Text style={{color: '#000'}}>Content for Step 3</Text>
         )}
@@ -124,7 +123,7 @@ const styles = StyleSheet.create({
     color: '#000',
   },
   contentContainer: {
-    flex: 0.95,
+    flex: 0.8,
     padding: 20,
   },
   buttonContainer: {

@@ -68,6 +68,18 @@ export type Images = {
   bin: ImageSourcePropType;
   check: ImageSourcePropType;
   oval: ImageSourcePropType;
+  wallet: ImageSourcePropType;
+  card: ImageSourcePropType;
+  paypal: ImageSourcePropType;
+  credit: ImageSourcePropType;
+  amex: ImageSourcePropType;
+  visa: ImageSourcePropType;
+  mastercard: ImageSourcePropType;
+  discover: ImageSourcePropType;
+  jcb: ImageSourcePropType;
+  dinners: ImageSourcePropType;
+  unionpay: ImageSourcePropType;
+  maestro: ImageSourcePropType;
 };
 
 export type Item = {

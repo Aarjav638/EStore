@@ -1,3 +1,4 @@
+import Assets from './images';
 import {Item} from './types';
 
 export const data: Item[] = [
@@ -212,5 +213,23 @@ export const menuItems = [
   {
     name: 'Women',
     id: 2,
+  },
+];
+
+export const paymentMethods = [
+  {
+    id: 1,
+    name: 'PayPal',
+    icon: Assets.paypal,
+  },
+  {
+    id: 2,
+    name: 'Credit Card',
+    icon: Assets.card,
+  },
+  {
+    id: 3,
+    name: 'Wallet',
+    icon: Assets.wallet,
   },
 ];
