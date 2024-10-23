@@ -5,6 +5,7 @@ import {CheckoutParam} from '../../constants/types';
 import Search from '../../screens/Search/Search';
 import Cart from '../../screens/Cart';
 import Checkout from '../../screens/Checkout';
+import TrackOrder from '../../screens/TrackOrder';
 
 const Stack = createNativeStackNavigator<CheckoutParam>();
 
@@ -18,6 +19,7 @@ const CartStack = () => {
       <Stack.Screen name="cart" component={Cart} />
       <Stack.Screen name="Checkout" component={Checkout} />
       <Stack.Screen name="Search" component={Search} />
+      <Stack.Screen name="trackOrder" component={TrackOrder} />
     </Stack.Navigator>
   );
 };

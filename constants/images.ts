@@ -20,6 +20,19 @@ const Assets: Images = {
   bin: require('../assets/bin.png'),
   check: require('../assets/check.png'),
   oval: require('../assets/oval.png'),
+  wallet: require('../assets/wallet.png'),
+  card: require('../assets/card.png'),
+  paypal: require('../assets/paypal.png'),
+  credit: require('../assets/credit-card.png'),
+  amex: require('../assets/amex.png'),
+  visa: require('../assets/visa.png'),
+  mastercard: require('../assets/master-card.png'),
+  jcb: require('../assets/jcb.png'),
+  unionpay: require('../assets/unionpay.png'),
+  discover: require('../assets/discover.png'),
+  dinners: require('../assets/dinners-club.png'),
+  maestro: require('../assets/maestro.png'),
+  trackOrder: require('../assets/Trackorder.png'),
 };
 
 export default Assets;

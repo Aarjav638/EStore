@@ -71,7 +71,11 @@ const Cart = ({navigation, route}: CartParam) => {
           <TouchableOpacity
             style={styles.checkout}
             activeOpacity={0.8}
-            onPress={() => navigation.navigate('Checkout')}>
+            onPress={() =>
+              navigation.navigate('Checkout', {
+                CartItems: revised,
+              })
+            }>
             <Text
               style={{
                 color: 'white',
@@ -107,7 +111,14 @@ const Cart = ({navigation, route}: CartParam) => {
             justifyContent: 'center',
             alignItems: 'center',
           }}>
-          <Text>Your cart is empty</Text>
+          <Text
+            style={{
+              color: 'black',
+              fontSize: 20,
+              fontWeight: 'bold',
+            }}>
+            Your cart is empty
+          </Text>
         </View>
       )}
     </View>

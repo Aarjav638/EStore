@@ -1,4 +1,12 @@
-import {Text, StyleSheet, View, Image, TouchableOpacity} from 'react-native';
+import {
+  Text,
+  StyleSheet,
+  View,
+  Image,
+  TouchableOpacity,
+  Dimensions,
+  Alert,
+} from 'react-native';
 import React, {useState} from 'react';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import Header from '../components/Discover/Header';
@@ -8,10 +16,30 @@ import {CheckoutParam} from '../constants/types';
 import ProgressBar from '../components/Checkout/ProgressBar';
 import AddressForm from '../components/Checkout/AddressForm';
 import CustomButton from '../components/Auth/SignIn/CustomButton';
+import Payment from '../components/Checkout/Payment/Payment';
+import Summary from '../components/Checkout/Summary/Summary';
 
 type CheckoutProps = NativeStackScreenProps<CheckoutParam, 'Checkout'>;
 
-const Checkout = ({navigation}: CheckoutProps) => {
+export type paymentData = {
+  cardNumber: string;
+  expiryDate: string;
+  cvc: string;
+  cardHolderName: string;
+  type?: string;
+  valid: boolean;
+};
+
+export type Address = {
+  street1: string;
+  street2: string;
+  city: string;
+  state: string;
+  country: string;
+};
+
+const Checkout = ({navigation, route}: CheckoutProps) => {
+  const cartItems = route.params.CartItems;
   const [currentStep, setCurrentStep] = useState(1);
   const [billingSameAsDelivery, setBillingSameAsDelivery] = useState(true);
   const [street1, setStreet1] = useState('');
@@ -19,19 +47,69 @@ const Checkout = ({navigation}: CheckoutProps) => {
   const [city, setCity] = useState('');
   const [state, setState] = useState('');
   const [country, setCountry] = useState('');
+
+  const addressData: Address = {
+    street1: street1,
+    street2: street2,
+    city: city,
+    state: state,
+    country: country,
+  };
+
+  const [paymentData, setPaymentData] = useState<paymentData>({
+    cardNumber: '',
+    expiryDate: '',
+    cvc: '',
+    cardHolderName: '',
+    type: '',
+    valid: false,
+  });
   const nextStep = () => {
-    if (currentStep < 3) setCurrentStep(currentStep + 1);
-    console.log('currentStep', currentStep);
-    console.log('billingSameAsDelivery', billingSameAsDelivery);
-    console.log('street1', street1);
-    console.log('street2', street2);
-    console.log('city', city);
-    console.log('state', state);
-    console.log('country', country);
+    if (currentStep === 1) {
+      if (
+        addressData.street1 === '' ||
+        addressData.city === '' ||
+        addressData.state === '' ||
+        addressData.country === ''
+      ) {
+        Alert.alert('Please fill all the fields');
+      } else {
+        setCurrentStep(currentStep + 1);
+      }
+    }
+    if (currentStep === 2) {
+      if (!paymentData.valid) {
+        Alert.alert('Please enter a valid card');
+      } else {
+        setCurrentStep(currentStep + 1);
+      }
+    }
+    if (currentStep === 3) {
+      console.log('Payment Data:', paymentData);
+      console.log('Address Data:', addressData);
+      navigation.navigate('trackOrder');
+    }
   };
 
   const previousStep = () => {
-    if (currentStep > 1) setCurrentStep(currentStep - 1);
+    if (currentStep == 2) {
+      setCurrentStep(currentStep - 1);
+      setCity('');
+      setState('');
+      setCountry('');
+      setStreet1('');
+      setStreet2('');
+    } else if (currentStep == 3) {
+      setCurrentStep(currentStep - 1);
+      setPaymentData({
+        cardNumber: '',
+        expiryDate: '',
+        cvc: '',
+        cardHolderName: '',
+        type: '',
+        valid: false,
+      });
+    } else navigation.goBack();
   };
   return (
     <SafeAreaView style={styles.container}>
@@ -77,11 +155,13 @@ const Checkout = ({navigation}: CheckoutProps) => {
             />
           </>
         )}
-        {currentStep === 2 && (
-          <Text style={{color: '#000'}}>Content for Step 2</Text>
-        )}
+        {currentStep === 2 && <Payment setPaymentData={setPaymentData} />}
         {currentStep === 3 && (
-          <Text style={{color: '#000'}}>Content for Step 3</Text>
+          <Summary
+            CartItems={cartItems}
+            paymentData={paymentData}
+            addressData={addressData}
+          />
         )}
       </View>
       <View style={styles.buttonContainer}>
@@ -98,7 +178,7 @@ const Checkout = ({navigation}: CheckoutProps) => {
         />
         <CustomButton
           customStyles={styles.button}
-          text="NEXT"
+          text={currentStep === 3 ? 'PAY' : 'NEXT'}
           onPress={nextStep}
         />
       </View>
@@ -124,13 +204,15 @@ const styles = StyleSheet.create({
     color: '#000',
   },
   contentContainer: {
-    flex: 0.95,
+    flex: 1,
     padding: 20,
   },
   buttonContainer: {
     flexDirection: 'row',
     paddingHorizontal: 20,
+    height: Dimensions.get('window').height * 0.065,
     justifyContent: 'space-between',
+    marginBottom: 20,
   },
   button: {
     flex: 1,
