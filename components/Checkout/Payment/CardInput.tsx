@@ -1,35 +1,35 @@
 import {Image, Text, TextInput, TouchableOpacity, View} from 'react-native';
 import React, {useState} from 'react';
 import Assets from '../../../constants/images';
+import {getCardIcon} from '../../../utils/getCardIcon';
+import {
+  CreditCardFormData,
+  CreditCardInput,
+} from 'react-native-credit-card-input';
+import {paymentData} from '../../../screens/Checkout';
 
-import {CreditCardInput} from 'react-native-credit-card-input';
-const CardInput = () => {
+const CardInput = ({
+  setPaymentData,
+}: {
+  setPaymentData: React.Dispatch<React.SetStateAction<paymentData>>;
+}) => {
   const [cardType, setCardType] = React.useState<string | undefined>('');
   const [check, setCheck] = useState(true);
-  const getCardIcon = () => {
-    switch (cardType) {
-      case 'visa':
-        return Assets.visa;
-      case 'mastercard':
-        return Assets.mastercard;
-      case 'american-express':
-        return Assets.amex;
-      case 'discover':
-        return Assets.discover;
-      case 'diners-club':
-        return Assets.dinners;
-      case 'jcb':
-        return Assets.jcb;
-      case 'unionpay':
-        return Assets.unionpay;
-      case 'maestro':
-        return Assets.maestro;
-      default:
-        return Assets.credit;
-    }
+  const [name, setName] = useState('');
+  const handleCardData = (data: CreditCardFormData) => {
+    console.log(data);
+    setPaymentData({
+      cardNumber: data.values.number,
+      expiryDate: data.values.expiry,
+      cvc: data.values.cvc,
+      cardHolderName: name,
+      type: cardType,
+      valid: data.valid,
+    });
   };
+
   return (
-    <View>
+    <View style={{marginTop: '12%'}}>
       <View
         style={{
           width: '100%',
@@ -49,8 +49,11 @@ const CardInput = () => {
         <TextInput
           cursorColor={'#000'}
           placeholder="John Doe"
+          value={name}
+          onChangeText={text => setName(text)}
           style={{
             color: '#000',
+            fontSize: 16,
             marginTop: -10,
             borderBottomWidth: 1,
             borderBottomColor: '#DDDDDD',
@@ -78,12 +81,17 @@ const CardInput = () => {
           fontSize: 14,
           alignSelf: 'flex-start',
         }}
-        onChange={formData => (
-          console.log(formData), setCardType(formData.values.type)
-        )}
+        inputStyle={{
+          color: '#000',
+          fontSize: 16,
+        }}
+        onChange={data => {
+          setCardType(data.values.type);
+          handleCardData(data);
+        }}
       />
       <Image
-        source={getCardIcon()}
+        source={getCardIcon(cardType)}
         style={{
           width: 30,
           height: 30,

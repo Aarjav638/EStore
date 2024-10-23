@@ -1,4 +1,5 @@
 import {ImageSourcePropType} from 'react-native';
+import {CartProps} from '../screens/Cart';
 
 export type RootStackParamList = {
   Splash: undefined;
@@ -33,8 +34,11 @@ export type DiscoverStackParams = {
 };
 
 export type CheckoutParam = {
-  Checkout: undefined;
+  Checkout: {
+    CartItems: CartProps[];
+  };
   cart: undefined;
+  trackOrder: undefined;
   Search: undefined;
 };
 
@@ -80,6 +84,7 @@ export type Images = {
   dinners: ImageSourcePropType;
   unionpay: ImageSourcePropType;
   maestro: ImageSourcePropType;
+  trackOrder: ImageSourcePropType;
 };
 
 export type Item = {

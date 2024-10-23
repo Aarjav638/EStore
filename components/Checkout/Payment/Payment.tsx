@@ -4,8 +4,13 @@ import {paymentMethods} from '../../../constants/data';
 import CardInput from './CardInput';
 import PaymentMethod from './PaymentMethod';
 import {ScrollView} from 'react-native-gesture-handler';
+import {paymentData} from '../../../screens/Checkout';
 
-const Payment = () => {
+const Payment = ({
+  setPaymentData,
+}: {
+  setPaymentData: React.Dispatch<React.SetStateAction<paymentData>>;
+}) => {
   const [selectedMethod, setSelectedMethod] = React.useState<number>(2);
   return (
     <View style={styles.container}>
@@ -17,7 +22,7 @@ const Payment = () => {
         style={{
           marginTop: '10%',
         }}>
-        {selectedMethod === 2 && <CardInput />}
+        {selectedMethod === 2 && <CardInput setPaymentData={setPaymentData} />}
         {selectedMethod === 1 && (
           <View
             style={{
@@ -53,7 +58,7 @@ export default Payment;
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
     backgroundColor: '#fff',
+    flex: 1,
   },
 });

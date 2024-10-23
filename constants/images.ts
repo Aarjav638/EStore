@@ -32,6 +32,7 @@ const Assets: Images = {
   discover: require('../assets/discover.png'),
   dinners: require('../assets/dinners-club.png'),
   maestro: require('../assets/maestro.png'),
+  trackOrder: require('../assets/Trackorder.png'),
 };
 
 export default Assets;
