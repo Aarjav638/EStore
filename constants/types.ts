@@ -38,6 +38,7 @@ export type CheckoutParam = {
     CartItems: CartProps[];
   };
   cart: undefined;
+  OrderAccept: undefined;
   trackOrder: undefined;
   Search: undefined;
 };

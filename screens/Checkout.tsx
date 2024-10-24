@@ -87,7 +87,7 @@ const Checkout = ({navigation, route}: CheckoutProps) => {
     if (currentStep === 3) {
       console.log('Payment Data:', paymentData);
       console.log('Address Data:', addressData);
-      navigation.navigate('trackOrder');
+      navigation.navigate('OrderAccept');
     }
   };
 
