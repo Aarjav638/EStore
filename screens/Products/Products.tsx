@@ -13,16 +13,17 @@ import React, {useEffect, useState} from 'react';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import Assets from '../../constants/images';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
-import {CategoryStackParams} from '../../constants/types';
+import {CategoryStackParams, DrawerParamList} from '../../constants/types';
 import CustomButton from '../../components/Auth/SignIn/CustomButton';
 import ProductsSkeleton from './ProductsSkeleton';
 import {DrawerActions} from '@react-navigation/native';
 
 type ProductsProps = NativeStackScreenProps<CategoryStackParams, 'Products'>;
+type ProductsDrawer = NativeStackScreenProps<DrawerParamList, 'Products'>;
 const {height: SCREEN_HEIGHT} = Dimensions.get('window');
-const Products = ({navigation, route}: ProductsProps) => {
+const Products = ({navigation, route}: ProductsProps | ProductsDrawer) => {
   const [heartClicked, setHeartClicked] = React.useState(false);
-  const {title} = route.params;
+  const title = route.params?.title ?? 'Products';
   const [loading, setLoading] = useState(true);
   const scrollY = new Animated.Value(0);
   useEffect(() => {

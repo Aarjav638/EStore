@@ -15,7 +15,7 @@ import Header from '../../components/Discover/Header';
 import Assets from '../../constants/images';
 import Arrow from '../../assets/chevron-right.svg';
 import CategorySkeleton from './CategorySkeleton';
-type CategoryCollectionProps = NativeStackScreenProps<
+export type CategoryCollectionProps = NativeStackScreenProps<
   CategoryStackParams,
   'Category1'
 >;
@@ -61,8 +61,9 @@ const data = [
     count: 100,
   },
 ];
+
 const CategoryCollection = ({route, navigation}: CategoryCollectionProps) => {
-  const {title} = route.params;
+  const title = route.params?.title ?? 'Collection';
 
   const [loading, setLoading] = React.useState(true);
 

@@ -19,8 +19,12 @@ export type BottomNavigationList = {
 
 export type DrawerParamList = {
   Discover: undefined;
-  Categories: undefined;
   Search: undefined;
+  Catalog: undefined;
+  Products: undefined;
+  Collection: undefined;
+  Category: undefined;
+  Wishlist: undefined;
 };
 
 export type DiscoverStackParams = {
@@ -85,6 +89,12 @@ export type Images = {
   unionpay: ImageSourcePropType;
   maestro: ImageSourcePropType;
   trackOrder: ImageSourcePropType;
+  home: ImageSourcePropType;
+  catalog: ImageSourcePropType;
+  category: ImageSourcePropType;
+  collection: ImageSourcePropType;
+  products: ImageSourcePropType;
+  gps: ImageSourcePropType;
 };
 
 export type Item = {
