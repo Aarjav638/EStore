@@ -123,4 +123,8 @@ dependencies {
     } else {
         implementation jscFlavor
     }
+    // implementation 'com.mappls.sdk:mappls-android-sdk:8.2.5'
+    // implementation 'com.mappls.sdk:markerview-plugin:1.0.1'
+    // implementation 'com.mappls.sdk:annotation-plugin:1.0.1'
+    // implementation 'com.mappls.sdk:geoanalytics-plugin:1.1.0'
 }
