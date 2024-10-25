@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import {ImageSourcePropType} from 'react-native';
 import {CartProps} from '../screens/Cart';
 
