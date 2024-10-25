@@ -7,7 +7,7 @@ import CartSvg from '../assets/cart.svg';
 import Gear from '../assets/Settings.svg';
 import Settings from '../screens/Settings';
 import {BottomNavigationList} from '../constants/types';
-import User from '../screens/User';
+import Account from '../screens/Account';
 import DiscoverStack from './Navigation/DiscoverStack';
 import CartStack from './Navigation/CartStack';
 
@@ -33,11 +33,13 @@ const BottomTabNavigation = () => {
                   flexDirection: 'row',
                   columnGap: 5,
                   alignItems: 'center',
-                  width: 52,
+                  flex: 1,
                   marginBottom: 10,
                 }}>
                 <Home height={20} width={20} color={color} fillOpacity={0.5} />
-                <Text style={{color: color}}>{focused ? 'Home' : ''}</Text>
+                <Text style={{color: color, fontSize: 12}}>
+                  {focused ? 'Home' : ''}
+                </Text>
               </View>
             ),
           }}
@@ -54,7 +56,7 @@ const BottomTabNavigation = () => {
                   alignItems: 'center',
 
                   marginBottom: 10,
-                  width: 52,
+                  flex: 1,
                 }}>
                 <View>
                   <View
@@ -80,21 +82,23 @@ const BottomTabNavigation = () => {
                     stroke={focused ? '#FA4248' : '#bbbb'}
                   />
                 </View>
-                <Text style={{color: color}}>{focused ? 'Cart' : ''}</Text>
+                <Text style={{color: color, fontSize: 12}}>
+                  {focused ? 'Cart' : ''}
+                </Text>
               </View>
             ),
           }}
         />
         <Tab.Screen
           name="User"
-          component={User}
+          component={Account}
           options={{
             tabBarIcon: ({focused, color}) => (
               <View
                 style={{
                   flexDirection: 'row',
                   columnGap: 5,
-                  width: 52,
+                  flex: 1,
                   alignItems: 'center',
                   marginBottom: 10,
                 }}>
@@ -103,7 +107,9 @@ const BottomTabNavigation = () => {
                   source={require('../assets/people.png')}
                   style={{width: 20, height: 20, tintColor: color}}
                 />
-                <Text style={{color: color}}>{focused ? 'User' : ''}</Text>
+                <Text style={{color: color, fontSize: 12}}>
+                  {focused ? 'Account' : ''}
+                </Text>
               </View>
             ),
           }}
@@ -117,13 +123,14 @@ const BottomTabNavigation = () => {
                 style={{
                   flexDirection: 'row',
                   columnGap: 5,
-
-                  width: 52,
+                  flex: 1,
                   alignItems: 'center',
                   marginBottom: 10,
                 }}>
                 <Gear fill={color} height={20} width={20} />
-                <Text style={{color: color}}>{focused ? 'Settings' : ''}</Text>
+                <Text style={{color: color, fontSize: 12}}>
+                  {focused ? 'Settings' : ''}
+                </Text>
               </View>
             ),
           }}
@@ -143,11 +150,11 @@ const styles = StyleSheet.create({
   },
   container: {
     flexDirection: 'row',
-    justifyContent: 'space-around',
+    justifyContent: 'space-between',
     width: '100%',
     height: 70,
-    padding: 20,
-    paddingHorizontal: 25,
+    padding: 15,
+    paddingHorizontal: 20,
     backgroundColor: 'white',
     borderColor: '#FA4248',
     borderWidth: 1.0,

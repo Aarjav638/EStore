@@ -4,8 +4,10 @@ import {SafeAreaView} from 'react-native-safe-area-context';
 import Header from '../components/Discover/Header';
 import Assets from '../constants/images';
 import CustomButton from '../components/Auth/SignIn/CustomButton';
+import {useNavigation} from '@react-navigation/native';
 
 const TrackOrder = () => {
+  const navigation = useNavigation();
   return (
     <SafeAreaView style={styles.container}>
       <Header text="Checkout" Searchasset={Assets.search} />
@@ -39,7 +41,7 @@ const TrackOrder = () => {
       </View>
       <CustomButton
         text="Track Order"
-        onPress={() => console.log('Track Order')}
+        onPress={() => navigation.navigate('Products')}
         customStyles={{
           width: '80%',
           alignSelf: 'center',

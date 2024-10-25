@@ -33,6 +33,12 @@ const Assets: Images = {
   dinners: require('../assets/dinners-club.png'),
   maestro: require('../assets/maestro.png'),
   trackOrder: require('../assets/Trackorder.png'),
+  products: require('../assets/products.png'),
+  collection: require('../assets/collection.png'),
+  category: require('../assets/category.png'),
+  home: require('../assets/home.png'),
+  catalog: require('../assets/catalog.png'),
+  gps: require('../assets/gps.png'),
 };
 
 export default Assets;
