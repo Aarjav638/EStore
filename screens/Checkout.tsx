@@ -18,6 +18,7 @@ import AddressForm from '../components/Checkout/AddressForm';
 import CustomButton from '../components/Auth/SignIn/CustomButton';
 import Payment from '../components/Checkout/Payment/Payment';
 import Summary from '../components/Checkout/Summary/Summary';
+import { useAppSelector } from '../redux/hooks';
 
 type CheckoutProps = NativeStackScreenProps<CheckoutParam, 'Checkout'>;
 
@@ -38,8 +39,7 @@ export type Address = {
   country: string;
 };
 
-const Checkout = ({navigation, route}: CheckoutProps) => {
-  const cartItems = route.params.CartItems;
+const Checkout = ({navigation}: CheckoutProps) => {
   const [currentStep, setCurrentStep] = useState(1);
   const [billingSameAsDelivery, setBillingSameAsDelivery] = useState(true);
   const [street1, setStreet1] = useState('');
@@ -158,7 +158,6 @@ const Checkout = ({navigation, route}: CheckoutProps) => {
         {currentStep === 2 && <Payment setPaymentData={setPaymentData} />}
         {currentStep === 3 && (
           <Summary
-            CartItems={cartItems}
             paymentData={paymentData}
             addressData={addressData}
           />

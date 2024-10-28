@@ -13,68 +13,72 @@ import CartItem from '../components/Cart/CartItem';
 import Assets from '../constants/images';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import {CheckoutParam} from '../constants/types';
+import { useAppDispatch, useAppSelector } from '../redux/hooks';
+import { removeFromCart } from '../redux/feature/Cart';
 
-const data: CartProps[] = [
-  {
-    id: 1,
-    name: 'White Dress',
-    price: 15,
-    image: Assets.whiteDress,
-    quantity: 2,
-  },
-  {
-    id: 2,
-    name: 'Red Dress',
-    price: 15,
-    image: Assets.redDress,
-    quantity: 1,
-  },
-  // {
-  //   id: 3,
-  //   name: 'Red Dress',
-  //   price: 15,
-  //   image: Assets.redDress,
-  //   quantity: 1,
-  // },
-];
+// const data: CartProps[] = [
+//   {
+//     id: 1,
+//     name: 'White Dress',
+//     price: 15,
+//     image: Assets.whiteDress,
+//     quantity: 2,
+//   },
+//   {
+//     id: 2,
+//     name: 'Red Dress',
+//     price: 15,
+//     image: Assets.redDress,
+//     quantity: 1,
+//   },
+//   // {
+//   //   id: 3,
+//   //   name: 'Red Dress',
+//   //   price: 15,
+//   //   image: Assets.redDress,
+//   //   quantity: 1,
+//   // },
+// ];
 
-export type CartProps = {
-  id: number;
-  name: string;
-  price: number;
-  image: ImageSourcePropType;
-  quantity: number;
-};
+// export type CartProps = {
+//   id: number;
+//   name: string;
+//   price: number;
+//   image: ImageSourcePropType;
+//   quantity: number;
+// };
 
 export type CartParam = NativeStackScreenProps<CheckoutParam, 'cart'>;
 
 const Cart = ({navigation, route}: CartParam) => {
-  const [revised, setRevisedData] = React.useState<CartProps[]>(data);
 
-  const handleDelete = (id: number, name: string) => {
-    setRevisedData(revised.filter(item => item.id !== id));
-    ToastAndroid.show('Item Deleted ' + name, ToastAndroid.SHORT);
+  const handleDelete = (id: number) => {
+
+    dispatch(removeFromCart({id: id}));
+    
   };
+  const dispatch = useAppDispatch();
+  const CartItems = useAppSelector(state => state.cart.cartItems);
+
+
 
   return (
     <View style={styles.container}>
       <CartHeader navigation={navigation} route={route} />
-      {revised.length > 0 ? (
+      {CartItems.length > 0 ? (
         <>
           <View
             style={{
               height: Dimensions.get('window').height * 0.65,
               marginVertical: 10,
             }}>
-            <CartItem data={revised} handleDelete={handleDelete} />
+            <CartItem handleDelete={handleDelete} />
           </View>
           <TouchableOpacity
             style={styles.checkout}
             activeOpacity={0.8}
             onPress={() =>
-              navigation.navigate('Checkout', {
-                CartItems: revised,
-              })
+              navigation.navigate('Checkout')
             }>
             <Text
               style={{

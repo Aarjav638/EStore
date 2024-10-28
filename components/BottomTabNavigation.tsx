@@ -10,9 +10,11 @@ import {BottomNavigationList} from '../constants/types';
 import Account from '../screens/Account';
 import DiscoverStack from './Navigation/DiscoverStack';
 import CartStack from './Navigation/CartStack';
+import { useAppSelector } from '../redux/hooks';
 
 const Tab = createBottomTabNavigator<BottomNavigationList>();
 const BottomTabNavigation = () => {
+  const cartItems = useAppSelector(state => state.cart.cartItems);
   return (
     <View style={styles.Wrapper}>
       <Tab.Navigator
@@ -73,7 +75,7 @@ const BottomTabNavigation = () => {
                     }}>
                     <Text
                       style={{color: '#fff', fontSize: 12, fontWeight: 'bold'}}>
-                      3
+                      {cartItems.length}
                     </Text>
                   </View>
                   <CartSvg
