@@ -9,7 +9,6 @@ import {
 import React, { useMemo } from 'react';
 import CartTotal from './CartTotal';
 import Assets from '../../constants/images';
-import { Product } from '../../constants/types';
 import { useAppDispatch, useAppSelector } from '../../redux/hooks';
 import { addToCart, removeFromCart} from '../../redux/feature/Cart';
 

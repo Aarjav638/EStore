@@ -1,16 +1,13 @@
 import {
   Dimensions,
-  ImageSourcePropType,
   StyleSheet,
   Text,
-  ToastAndroid,
   TouchableOpacity,
   View,
 } from 'react-native';
 import React from 'react';
 import CartHeader from '../components/Cart/CartHeader';
 import CartItem from '../components/Cart/CartItem';
-import Assets from '../constants/images';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import {CheckoutParam} from '../constants/types';
 import { useAppDispatch, useAppSelector } from '../redux/hooks';

@@ -17,7 +17,7 @@ import {CategoryStackParams, DrawerParamList} from '../../constants/types';
 import CustomButton from '../../components/Auth/SignIn/CustomButton';
 import ProductsSkeleton from './ProductsSkeleton';
 import {DrawerActions} from '@react-navigation/native';
-import { useAppDispatch, useAppSelector } from '../../redux/hooks';
+import { useAppDispatch } from '../../redux/hooks';
 import { addToCart } from '../../redux/feature/Cart';
 
 type ProductsProps = NativeStackScreenProps<CategoryStackParams, 'Products'>;

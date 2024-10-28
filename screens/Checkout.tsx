@@ -18,7 +18,6 @@ import AddressForm from '../components/Checkout/AddressForm';
 import CustomButton from '../components/Auth/SignIn/CustomButton';
 import Payment from '../components/Checkout/Payment/Payment';
 import Summary from '../components/Checkout/Summary/Summary';
-import { useAppSelector } from '../redux/hooks';
 
 type CheckoutProps = NativeStackScreenProps<CheckoutParam, 'Checkout'>;
 
