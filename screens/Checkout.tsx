@@ -18,7 +18,6 @@ import AddressForm from '../components/Checkout/AddressForm';
 import CustomButton from '../components/Auth/SignIn/CustomButton';
 import Payment from '../components/Checkout/Payment/Payment';
 import Summary from '../components/Checkout/Summary/Summary';
-import { useAppSelector } from '../redux/hooks';
 
 type CheckoutProps = NativeStackScreenProps<CheckoutParam, 'Checkout'>;
 
@@ -157,10 +156,7 @@ const Checkout = ({navigation}: CheckoutProps) => {
         )}
         {currentStep === 2 && <Payment setPaymentData={setPaymentData} />}
         {currentStep === 3 && (
-          <Summary
-            paymentData={paymentData}
-            addressData={addressData}
-          />
+          <Summary paymentData={paymentData} addressData={addressData} />
         )}
       </View>
       <View style={styles.buttonContainer}>

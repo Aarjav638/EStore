@@ -6,28 +6,21 @@ import {
   Image,
   TouchableOpacity,
 } from 'react-native';
-import React, { useMemo } from 'react';
+import React, {useMemo} from 'react';
 import CartTotal from './CartTotal';
 import Assets from '../../constants/images';
-import { Product } from '../../constants/types';
-import { useAppDispatch, useAppSelector } from '../../redux/hooks';
-import { addToCart, removeFromCart} from '../../redux/feature/Cart';
+import {useAppDispatch, useAppSelector} from '../../redux/hooks';
+import {addToCart, removeFromCart} from '../../redux/feature/Cart';
 
-const CartItem = ({
-  handleDelete,
-}: {
-  handleDelete: (id: number) => void;
-}) => {
+const CartItem = ({handleDelete}: {handleDelete: (id: number) => void}) => {
   const dispatch = useAppDispatch();
   const cartItems = useAppSelector(state => state.cart.cartItems);
 
-
-    const subTotal = useMemo(() => {
+  const subTotal = useMemo(() => {
     return cartItems.reduce((acc, item) => {
       return acc + item.price * (item.quantity ?? 1);
     }, 0);
   }, [cartItems]);
-
 
   return (
     <FlatList
@@ -42,7 +35,7 @@ const CartItem = ({
       renderItem={({item}) => {
         return (
           <View style={styles.container}>
-            <Image source={{uri:item.image_url}} style={styles.image} />
+            <Image source={{uri: item.image_url}} style={styles.image} />
             <View style={styles.subView}>
               <View
                 style={{
@@ -51,7 +44,7 @@ const CartItem = ({
                   alignItems: 'center',
                 }}>
                 <Text style={styles.itemName}>{item.name}</Text>
-                <Text style={styles.price}>${(item.price).toFixed(2)}</Text>
+                <Text style={styles.price}>${item.price.toFixed(2)}</Text>
               </View>
               <Text style={{fontSize: 12, color: '#000', opacity: 0.5}}>
                 Women
@@ -64,15 +57,17 @@ const CartItem = ({
                   justifyContent: 'space-between',
                 }}>
                 <View style={styles.Quantity}>
-                  <Text  style={styles.text} 
-                  onPress={()=>
-                      dispatch(addToCart({...item,quantity:1}))
-                  }
-                  >+</Text>
+                  <Text
+                    style={styles.text}
+                    onPress={() => dispatch(addToCart({...item, quantity: 1}))}>
+                    +
+                  </Text>
                   <Text style={styles.text}>{item.quantity}</Text>
-                  <Text style={styles.text} onPress={()=>
-                      dispatch(removeFromCart({id:item.id}))
-                  } >-</Text>
+                  <Text
+                    style={styles.text}
+                    onPress={() => dispatch(removeFromCart({id: item.id}))}>
+                    -
+                  </Text>
                 </View>
                 <TouchableOpacity
                   style={{
@@ -155,6 +150,5 @@ const styles = StyleSheet.create({
     fontSize: 16,
     color: 'black',
     width: 20,
-
   },
 });
