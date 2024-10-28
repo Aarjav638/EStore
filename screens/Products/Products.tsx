@@ -17,16 +17,14 @@ import {CategoryStackParams, DrawerParamList} from '../../constants/types';
 import CustomButton from '../../components/Auth/SignIn/CustomButton';
 import ProductsSkeleton from './ProductsSkeleton';
 import {DrawerActions} from '@react-navigation/native';
-import { useAppDispatch } from '../../redux/hooks';
-import { addToCart } from '../../redux/feature/Cart';
+import {useAppDispatch} from '../../redux/hooks';
+import {addToCart} from '../../redux/feature/Cart';
 
 type ProductsProps = NativeStackScreenProps<CategoryStackParams, 'Products'>;
 type ProductsDrawer = NativeStackScreenProps<DrawerParamList, 'Products'>;
 const {height: SCREEN_HEIGHT} = Dimensions.get('window');
 const Products = ({navigation, route}: ProductsProps | ProductsDrawer) => {
-
-  
-const dispatch=useAppDispatch();
+  const dispatch = useAppDispatch();
   const [heartClicked, setHeartClicked] = React.useState(false);
   const [quantity, setQuantity] = React.useState(1);
   const title = route.params?.title ?? 'Products';
@@ -70,16 +68,18 @@ const dispatch=useAppDispatch();
   }
 
   const handleAddToCart = () => {
-    dispatch(addToCart({
-      id: 1,
-      name: 'Gucci Sunglasses',
-      price: 45,
-      image_url: 'https://dummyimage.com/200x200/000/fff&text=Sunglasses',
-      category: 'Sunglasses',
-      brand: 'Gucci',
-      rating: 5,
-      quantity: quantity
-    }))
+    dispatch(
+      addToCart({
+        id: 1,
+        name: 'Gucci Sunglasses',
+        price: 45,
+        image_url: 'https://dummyimage.com/200x200/000/fff&text=Sunglasses',
+        category: 'Sunglasses',
+        brand: 'Gucci',
+        rating: 5,
+        quantity: quantity,
+      }),
+    );
   };
 
   return (
@@ -471,7 +471,7 @@ const dispatch=useAppDispatch();
                   paddingHorizontal: 10,
                 }}>
                 <Text
-                onPress={()=>setQuantity(quantity+1)}
+                  onPress={() => setQuantity(quantity + 1)}
                   style={{
                     color: '#000',
                     fontSize: 14,
@@ -485,16 +485,14 @@ const dispatch=useAppDispatch();
                     color: '#000',
                     fontSize: 14,
                   }}>
-                 {quantity}
+                  {quantity}
                 </Text>
                 <Text
-                onPress={()=>
-                  {if(quantity>1){
-                    setQuantity(quantity-1)
-                  }
-                }
-
-                }
+                  onPress={() => {
+                    if (quantity > 1) {
+                      setQuantity(quantity - 1);
+                    }
+                  }}
                   style={{
                     color: '#000',
                     fontSize: 18,

@@ -156,10 +156,7 @@ const Checkout = ({navigation}: CheckoutProps) => {
         )}
         {currentStep === 2 && <Payment setPaymentData={setPaymentData} />}
         {currentStep === 3 && (
-          <Summary
-            paymentData={paymentData}
-            addressData={addressData}
-          />
+          <Summary paymentData={paymentData} addressData={addressData} />
         )}
       </View>
       <View style={styles.buttonContainer}>

@@ -10,7 +10,7 @@ import {BottomNavigationList} from '../constants/types';
 import Account from '../screens/Account';
 import DiscoverStack from './Navigation/DiscoverStack';
 import CartStack from './Navigation/CartStack';
-import { useAppSelector } from '../redux/hooks';
+import {useAppSelector} from '../redux/hooks';
 
 const Tab = createBottomTabNavigator<BottomNavigationList>();
 const BottomTabNavigation = () => {

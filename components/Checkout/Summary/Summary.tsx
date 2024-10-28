@@ -3,7 +3,7 @@ import React from 'react';
 import {Address, paymentData} from '../../../screens/Checkout';
 import Assets from '../../../constants/images';
 import {getCardIcon} from '../../../utils/getCardIcon';
-import { useAppSelector } from '../../../redux/hooks';
+import {useAppSelector} from '../../../redux/hooks';
 
 const Summary = ({
   paymentData,
@@ -31,7 +31,7 @@ const Summary = ({
                 justifyContent: 'center',
                 gap: 4,
               }}>
-              <Image source={{uri:item.image_url}} style={styles.itemImage} />
+              <Image source={{uri: item.image_url}} style={styles.itemImage} />
               <Text style={styles.name}>{item.name}</Text>
               <Text style={styles.price}>${item.price}</Text>
             </View>

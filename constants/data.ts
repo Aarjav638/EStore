@@ -12,8 +12,8 @@ export const data: Product[] = [
     color: 'black',
     image_url: 'https://dummyimage.com/200x200/000/fff&text=Classic+T-Shirt',
     quantity: 0,
-},
-{
+  },
+  {
     id: 2,
     name: 'Classic T-Shirt',
     category: 'Men',
@@ -23,8 +23,8 @@ export const data: Product[] = [
     color: 'black',
     image_url: 'https://dummyimage.com/200x200/000/fff&text=Classic+T-Shirt',
     quantity: 0,
-},
-{
+  },
+  {
     id: 3,
     name: 'Classic T-Shirt',
     category: 'Men',
@@ -34,8 +34,8 @@ export const data: Product[] = [
     color: 'black',
     image_url: 'https://dummyimage.com/200x200/000/fff&text=Classic+T-Shirt',
     quantity: 0,
-},
-{
+  },
+  {
     id: 4,
     name: 'Slim Fit Jeans',
     category: 'Men',
@@ -45,8 +45,8 @@ export const data: Product[] = [
     color: 'blue',
     image_url: 'https://dummyimage.com/200x200/000/fff&text=Slim+Fit+Jeans',
     quantity: 0,
-},
-{
+  },
+  {
     id: 5,
     name: 'Floral Dress',
     category: 'Women',
@@ -56,8 +56,8 @@ export const data: Product[] = [
     color: 'floral',
     image_url: 'https://dummyimage.com/200x200/000/fff&text=Floral+Dress',
     quantity: 0,
-},
-{
+  },
+  {
     id: 6,
     name: 'Oversized Hoodie',
     category: 'Best Sellers',
@@ -66,8 +66,8 @@ export const data: Product[] = [
     rating: 4.8,
     color: 'black',
     image_url: 'https://dummyimage.com/200x200/000/fff&text=Oversized+Hoodie',
-},
-{
+  },
+  {
     id: 7,
     name: 'Chino Shorts',
     category: 'Men',
@@ -76,8 +76,8 @@ export const data: Product[] = [
     rating: 4.2,
     color: 'khaki',
     image_url: 'https://dummyimage.com/200x200/000/fff&text=Chino+Shorts',
-},
-{
+  },
+  {
     id: 8,
     name: 'Silk Blouse',
     category: 'Women',
@@ -86,8 +86,8 @@ export const data: Product[] = [
     rating: 4.4,
     color: 'white',
     image_url: 'https://dummyimage.com/200x200/000/fff&text=Silk+Blouse',
-},
-{
+  },
+  {
     id: 9,
     name: 'Running Shoes',
     category: 'Best Sellers',
@@ -96,8 +96,8 @@ export const data: Product[] = [
     rating: 4.9,
     color: 'white',
     image_url: 'https://dummyimage.com/200x200/000/fff&text=Running+Shoes',
-},
-{
+  },
+  {
     id: 10,
     name: 'Polo Shirt',
     category: 'Men',
@@ -106,8 +106,8 @@ export const data: Product[] = [
     rating: 4.7,
     color: 'blue',
     image_url: 'https://dummyimage.com/200x200/000/fff&text=Polo+Shirt',
-},
-{
+  },
+  {
     id: 11,
     name: 'Denim Jacket',
     category: 'Women',
@@ -116,8 +116,8 @@ export const data: Product[] = [
     rating: 4.5,
     color: 'blue',
     image_url: 'https://dummyimage.com/200x200/000/fff&text=Denim+Jacket',
-},
-{
+  },
+  {
     id: 12,
     name: 'Yoga Pants',
     category: 'Best Sellers',
@@ -126,8 +126,8 @@ export const data: Product[] = [
     rating: 4.8,
     color: 'black',
     image_url: 'https://dummyimage.com/200x200/000/fff&text=Yoga+Pants',
-},
-{
+  },
+  {
     id: 13,
     name: 'Graphic T-Shirt',
     category: 'Men',
@@ -136,8 +136,8 @@ export const data: Product[] = [
     color: 'white',
     rating: 4.6,
     image_url: 'https://dummyimage.com/200x200/000/fff&text=Graphic+T-Shirt',
-},
-{
+  },
+  {
     id: 14,
     name: 'Maxi Skirt',
     category: 'Women',
@@ -146,8 +146,8 @@ export const data: Product[] = [
     rating: 4.3,
     color: 'floral',
     image_url: 'https://dummyimage.com/200x200/000/fff&text=Maxi+Skirt',
-},
-{
+  },
+  {
     id: 15,
     name: 'High-Top Sneakers',
     category: 'Best Sellers',
@@ -156,8 +156,8 @@ export const data: Product[] = [
     color: 'white',
     rating: 4.7,
     image_url: 'https://dummyimage.com/200x200/000/fff&text=High-Top+Sneakers',
-},
-{
+  },
+  {
     id: 16,
     name: 'Cargo Pants',
     category: 'Men',
@@ -166,8 +166,8 @@ export const data: Product[] = [
     color: 'khaki',
     rating: 4.2,
     image_url: 'https://dummyimage.com/200x200/000/fff&text=Cargo+Pants',
-},
-{
+  },
+  {
     id: 17,
     name: 'Leather Jacket',
     category: 'Women',
@@ -176,8 +176,8 @@ export const data: Product[] = [
     rating: 4.6,
     color: 'black',
     image_url: 'https://dummyimage.com/200x200/000/fff&text=Leather+Jacket',
-},
-{
+  },
+  {
     id: 18,
     name: 'Sweatpants',
     category: 'Best Sellers',
@@ -186,8 +186,8 @@ export const data: Product[] = [
     color: 'black',
     rating: 4.5,
     image_url: 'https://dummyimage.com/200x200/000/fff&text=Sweatpants',
-},
-{
+  },
+  {
     id: 19,
     name: 'Casual Blazer',
     category: 'Men',
@@ -196,8 +196,8 @@ export const data: Product[] = [
     rating: 4.4,
     color: 'black',
     image_url: 'https://dummyimage.com/200x200/000/fff&text=Casual+Blazer',
-},
-{
+  },
+  {
     id: 20,
     name: 'Evening Gown',
     category: 'Women',
@@ -206,8 +206,8 @@ export const data: Product[] = [
     rating: 4.9,
     color: 'red',
     image_url: 'https://dummyimage.com/200x200/000/fff&text=Evening+Gown',
-},
-{
+  },
+  {
     id: 21,
     name: 'Baseball Cap',
     category: 'Best Sellers',
@@ -216,8 +216,8 @@ export const data: Product[] = [
     color: 'black',
     rating: 4.7,
     image_url: 'https://dummyimage.com/200x200/000/fff&text=Baseball+Cap',
-},
-{
+  },
+  {
     id: 22,
     name: 'Button-Down Shirt',
     category: 'Men',
@@ -226,7 +226,7 @@ export const data: Product[] = [
     rating: 4.5,
     color: 'blue',
     image_url: 'https://dummyimage.com/200x200/000/fff&text=Button-Down+Shirt',
-}
+  },
 ];
 export const menuItems = [
   {

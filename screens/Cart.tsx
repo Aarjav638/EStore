@@ -10,8 +10,8 @@ import CartHeader from '../components/Cart/CartHeader';
 import CartItem from '../components/Cart/CartItem';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import {CheckoutParam} from '../constants/types';
-import { useAppDispatch, useAppSelector } from '../redux/hooks';
-import { removeFromCart } from '../redux/feature/Cart';
+import {useAppDispatch, useAppSelector} from '../redux/hooks';
+import {removeFromCart} from '../redux/feature/Cart';
 
 // const data: CartProps[] = [
 //   {
@@ -48,16 +48,11 @@ import { removeFromCart } from '../redux/feature/Cart';
 export type CartParam = NativeStackScreenProps<CheckoutParam, 'cart'>;
 
 const Cart = ({navigation, route}: CartParam) => {
-
   const handleDelete = (id: number) => {
-
     dispatch(removeFromCart({id: id}));
-    
   };
   const dispatch = useAppDispatch();
   const CartItems = useAppSelector(state => state.cart.cartItems);
-
-
 
   return (
     <View style={styles.container}>
@@ -74,9 +69,7 @@ const Cart = ({navigation, route}: CartParam) => {
           <TouchableOpacity
             style={styles.checkout}
             activeOpacity={0.8}
-            onPress={() =>
-              navigation.navigate('Checkout')
-            }>
+            onPress={() => navigation.navigate('Checkout')}>
             <Text
               style={{
                 color: 'white',
