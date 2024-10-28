@@ -1,8 +1,9 @@
 import Assets from './images';
-import {Item} from './types';
+import {Product} from './types';
 
-export const data: Item[] = [
+export const data: Product[] = [
   {
+    id: 1,
     name: 'Classic T-Shirt',
     category: 'Men',
     brand: "Levi's",
@@ -10,8 +11,10 @@ export const data: Item[] = [
     rating: 4.5,
     color: 'black',
     image_url: 'https://dummyimage.com/200x200/000/fff&text=Classic+T-Shirt',
-  },
-  {
+    quantity: 0,
+},
+{
+    id: 2,
     name: 'Classic T-Shirt',
     category: 'Men',
     brand: "Levi's",
@@ -19,8 +22,10 @@ export const data: Item[] = [
     rating: 4.5,
     color: 'black',
     image_url: 'https://dummyimage.com/200x200/000/fff&text=Classic+T-Shirt',
-  },
-  {
+    quantity: 0,
+},
+{
+    id: 3,
     name: 'Classic T-Shirt',
     category: 'Men',
     brand: "Levi's",
@@ -28,8 +33,10 @@ export const data: Item[] = [
     rating: 4.5,
     color: 'black',
     image_url: 'https://dummyimage.com/200x200/000/fff&text=Classic+T-Shirt',
-  },
-  {
+    quantity: 0,
+},
+{
+    id: 4,
     name: 'Slim Fit Jeans',
     category: 'Men',
     brand: 'Wrangler',
@@ -37,8 +44,10 @@ export const data: Item[] = [
     rating: 4.3,
     color: 'blue',
     image_url: 'https://dummyimage.com/200x200/000/fff&text=Slim+Fit+Jeans',
-  },
-  {
+    quantity: 0,
+},
+{
+    id: 5,
     name: 'Floral Dress',
     category: 'Women',
     brand: 'Zara',
@@ -46,8 +55,10 @@ export const data: Item[] = [
     rating: 4.6,
     color: 'floral',
     image_url: 'https://dummyimage.com/200x200/000/fff&text=Floral+Dress',
-  },
-  {
+    quantity: 0,
+},
+{
+    id: 6,
     name: 'Oversized Hoodie',
     category: 'Best Sellers',
     brand: 'Nike',
@@ -55,8 +66,9 @@ export const data: Item[] = [
     rating: 4.8,
     color: 'black',
     image_url: 'https://dummyimage.com/200x200/000/fff&text=Oversized+Hoodie',
-  },
-  {
+},
+{
+    id: 7,
     name: 'Chino Shorts',
     category: 'Men',
     brand: 'Gap',
@@ -64,8 +76,9 @@ export const data: Item[] = [
     rating: 4.2,
     color: 'khaki',
     image_url: 'https://dummyimage.com/200x200/000/fff&text=Chino+Shorts',
-  },
-  {
+},
+{
+    id: 8,
     name: 'Silk Blouse',
     category: 'Women',
     brand: 'H&M',
@@ -73,8 +86,9 @@ export const data: Item[] = [
     rating: 4.4,
     color: 'white',
     image_url: 'https://dummyimage.com/200x200/000/fff&text=Silk+Blouse',
-  },
-  {
+},
+{
+    id: 9,
     name: 'Running Shoes',
     category: 'Best Sellers',
     brand: 'Adidas',
@@ -82,8 +96,9 @@ export const data: Item[] = [
     rating: 4.9,
     color: 'white',
     image_url: 'https://dummyimage.com/200x200/000/fff&text=Running+Shoes',
-  },
-  {
+},
+{
+    id: 10,
     name: 'Polo Shirt',
     category: 'Men',
     brand: 'Ralph Lauren',
@@ -91,8 +106,9 @@ export const data: Item[] = [
     rating: 4.7,
     color: 'blue',
     image_url: 'https://dummyimage.com/200x200/000/fff&text=Polo+Shirt',
-  },
-  {
+},
+{
+    id: 11,
     name: 'Denim Jacket',
     category: 'Women',
     brand: "Levi's",
@@ -100,8 +116,9 @@ export const data: Item[] = [
     rating: 4.5,
     color: 'blue',
     image_url: 'https://dummyimage.com/200x200/000/fff&text=Denim+Jacket',
-  },
-  {
+},
+{
+    id: 12,
     name: 'Yoga Pants',
     category: 'Best Sellers',
     brand: 'Lululemon',
@@ -109,8 +126,9 @@ export const data: Item[] = [
     rating: 4.8,
     color: 'black',
     image_url: 'https://dummyimage.com/200x200/000/fff&text=Yoga+Pants',
-  },
-  {
+},
+{
+    id: 13,
     name: 'Graphic T-Shirt',
     category: 'Men',
     brand: 'Supreme',
@@ -118,8 +136,9 @@ export const data: Item[] = [
     color: 'white',
     rating: 4.6,
     image_url: 'https://dummyimage.com/200x200/000/fff&text=Graphic+T-Shirt',
-  },
-  {
+},
+{
+    id: 14,
     name: 'Maxi Skirt',
     category: 'Women',
     brand: 'Free People',
@@ -127,8 +146,9 @@ export const data: Item[] = [
     rating: 4.3,
     color: 'floral',
     image_url: 'https://dummyimage.com/200x200/000/fff&text=Maxi+Skirt',
-  },
-  {
+},
+{
+    id: 15,
     name: 'High-Top Sneakers',
     category: 'Best Sellers',
     brand: 'Converse',
@@ -136,8 +156,9 @@ export const data: Item[] = [
     color: 'white',
     rating: 4.7,
     image_url: 'https://dummyimage.com/200x200/000/fff&text=High-Top+Sneakers',
-  },
-  {
+},
+{
+    id: 16,
     name: 'Cargo Pants',
     category: 'Men',
     brand: 'Dockers',
@@ -145,8 +166,9 @@ export const data: Item[] = [
     color: 'khaki',
     rating: 4.2,
     image_url: 'https://dummyimage.com/200x200/000/fff&text=Cargo+Pants',
-  },
-  {
+},
+{
+    id: 17,
     name: 'Leather Jacket',
     category: 'Women',
     brand: 'Michael Kors',
@@ -154,8 +176,9 @@ export const data: Item[] = [
     rating: 4.6,
     color: 'black',
     image_url: 'https://dummyimage.com/200x200/000/fff&text=Leather+Jacket',
-  },
-  {
+},
+{
+    id: 18,
     name: 'Sweatpants',
     category: 'Best Sellers',
     brand: 'Champion',
@@ -163,8 +186,9 @@ export const data: Item[] = [
     color: 'black',
     rating: 4.5,
     image_url: 'https://dummyimage.com/200x200/000/fff&text=Sweatpants',
-  },
-  {
+},
+{
+    id: 19,
     name: 'Casual Blazer',
     category: 'Men',
     brand: 'Zara',
@@ -172,8 +196,9 @@ export const data: Item[] = [
     rating: 4.4,
     color: 'black',
     image_url: 'https://dummyimage.com/200x200/000/fff&text=Casual+Blazer',
-  },
-  {
+},
+{
+    id: 20,
     name: 'Evening Gown',
     category: 'Women',
     brand: 'Gucci',
@@ -181,8 +206,9 @@ export const data: Item[] = [
     rating: 4.9,
     color: 'red',
     image_url: 'https://dummyimage.com/200x200/000/fff&text=Evening+Gown',
-  },
-  {
+},
+{
+    id: 21,
     name: 'Baseball Cap',
     category: 'Best Sellers',
     brand: 'New Era',
@@ -190,8 +216,9 @@ export const data: Item[] = [
     color: 'black',
     rating: 4.7,
     image_url: 'https://dummyimage.com/200x200/000/fff&text=Baseball+Cap',
-  },
-  {
+},
+{
+    id: 22,
     name: 'Button-Down Shirt',
     category: 'Men',
     brand: 'Tommy Hilfiger',
@@ -199,7 +226,7 @@ export const data: Item[] = [
     rating: 4.5,
     color: 'blue',
     image_url: 'https://dummyimage.com/200x200/000/fff&text=Button-Down+Shirt',
-  },
+}
 ];
 export const menuItems = [
   {

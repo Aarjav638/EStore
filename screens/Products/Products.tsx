@@ -17,12 +17,18 @@ import {CategoryStackParams, DrawerParamList} from '../../constants/types';
 import CustomButton from '../../components/Auth/SignIn/CustomButton';
 import ProductsSkeleton from './ProductsSkeleton';
 import {DrawerActions} from '@react-navigation/native';
+import { useAppDispatch, useAppSelector } from '../../redux/hooks';
+import { addToCart } from '../../redux/feature/Cart';
 
 type ProductsProps = NativeStackScreenProps<CategoryStackParams, 'Products'>;
 type ProductsDrawer = NativeStackScreenProps<DrawerParamList, 'Products'>;
 const {height: SCREEN_HEIGHT} = Dimensions.get('window');
 const Products = ({navigation, route}: ProductsProps | ProductsDrawer) => {
+
+  
+const dispatch=useAppDispatch();
   const [heartClicked, setHeartClicked] = React.useState(false);
+  const [quantity, setQuantity] = React.useState(1);
   const title = route.params?.title ?? 'Products';
   const [loading, setLoading] = useState(true);
   const scrollY = new Animated.Value(0);
@@ -62,6 +68,19 @@ const Products = ({navigation, route}: ProductsProps | ProductsDrawer) => {
   if (loading) {
     return <ProductsSkeleton title={title} />;
   }
+
+  const handleAddToCart = () => {
+    dispatch(addToCart({
+      id: 1,
+      name: 'Gucci Sunglasses',
+      price: 45,
+      image_url: 'https://dummyimage.com/200x200/000/fff&text=Sunglasses',
+      category: 'Sunglasses',
+      brand: 'Gucci',
+      rating: 5,
+      quantity: quantity
+    }))
+  };
 
   return (
     <SafeAreaView style={styles.container}>
@@ -275,7 +294,7 @@ const Products = ({navigation, route}: ProductsProps | ProductsDrawer) => {
             opacity: oldContentOpacity,
           }}>
           <CustomButton
-            onPress={() => console.log('Add to cart')}
+            onPress={handleAddToCart}
             customStyles={styles.button}
             text="Add To Cart"
             textStyle={styles.buttonText}
@@ -434,7 +453,7 @@ const Products = ({navigation, route}: ProductsProps | ProductsDrawer) => {
                 columnGap: 10,
               }}>
               <CustomButton
-                onPress={() => console.log('Add to cart')}
+                onPress={handleAddToCart}
                 customStyles={styles.button}
                 text="Add To Cart"
                 textStyle={styles.buttonText}
@@ -452,9 +471,12 @@ const Products = ({navigation, route}: ProductsProps | ProductsDrawer) => {
                   paddingHorizontal: 10,
                 }}>
                 <Text
+                onPress={()=>setQuantity(quantity+1)}
                   style={{
                     color: '#000',
                     fontSize: 14,
+                    textAlign: 'center',
+                    width: 20,
                   }}>
                   +
                 </Text>
@@ -463,12 +485,21 @@ const Products = ({navigation, route}: ProductsProps | ProductsDrawer) => {
                     color: '#000',
                     fontSize: 14,
                   }}>
-                  1
+                 {quantity}
                 </Text>
                 <Text
+                onPress={()=>
+                  {if(quantity>1){
+                    setQuantity(quantity-1)
+                  }
+                }
+
+                }
                   style={{
                     color: '#000',
-                    fontSize: 14,
+                    fontSize: 18,
+                    textAlign: 'center',
+                    width: 20,
                   }}>
                   -
                 </Text>

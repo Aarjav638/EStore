@@ -9,11 +9,14 @@ import {RootStackParamList} from '../../constants/types';
 import Verification from '../../screens/Auth/Verification';
 import Welcome from '../../screens/Welcome';
 import MyDrawer from './Drawer';
+import { Provider } from 'react-redux';
+import { store } from '../../redux/store';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
 const Navigation = () => {
   return (
+    <Provider store={store}>
     <NavigationContainer>
       <Stack.Navigator
         screenOptions={{
@@ -28,6 +31,7 @@ const Navigation = () => {
         <Stack.Screen name="Drawer" component={MyDrawer} />
       </Stack.Navigator>
     </NavigationContainer>
+    </Provider>
   );
 };
 

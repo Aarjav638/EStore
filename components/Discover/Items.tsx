@@ -10,7 +10,7 @@ import {
 import React, {useCallback, useMemo, useState} from 'react';
 import Assets from '../../constants/images';
 
-import {Item} from '../../constants/types';
+import {Product} from '../../constants/types';
 
 const ItemView = React.memo(
   ({
@@ -20,7 +20,7 @@ const ItemView = React.memo(
     clickedItems,
     dataLoading,
   }: {
-    item: Item;
+    item: Product;
     index: number;
     handleHeartClick: (index: number) => void;
     clickedItems: {
@@ -96,7 +96,7 @@ const Items = ({
 }: {
   selected: number;
   menuItems: {name: string; id: number}[];
-  data: Item[];
+  data: Product[];
   dataLoading: boolean;
 }) => {
   const [loading, setLoading] = useState(false);
@@ -131,7 +131,7 @@ const Items = ({
     return <ActivityIndicator size="large" color="#FA4248" />;
   };
   const renderItem = useCallback(
-    ({item, index}: {item: Item; index: number}) => (
+    ({item, index}: {item: Product; index: number}) => (
       <ItemView
         dataLoading={dataLoading}
         item={item}

@@ -1,20 +1,19 @@
 import {FlatList, Image, StyleSheet, Text, View} from 'react-native';
 import React from 'react';
-import {CartProps} from '../../../screens/Cart';
 import {Address, paymentData} from '../../../screens/Checkout';
 import Assets from '../../../constants/images';
 import {getCardIcon} from '../../../utils/getCardIcon';
+import { useAppSelector } from '../../../redux/hooks';
 
 const Summary = ({
-  CartItems,
   paymentData,
   addressData,
 }: {
-  CartItems: CartProps[];
   paymentData: paymentData;
   addressData: Address;
 }) => {
-  console.log('CartItems', CartItems);
+  const cartItems = useAppSelector(state => state.cart.cartItems);
+  console.log('CartItems', cartItems);
   console.log('paymentData', paymentData);
   console.log('addressData', addressData);
   return (
@@ -24,7 +23,7 @@ const Summary = ({
         <FlatList
           horizontal
           contentContainerStyle={{paddingHorizontal: 10, columnGap: 20}}
-          data={CartItems}
+          data={cartItems}
           keyExtractor={item => item.id.toString()}
           renderItem={({item}) => (
             <View
@@ -32,7 +31,7 @@ const Summary = ({
                 justifyContent: 'center',
                 gap: 4,
               }}>
-              <Image source={item.image} style={styles.itemImage} />
+              <Image source={{uri:item.image_url}} style={styles.itemImage} />
               <Text style={styles.name}>{item.name}</Text>
               <Text style={styles.price}>${item.price}</Text>
             </View>

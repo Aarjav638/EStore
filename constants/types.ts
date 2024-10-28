@@ -1,5 +1,4 @@
 import {ImageSourcePropType} from 'react-native';
-import {CartProps} from '../screens/Cart';
 
 export type RootStackParamList = {
   Splash: undefined;
@@ -38,9 +37,7 @@ export type DiscoverStackParams = {
 };
 
 export type CheckoutParam = {
-  Checkout: {
-    CartItems: CartProps[];
-  };
+  Checkout: undefined;
   cart: undefined;
   trackOrder: undefined;
   Search: undefined;
@@ -97,7 +94,9 @@ export type Images = {
   gps: ImageSourcePropType;
 };
 
-export type Item = {
+
+export type Product = {
+  id: number;
   name: string;
   category: string;
   color?: string;
@@ -105,4 +104,20 @@ export type Item = {
   price: number;
   rating: number;
   image_url: string;
+  quantity?: number;
+};
+export type ProductState = {
+  products: Product[];
+  loading: boolean;
+  error: string;
+};
+
+export type Rating = {
+  rate: number;
+  count: number;
+};
+
+export type CartState = {
+  cartItems: Product[];
+  addedToCart: boolean;
 };

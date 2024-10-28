@@ -6,22 +6,28 @@ import {
   Image,
   TouchableOpacity,
 } from 'react-native';
-import React from 'react';
-import {CartProps} from '../../screens/Cart';
+import React, { useMemo } from 'react';
 import CartTotal from './CartTotal';
 import Assets from '../../constants/images';
+import { Product } from '../../constants/types';
+import { useAppDispatch, useAppSelector } from '../../redux/hooks';
+import { addToCart, removeFromCart} from '../../redux/feature/Cart';
 
 const CartItem = ({
-  data,
   handleDelete,
 }: {
-  data: CartProps[];
-  handleDelete: (id: number, name: string) => void;
+  handleDelete: (id: number) => void;
 }) => {
-  const subTotal = data.reduce(
-    (sum, item) => sum + item.price * item.quantity,
-    0,
-  );
+  const dispatch = useAppDispatch();
+  const cartItems = useAppSelector(state => state.cart.cartItems);
+
+
+    const subTotal = useMemo(() => {
+    return cartItems.reduce((acc, item) => {
+      return acc + item.price * (item.quantity ?? 1);
+    }, 0);
+  }, [cartItems]);
+
 
   return (
     <FlatList
@@ -31,12 +37,12 @@ const CartItem = ({
         paddingHorizontal: 20,
       }}
       ListFooterComponent={<CartTotal total={subTotal} />}
-      data={data}
+      data={cartItems}
       keyExtractor={item => item.id.toString()}
       renderItem={({item}) => {
         return (
           <View style={styles.container}>
-            <Image source={item.image} style={styles.image} />
+            <Image source={{uri:item.image_url}} style={styles.image} />
             <View style={styles.subView}>
               <View
                 style={{
@@ -45,7 +51,7 @@ const CartItem = ({
                   alignItems: 'center',
                 }}>
                 <Text style={styles.itemName}>{item.name}</Text>
-                <Text style={styles.price}>${item.price * item.quantity}</Text>
+                <Text style={styles.price}>${(item.price).toFixed(2)}</Text>
               </View>
               <Text style={{fontSize: 12, color: '#000', opacity: 0.5}}>
                 Women
@@ -58,20 +64,27 @@ const CartItem = ({
                   justifyContent: 'space-between',
                 }}>
                 <View style={styles.Quantity}>
-                  <Text style={styles.text}>+</Text>
+                  <Text  style={styles.text} 
+                  onPress={()=>
+                      dispatch(addToCart({...item,quantity:1}))
+                  }
+                  >+</Text>
                   <Text style={styles.text}>{item.quantity}</Text>
-                  <Text style={styles.text}>-</Text>
+                  <Text style={styles.text} onPress={()=>
+                      dispatch(removeFromCart({id:item.id}))
+                  } >-</Text>
                 </View>
                 <TouchableOpacity
                   style={{
                     height: 55,
                     width: 53,
+                    marginTop: '-4%',
                     justifyContent: 'center',
                     alignItems: 'center',
                     backgroundColor: '#FA4248',
                     borderRadius: 18,
                   }}
-                  onPress={() => handleDelete(item.id, item.name)}>
+                  onPress={() => handleDelete(item.id)}>
                   <Image
                     source={Assets.bin}
                     style={{
@@ -100,6 +113,7 @@ const styles = StyleSheet.create({
     columnGap: 10,
     width: '100%',
     paddingHorizontal: 10,
+    alignItems: 'center',
     justifyContent: 'space-between',
   },
   image: {
@@ -119,6 +133,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: '700',
     color: 'black',
+    width: '60%',
   },
   price: {
     fontSize: 18,
@@ -139,5 +154,7 @@ const styles = StyleSheet.create({
   text: {
     fontSize: 16,
     color: 'black',
+    width: 20,
+
   },
 });
