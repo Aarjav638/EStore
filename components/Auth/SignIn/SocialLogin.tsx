@@ -2,8 +2,29 @@ import {StyleSheet, Text, View} from 'react-native';
 import React from 'react';
 import CustomButton from './CustomButton';
 import Assets from '../../../constants/images';
+import { signIn } from '../../../utils/auth';
+import { useAppDispatch
 
-const SocialLogin = () => {
+ } from '../../../redux/hooks';
+import { setUserInfo } from '../../../redux/feature/Auth';
+import { RootStackParamList } from '../../../constants/types';
+import { NavigationProp } from '@react-navigation/native';
+
+type socialProps=NavigationProp<RootStackParamList>
+
+const SocialLogin = ({navigation}:{
+  navigation:socialProps
+})=> {
+  const dispatch = useAppDispatch();
+  const handleSignIn = async () => {
+    const response = await signIn();
+    dispatch(setUserInfo(response));
+    navigation.navigate('Welcome');
+  }
+
+
+
+
   return (
     <View style={styles.mainContainer}>
       <Text style={styles.or}>- OR -</Text>
@@ -13,7 +34,7 @@ const SocialLogin = () => {
           text="Sign In with Google"
           icon={Assets.google}
           textStyle={styles.buttonTextStyle}
-          onPress={() => console.log('pressed')}
+          onPress={handleSignIn}
         />
         <CustomButton
           customStyles={styles.button}

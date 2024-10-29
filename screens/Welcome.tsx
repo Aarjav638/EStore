@@ -5,25 +5,47 @@ import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import {RootStackParamList} from '../constants/types';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import Header from '../components/Splash/Header';
-import Assets from '../constants/images';
 import CustomButton from '../components/Auth/SignIn/CustomButton';
+import { useAppSelector } from '../redux/hooks';
 
 type WelcomeProps = NativeStackScreenProps<RootStackParamList, 'Welcome'>;
 
 const Welcome = ({navigation}: WelcomeProps) => {
+  const {userInfo}=useAppSelector(state=>state.auth)
+  // console.log(userInfo.user.photo)
   return (
     <SafeAreaView style={styles.container}>
       <Topbar text="Welcome" navigation={navigation} />
       <Header color="#151515" marginTop={'10%'} />
-      <Image source={Assets.avatar} style={styles.image} />
+      <View style={styles.image}>
+      <Image src={
+        userInfo.user.photo
+         
+      } onError={
+        (e)=>console.log(e)
+      
+      }
+      onLoadStart={
+        ()=>console.log('loading')
+      } 
+      onLoadEnd={
+        ()=>console.log('loaded')
+      }
+      onPartialLoad={
+        ()=>console.log('partial')
+      }
+      style={{height:'100%',width:'100%',
+      borderRadius:100,
+      }}/>
+      </View>
       <View style={styles.nameContainer}>
         <Text style={styles.heading}>Welcome Back</Text>
-        <Text style={styles.name}>Jameson Dunn</Text>
+        <Text style={styles.name}>{userInfo.user.name}</Text>
       </View>
       <View style={styles.buttonWrapper}>
         <CustomButton
           onPress={() => navigation.navigate('Drawer')}
-          text="CONTINUE AS JAMESON"
+          text={`CONTINUE AS ${userInfo.user.name.toUpperCase()}`}
         />
         <CustomButton
           onPress={() => navigation.navigate('SignIn')}
@@ -53,9 +75,10 @@ const styles = StyleSheet.create({
   },
   image: {
     height: '20%',
-    width: '60%',
-    resizeMode: 'contain',
-    tintColor: '#BEBEBE',
+    width: '40%',
+    alignItems: 'center',
+    justifyContent: 'center',
+    objectFit: 'cover',
   },
   nameContainer: {
     marginTop: '10%',

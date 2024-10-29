@@ -16,6 +16,8 @@
   "dependencies": {
     "@ptomasroos/react-native-multi-slider": "^2.2.2",
     "@react-native-community/blur": "^4.4.1",
+    "@react-native-firebase/app": "^21.2.0",
+    "@react-native-google-signin/google-signin": "latest",
     "@react-navigation/bottom-tabs": "^6.6.1",
     "@react-navigation/drawer": "^6.7.2",
     "@react-navigation/native": "^6.1.18",
