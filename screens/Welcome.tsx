@@ -13,14 +13,16 @@ type WelcomeProps = NativeStackScreenProps<RootStackParamList, 'Welcome'>;
 
 const Welcome = ({navigation}: WelcomeProps) => {
   const {userInfo} = useAppSelector(state => state.auth);
-  console.log(userInfo)
+  console.log(userInfo);
   return (
     <SafeAreaView style={styles.container}>
       <Topbar text="Welcome" navigation={navigation} />
       <Header color="#151515" marginTop={'10%'} />
       <View style={styles.image}>
         <Image
-         source={userInfo.user.photo?{uri:userInfo?.user.photo}:Assets.avatar}
+          source={
+            userInfo.user.photo ? {uri: userInfo?.user.photo} : Assets.avatar
+          }
           onError={e => console.log(e)}
           onLoadStart={() => console.log('loading')}
           onLoadEnd={() => console.log('loaded')}

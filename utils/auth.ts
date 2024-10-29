@@ -22,14 +22,18 @@ export const signIn = async () => {
         case statusCodes.IN_PROGRESS:
           throw new Error('Sign-in is already in progress');
         case statusCodes.PLAY_SERVICES_NOT_AVAILABLE:
-          throw new Error('Google Play Services is not available or is outdated');
+          throw new Error(
+            'Google Play Services is not available or is outdated',
+          );
         case statusCodes.SIGN_IN_REQUIRED:
           throw new Error('Sign-in is required to proceed');
         default:
           throw new Error('An unknown error occurred during sign-in');
       }
     } else {
-      throw new Error((error as Error)?.message || 'An unexpected error occurred');
+      throw new Error(
+        (error as Error)?.message || 'An unexpected error occurred',
+      );
     }
   }
 };

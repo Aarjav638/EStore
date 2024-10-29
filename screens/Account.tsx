@@ -4,11 +4,11 @@ import {SafeAreaView} from 'react-native-safe-area-context';
 import Header from '../components/Discover/Header';
 import Assets from '../constants/images';
 import RightArrow from '../assets/chevron-right.svg';
-import { useAppDispatch, useAppSelector } from '../redux/hooks';
-import { logOut } from '../redux/feature/Auth';
-import { GoogleSignin } from '@react-native-google-signin/google-signin';
-import { NavigationProp } from '@react-navigation/native';
-import { AccountStackParamList } from '../components/AccountStack';
+import {useAppDispatch, useAppSelector} from '../redux/hooks';
+import {logOut} from '../redux/feature/Auth';
+import {GoogleSignin} from '@react-native-google-signin/google-signin';
+import {NavigationProp} from '@react-navigation/native';
+import {AccountStackParamList} from '../components/AccountStack';
 const data = [
   {
     id: 1,
@@ -45,12 +45,10 @@ const data = [
   },
 ];
 
-type AccountProps = NavigationProp<AccountStackParamList,'Account'>
+type AccountProps = NavigationProp<AccountStackParamList, 'Account'>;
 
-const Account = ({navigation}:{
-  navigation:AccountProps
-}) => {
-  const {userInfo}=useAppSelector(state=>state.auth)
+const Account = ({navigation}: {navigation: AccountProps}) => {
+  const {userInfo} = useAppSelector(state => state.auth);
   const dispatch = useAppDispatch();
   const handleLogout = async () => {
     try {
@@ -58,16 +56,18 @@ const Account = ({navigation}:{
       dispatch(logOut());
       navigation.navigate('SignIn');
     } catch (error) {
-      console.error("Error logging out: ", error);
+      console.error('Error logging out: ', error);
     }
   };
-  
+
   return (
     <SafeAreaView style={styles.container}>
       <Header text="Account" Searchasset={Assets.search} />
       <View style={styles.profileHeader}>
         <Image
-          source={userInfo.user.photo?{uri:userInfo.user.photo}:Assets.avatar}
+          source={
+            userInfo.user.photo ? {uri: userInfo.user.photo} : Assets.avatar
+          }
           style={{
             width: '30%',
             height: '75%',
@@ -98,7 +98,7 @@ const Account = ({navigation}:{
               fontWeight: 'semibold',
               color: 'black',
             }}>
-           {userInfo.user.email}
+            {userInfo.user.email}
           </Text>
         </View>
       </View>
@@ -151,17 +151,13 @@ const Account = ({navigation}:{
                   fontSize: 18,
                   color: 'black',
                 }}
-                
                 onPress={() => {
                   if (item.id === 8) {
                     handleLogout();
+                  } else {
+                    console.log('Not implemented yet');
                   }
-                  else{
-                    console.log('Not implemented yet')
-                  }
-                }
-                }
-                >
+                }}>
                 {item.title}
               </Text>
             </View>

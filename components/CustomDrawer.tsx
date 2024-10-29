@@ -26,10 +26,10 @@ const CustomDrawer = (props: DrawerContentComponentProps) => {
       dispatch(logOut());
       props.navigation.navigate('SignIn');
     } catch (error) {
-      console.error("Error logging out: ", error);
+      console.error('Error logging out: ', error);
     }
   };
-  
+
   return (
     <View style={styles.container}>
       <StatusBar barStyle="dark-content" backgroundColor={'transparent'} />
@@ -43,7 +43,9 @@ const CustomDrawer = (props: DrawerContentComponentProps) => {
         <View style={styles.headerWrapper}>
           <View>
             <Image
-              source={userInfo.user.photo ? {uri: userInfo.user.photo} : Assets.avatar}
+              source={
+                userInfo.user.photo ? {uri: userInfo.user.photo} : Assets.avatar
+              }
               style={{
                 height: 50,
                 width: 50,
@@ -51,14 +53,16 @@ const CustomDrawer = (props: DrawerContentComponentProps) => {
                 objectFit: 'contain',
               }}
             />
-            <Text style={styles.headerText}>{userInfo.user.name?userInfo.user.name:'Jameson'}</Text>
+            <Text style={styles.headerText}>
+              {userInfo.user.name ? userInfo.user.name : 'Jameson'}
+            </Text>
             <Text
               style={{
                 fontSize: 14,
                 color: 'white',
                 opacity: 0.56,
               }}>
-              {userInfo.user.email?userInfo.user.email:'jameson@gmail.com'}
+              {userInfo.user.email ? userInfo.user.email : 'jameson@gmail.com'}
             </Text>
           </View>
           <TouchableOpacity onPress={() => props.navigation.closeDrawer()}>
