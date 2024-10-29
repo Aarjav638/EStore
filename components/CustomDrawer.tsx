@@ -13,20 +13,19 @@ import {
   DrawerItemList,
 } from '@react-navigation/drawer';
 import Assets from '../constants/images';
-import { useAppDispatch, useAppSelector } from '../redux/hooks';
-import { logOut } from '../redux/feature/Auth';
-import { GoogleSignin } from '@react-native-google-signin/google-signin';
+import {useAppDispatch, useAppSelector} from '../redux/hooks';
+import {logOut} from '../redux/feature/Auth';
+import {GoogleSignin} from '@react-native-google-signin/google-signin';
 
 const CustomDrawer = (props: DrawerContentComponentProps) => {
   const dispatch = useAppDispatch();
-  const {userInfo}=useAppSelector(state=>state.auth)
+  const {userInfo} = useAppSelector(state => state.auth);
   const handleLogout = () => {
-    dispatch(logOut())
-    GoogleSignin.signOut()
-    GoogleSignin.revokeAccess()
-    props.navigation.navigate('SignIn')
-    
-  }
+    dispatch(logOut());
+    GoogleSignin.signOut();
+    GoogleSignin.revokeAccess();
+    props.navigation.navigate('SignIn');
+  };
   return (
     <View style={styles.container}>
       <StatusBar barStyle="dark-content" backgroundColor={'transparent'} />
@@ -93,7 +92,7 @@ const CustomDrawer = (props: DrawerContentComponentProps) => {
             About us
           </Text>
           <Text
-          onPress={handleLogout}
+            onPress={handleLogout}
             style={{
               fontSize: 16,
               color: 'white',

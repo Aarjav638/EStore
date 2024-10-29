@@ -2,28 +2,21 @@ import {StyleSheet, Text, View} from 'react-native';
 import React from 'react';
 import CustomButton from './CustomButton';
 import Assets from '../../../constants/images';
-import { signIn } from '../../../utils/auth';
-import { useAppDispatch
+import {signIn} from '../../../utils/auth';
+import {useAppDispatch} from '../../../redux/hooks';
+import {setUserInfo} from '../../../redux/feature/Auth';
+import {RootStackParamList} from '../../../constants/types';
+import {NavigationProp} from '@react-navigation/native';
 
- } from '../../../redux/hooks';
-import { setUserInfo } from '../../../redux/feature/Auth';
-import { RootStackParamList } from '../../../constants/types';
-import { NavigationProp } from '@react-navigation/native';
+type socialProps = NavigationProp<RootStackParamList>;
 
-type socialProps=NavigationProp<RootStackParamList>
-
-const SocialLogin = ({navigation}:{
-  navigation:socialProps
-})=> {
+const SocialLogin = ({navigation}: {navigation: socialProps}) => {
   const dispatch = useAppDispatch();
   const handleSignIn = async () => {
     const response = await signIn();
     dispatch(setUserInfo(response));
     navigation.navigate('Welcome');
-  }
-
-
-
+  };
 
   return (
     <View style={styles.mainContainer}>

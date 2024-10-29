@@ -1,4 +1,4 @@
-import {createSlice, PayloadAction} from '@reduxjs/toolkit';
+import {createSlice} from '@reduxjs/toolkit';
 export interface UserAuthData {
   idToken: string;
   scopes: string[];
@@ -16,10 +16,10 @@ export interface UserAuthData {
 type AuthState = {
   userInfo: UserAuthData;
   error: string;
-  loading:boolean
+  loading: boolean;
 };
 
-const initialCartState:AuthState = {
+const initialCartState: AuthState = {
   userInfo: {
     idToken: '',
     scopes: [],
@@ -34,24 +34,24 @@ const initialCartState:AuthState = {
     },
   },
   error: '',
-  loading:false
+  loading: false,
 };
 
 const authSlice = createSlice({
   name: 'Auth',
   initialState: initialCartState,
   reducers: {
-    setUserInfo: (state, action: PayloadAction<UserAuthData>) => {
-        state.loading = true;
-        try {
-            state.userInfo = action.payload;
-            state.error = '';
-            state.loading = false;
-        } catch (error) {
-            state.error = (error as string);
-        }
+    setUserInfo: (state, action) => {
+      state.loading = true;
+      try {
+        state.userInfo = action.payload;
+        state.error = '';
+        state.loading = false;
+      } catch (error) {
+        state.error = error as string;
+      }
     },
-    logOut: (state) => {
+    logOut: state => {
       state.userInfo = {
         idToken: '',
         scopes: [],
@@ -66,9 +66,8 @@ const authSlice = createSlice({
         },
       };
     },
-
   },
 });
 
-export const {setUserInfo,logOut} = authSlice.actions;
+export const {setUserInfo, logOut} = authSlice.actions;
 export default authSlice.reducer;

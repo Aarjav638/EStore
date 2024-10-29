@@ -11,8 +11,6 @@ import {RootStackParamList} from '../../constants/types';
 export type SignInProps = NativeStackScreenProps<RootStackParamList, 'SignIn'>;
 
 const SignIn = ({navigation}: SignInProps) => {
-
-  
   return (
     <SafeAreaView style={styles.container}>
       <KeyboardAwareScrollView
@@ -22,9 +20,7 @@ const SignIn = ({navigation}: SignInProps) => {
         <View style={styles.modalWrapper}>
           <Modal navigation={navigation} />
         </View>
-        <SocialLogin navigation={
-          navigation
-        } />
+        <SocialLogin navigation={navigation} />
       </KeyboardAwareScrollView>
     </SafeAreaView>
   );
