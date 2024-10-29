@@ -4,6 +4,11 @@ import {SafeAreaView} from 'react-native-safe-area-context';
 import Header from '../components/Discover/Header';
 import Assets from '../constants/images';
 import RightArrow from '../assets/chevron-right.svg';
+import { useAppDispatch, useAppSelector } from '../redux/hooks';
+import { logOut } from '../redux/feature/Auth';
+import { GoogleSignin } from '@react-native-google-signin/google-signin';
+import { NavigationProp } from '@react-navigation/native';
+import { AccountStackParamList } from '../components/AccountStack';
 const data = [
   {
     id: 1,
@@ -40,17 +45,34 @@ const data = [
   },
 ];
 
-const Account = () => {
+type AccountProps = NavigationProp<AccountStackParamList,'Account'>
+
+const Account = ({navigation}:{
+  navigation:AccountProps
+}) => {
+  const {userInfo}=useAppSelector(state=>state.auth)
+  const dispatch = useAppDispatch();
+  const handleLogout = async () => {
+    try {
+      await GoogleSignin.signOut();
+      dispatch(logOut());
+      navigation.navigate('SignIn');
+    } catch (error) {
+      console.error("Error logging out: ", error);
+    }
+  };
+  
   return (
     <SafeAreaView style={styles.container}>
       <Header text="Account" Searchasset={Assets.search} />
       <View style={styles.profileHeader}>
         <Image
-          source={Assets.avatar}
+          source={userInfo.user.photo?{uri:userInfo.user.photo}:Assets.avatar}
           style={{
             width: '30%',
-            height: '100%',
-            objectFit: 'contain',
+            height: '75%',
+            objectFit: 'cover',
+            borderRadius: 100,
             marginRight: 10,
           }}
         />
@@ -68,7 +90,7 @@ const Account = () => {
               fontWeight: 'bold',
               color: 'black',
             }}>
-            Jameson Dunn
+            {userInfo.user.name}
           </Text>
           <Text
             style={{
@@ -76,7 +98,7 @@ const Account = () => {
               fontWeight: 'semibold',
               color: 'black',
             }}>
-            jamesondunn@gmail.com
+           {userInfo.user.email}
           </Text>
         </View>
       </View>
@@ -128,7 +150,18 @@ const Account = () => {
                 style={{
                   fontSize: 18,
                   color: 'black',
-                }}>
+                }}
+                
+                onPress={() => {
+                  if (item.id === 8) {
+                    handleLogout();
+                  }
+                  else{
+                    console.log('Not implemented yet')
+                  }
+                }
+                }
+                >
                 {item.title}
               </Text>
             </View>

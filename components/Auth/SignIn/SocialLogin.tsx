@@ -1,4 +1,4 @@
-import {StyleSheet, Text, View} from 'react-native';
+import {Alert, StyleSheet, Text, View} from 'react-native';
 import React from 'react';
 import CustomButton from './CustomButton';
 import Assets from '../../../constants/images';
@@ -13,9 +13,14 @@ type socialProps = NavigationProp<RootStackParamList>;
 const SocialLogin = ({navigation}: {navigation: socialProps}) => {
   const dispatch = useAppDispatch();
   const handleSignIn = async () => {
-    const response = await signIn();
-    dispatch(setUserInfo(response));
-    navigation.navigate('Welcome');
+    try {
+      const response = await signIn();
+      dispatch(setUserInfo(response));
+      navigation.navigate('Welcome');
+    } catch (error) {
+      console.error('Error signing in:', (error as Error).message);
+      Alert.alert(`Sign-in failed: ${(error as Error).message}`);
+    }
   };
 
   return (

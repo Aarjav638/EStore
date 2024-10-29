@@ -7,19 +7,20 @@ import {SafeAreaView} from 'react-native-safe-area-context';
 import Header from '../components/Splash/Header';
 import CustomButton from '../components/Auth/SignIn/CustomButton';
 import {useAppSelector} from '../redux/hooks';
+import Assets from '../constants/images';
 
 type WelcomeProps = NativeStackScreenProps<RootStackParamList, 'Welcome'>;
 
 const Welcome = ({navigation}: WelcomeProps) => {
   const {userInfo} = useAppSelector(state => state.auth);
-  // console.log(userInfo.user.photo)
+  console.log(userInfo)
   return (
     <SafeAreaView style={styles.container}>
       <Topbar text="Welcome" navigation={navigation} />
       <Header color="#151515" marginTop={'10%'} />
       <View style={styles.image}>
         <Image
-          src={userInfo.user.photo}
+         source={userInfo.user.photo?{uri:userInfo?.user.photo}:Assets.avatar}
           onError={e => console.log(e)}
           onLoadStart={() => console.log('loading')}
           onLoadEnd={() => console.log('loaded')}

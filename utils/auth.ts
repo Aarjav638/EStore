@@ -1,4 +1,4 @@
-// import statusCodes along with GoogleSignin
+// Import GoogleSignin, statusCodes, and relevant utilities
 import {
   GoogleSignin,
   isErrorWithCode,
@@ -6,7 +6,6 @@ import {
   statusCodes,
 } from '@react-native-google-signin/google-signin';
 
-// Somewhere in your code
 export const signIn = async () => {
   try {
     await GoogleSignin.hasPlayServices();
@@ -14,33 +13,23 @@ export const signIn = async () => {
     if (isSuccessResponse(response)) {
       return response.data;
     } else {
-      // sign in was cancelled by user
-      console.log('cancelled');
-      return {
-        message: 'cancelled',
-      };
+      console.log('Sign-in was canceled by the user');
+      throw new Error('User canceled sign-in');
     }
   } catch (error) {
     if (isErrorWithCode(error)) {
       switch (error.code) {
         case statusCodes.IN_PROGRESS:
-          return {
-            message: 'in progress',
-          };
+          throw new Error('Sign-in is already in progress');
         case statusCodes.PLAY_SERVICES_NOT_AVAILABLE:
-          // Android only, play services not available or outdated
-          console.log('play services not available');
-          return {
-            message: 'play services not available',
-          };
+          throw new Error('Google Play Services is not available or is outdated');
+        case statusCodes.SIGN_IN_REQUIRED:
+          throw new Error('Sign-in is required to proceed');
         default:
-          // some other error happened
-          return {
-            message: 'some other error happened',
-          };
+          throw new Error('An unknown error occurred during sign-in');
       }
     } else {
-      return error;
+      throw new Error((error as Error)?.message || 'An unexpected error occurred');
     }
   }
 };
