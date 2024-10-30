@@ -18,28 +18,40 @@ import Assets from '../constants/images';
 import {GoogleSignin} from '@react-native-google-signin/google-signin';
 import {LoginManager} from 'react-native-fbsdk-next';
 import {logOut} from '../redux/feature/Auth';
+import { useFocusEffect } from '@react-navigation/native';
 
 type WelcomeProps = NativeStackScreenProps<RootStackParamList, 'Welcome'>;
 
-const Welcome = ({navigation}: WelcomeProps) => {
+const Welcome = ({navigation,route}: WelcomeProps) => {
   const {userInfo} = useAppSelector(state => state.auth);
   const dispatch = useAppDispatch();
   const handleLogout = async () => {
     try {
+      LoginManager.logOut();
       await GoogleSignin.signOut();
-      await LoginManager.logOut();
       dispatch(logOut());
       navigation.goBack();
+      return true;
     } catch (error) {
       console.error('Error logging out: ', error);
+      return false;
     }
+  };
+
+  const handleBackPress = () => {
+    handleLogout();
     return true;
   };
 
-  BackHandler.addEventListener('hardwareBackPress', () => {
-    handleLogout();
-    return true;
-  });
+  useFocusEffect(
+    React.useCallback(() => {
+      if (route.name === 'Welcome') {
+        BackHandler.addEventListener('hardwareBackPress', handleBackPress);
+        return () =>
+          BackHandler.removeEventListener('hardwareBackPress', handleBackPress);
+      }
+    }, [route.name])
+  );
 
   return (
     <SafeAreaView style={styles.container}>

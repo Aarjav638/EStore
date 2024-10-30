@@ -7,6 +7,8 @@ import Modal from '../../components/Auth/SignIn/Modal';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import {RootStackParamList} from '../../constants/types';
+// import CustomButton from '../../components/Auth/SignIn/CustomButton';
+// import { truecallerLogin } from '../../utils/auth';
 
 export type SignInProps = NativeStackScreenProps<RootStackParamList, 'SignIn'>;
 
@@ -21,6 +23,10 @@ const SignIn = ({navigation}: SignInProps) => {
           <Modal navigation={navigation} />
         </View>
         <SocialLogin navigation={navigation} />
+        {/* <CustomButton
+          text="Login With TrueCaller"
+          onPress={() => truecallerLogin()}
+        /> */}
       </KeyboardAwareScrollView>
     </SafeAreaView>
   );
