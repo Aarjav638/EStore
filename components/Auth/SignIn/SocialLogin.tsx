@@ -2,7 +2,7 @@ import {Alert, StyleSheet, Text, View} from 'react-native';
 import React from 'react';
 import CustomButton from './CustomButton';
 import Assets from '../../../constants/images';
-import {signIn} from '../../../utils/auth';
+import {facebookLogin, signIn} from '../../../utils/auth';
 import {useAppDispatch} from '../../../redux/hooks';
 import {setUserInfo} from '../../../redux/feature/Auth';
 import {RootStackParamList} from '../../../constants/types';
@@ -12,9 +12,19 @@ type socialProps = NavigationProp<RootStackParamList>;
 
 const SocialLogin = ({navigation}: {navigation: socialProps}) => {
   const dispatch = useAppDispatch();
-  const handleSignIn = async () => {
+  const handleGoogleSignIn = async () => {
     try {
       const response = await signIn();
+      dispatch(setUserInfo(response));
+      navigation.navigate('Welcome');
+    } catch (error) {
+      console.error('Error signing in:', (error as Error).message);
+      Alert.alert(`Sign-in failed: ${(error as Error).message}`);
+    }
+  };
+  const handleFaceBookSignIN = async () => {
+    try {
+      const response = await facebookLogin();
       dispatch(setUserInfo(response));
       navigation.navigate('Welcome');
     } catch (error) {
@@ -32,14 +42,14 @@ const SocialLogin = ({navigation}: {navigation: socialProps}) => {
           text="Sign In with Google"
           icon={Assets.google}
           textStyle={styles.buttonTextStyle}
-          onPress={handleSignIn}
+          onPress={handleGoogleSignIn}
         />
         <CustomButton
           customStyles={styles.button}
           text="Sign In with Facebook"
           textStyle={styles.buttonTextStyle}
           icon={Assets.facebook}
-          onPress={() => console.log('pressed >>')}
+          onPress={handleFaceBookSignIN}
         />
       </View>
       <Text style={styles.accountText}>

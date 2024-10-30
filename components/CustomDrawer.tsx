@@ -13,17 +13,15 @@ import {
   DrawerItemList,
 } from '@react-navigation/drawer';
 import Assets from '../constants/images';
-import {useAppDispatch, useAppSelector} from '../redux/hooks';
-import {logOut} from '../redux/feature/Auth';
-import {GoogleSignin} from '@react-native-google-signin/google-signin';
+import { useAppDispatch, useAppSelector} from '../redux/hooks';
+import { handleCompleteLogout } from '../utils/auth';
 
 const CustomDrawer = (props: DrawerContentComponentProps) => {
-  const dispatch = useAppDispatch();
   const {userInfo} = useAppSelector(state => state.auth);
+  const dispatch = useAppDispatch();
   const handleLogout = async () => {
     try {
-      await GoogleSignin.signOut();
-      dispatch(logOut());
+      await handleCompleteLogout(dispatch);  
       props.navigation.navigate('SignIn');
     } catch (error) {
       console.error('Error logging out: ', error);

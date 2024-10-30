@@ -1,19 +1,15 @@
 import {createSlice} from '@reduxjs/toolkit';
 export interface UserAuthData {
   idToken: string;
-  scopes: string[];
-  serverAuthCode: string | null;
   user: {
-    email: string;
-    familyName: string;
-    givenName: string;
+    email?: string;
     id: string;
     name: string;
     photo: string;
   };
 }
 
-type AuthState = {
+export type AuthState = {
   userInfo: UserAuthData;
   error: string;
   loading: boolean;
@@ -22,12 +18,8 @@ type AuthState = {
 const initialCartState: AuthState = {
   userInfo: {
     idToken: '',
-    scopes: [],
-    serverAuthCode: '',
     user: {
-      email: '',
-      familyName: '',
-      givenName: '',
+      email: undefined,
       id: '',
       name: '',
       photo: '',
@@ -52,14 +44,11 @@ const authSlice = createSlice({
       }
     },
     logOut: state => {
+      console.log('Logging out');
       state.userInfo = {
         idToken: '',
-        scopes: [],
-        serverAuthCode: '',
         user: {
           email: '',
-          familyName: '',
-          givenName: '',
           id: '',
           name: '',
           photo: '',

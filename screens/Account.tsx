@@ -5,10 +5,9 @@ import Header from '../components/Discover/Header';
 import Assets from '../constants/images';
 import RightArrow from '../assets/chevron-right.svg';
 import {useAppDispatch, useAppSelector} from '../redux/hooks';
-import {logOut} from '../redux/feature/Auth';
-import {GoogleSignin} from '@react-native-google-signin/google-signin';
 import {NavigationProp} from '@react-navigation/native';
 import {AccountStackParamList} from '../components/AccountStack';
+import { handleCompleteLogout } from '../utils/auth';
 const data = [
   {
     id: 1,
@@ -52,8 +51,7 @@ const Account = ({navigation}: {navigation: AccountProps}) => {
   const dispatch = useAppDispatch();
   const handleLogout = async () => {
     try {
-      await GoogleSignin.signOut();
-      dispatch(logOut());
+      await handleCompleteLogout(dispatch);
       navigation.navigate('SignIn');
     } catch (error) {
       console.error('Error logging out: ', error);
@@ -62,7 +60,7 @@ const Account = ({navigation}: {navigation: AccountProps}) => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <Header text="Account" Searchasset={Assets.search} />
+      <Header text="Account" Searchasset={Assets.search} navigation={navigation} />
       <View style={styles.profileHeader}>
         <Image
           source={

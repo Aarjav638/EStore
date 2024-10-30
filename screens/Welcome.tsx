@@ -1,4 +1,4 @@
-import {Dimensions, Image, StyleSheet, Text, View} from 'react-native';
+import {BackHandler, Dimensions, Image, StyleSheet, Text, View} from 'react-native';
 import React from 'react';
 import Topbar from '../components/Verification/Topbar';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
@@ -6,14 +6,34 @@ import {RootStackParamList} from '../constants/types';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import Header from '../components/Splash/Header';
 import CustomButton from '../components/Auth/SignIn/CustomButton';
-import {useAppSelector} from '../redux/hooks';
+import {useAppDispatch, useAppSelector} from '../redux/hooks';
 import Assets from '../constants/images';
+import { GoogleSignin } from '@react-native-google-signin/google-signin';
+import { LoginManager } from 'react-native-fbsdk-next';
+import { logOut } from '../redux/feature/Auth';
 
 type WelcomeProps = NativeStackScreenProps<RootStackParamList, 'Welcome'>;
 
 const Welcome = ({navigation}: WelcomeProps) => {
   const {userInfo} = useAppSelector(state => state.auth);
-  console.log(userInfo);
+  const dispatch = useAppDispatch();
+const handleLogout = async () => {
+    try {
+      await GoogleSignin.signOut();
+      await LoginManager.logOut();
+      dispatch(logOut());
+      navigation.goBack();
+    } catch (error) {
+      console.error('Error logging out: ', error);
+    }
+    return true;
+  }
+
+  BackHandler.addEventListener('hardwareBackPress', () => {
+    handleLogout();
+    return true;
+  });
+  
   return (
     <SafeAreaView style={styles.container}>
       <Topbar text="Welcome" navigation={navigation} />
@@ -21,7 +41,7 @@ const Welcome = ({navigation}: WelcomeProps) => {
       <View style={styles.image}>
         <Image
           source={
-            userInfo.user.photo ? {uri: userInfo?.user.photo} : Assets.avatar
+            userInfo.user.photo ? {uri: userInfo.user.photo} : Assets.avatar
           }
           onError={e => console.log(e)}
           onLoadStart={() => console.log('loading')}

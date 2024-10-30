@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">EStore</string>
+    
+<string name="facebook_app_id">1264263021312979</string>
+<string name="fb_login_protocol_scheme">fb1264263021312979</string>
+<string name="facebook_client_token">706980d2cb45108fe9a968dc79b0b96a</string>
+
+
 </resources>

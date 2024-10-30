@@ -114,8 +114,6 @@ android {
             signingConfig signingConfigs.debug
         }
         release {
-            // Caution! In production, you need to generate your own keystore file.
-            // see https://reactnative.dev/docs/signed-apk-android.
              signingConfig signingConfigs.release
             minifyEnabled enableProguardInReleaseBuilds
             proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
@@ -124,7 +122,6 @@ android {
 }
 
 dependencies {
-    // The version of react-native is set by the React Native Gradle Plugin
     implementation("com.facebook.react:react-android")
 
     if (hermesEnabled.toBoolean()) {
@@ -134,8 +131,4 @@ dependencies {
     }
     implementation platform('com.google.firebase:firebase-bom:33.5.1')
     implementation 'com.google.firebase:firebase-analytics'
-    // implementation 'com.mappls.sdk:mappls-android-sdk:8.2.5'
-    // implementation 'com.mappls.sdk:markerview-plugin:1.0.1'
-    // implementation 'com.mappls.sdk:annotation-plugin:1.0.1'
-    // implementation 'com.mappls.sdk:geoanalytics-plugin:1.1.0'
 }
