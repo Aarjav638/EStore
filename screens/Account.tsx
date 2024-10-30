@@ -7,7 +7,7 @@ import RightArrow from '../assets/chevron-right.svg';
 import {useAppDispatch, useAppSelector} from '../redux/hooks';
 import {NavigationProp} from '@react-navigation/native';
 import {AccountStackParamList} from '../components/AccountStack';
-import { handleCompleteLogout } from '../utils/auth';
+import {handleCompleteLogout} from '../utils/auth';
 const data = [
   {
     id: 1,
@@ -60,7 +60,11 @@ const Account = ({navigation}: {navigation: AccountProps}) => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <Header text="Account" Searchasset={Assets.search} navigation={navigation} />
+      <Header
+        text="Account"
+        Searchasset={Assets.search}
+        navigation={navigation}
+      />
       <View style={styles.profileHeader}>
         <Image
           source={

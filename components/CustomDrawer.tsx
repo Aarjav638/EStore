@@ -13,15 +13,15 @@ import {
   DrawerItemList,
 } from '@react-navigation/drawer';
 import Assets from '../constants/images';
-import { useAppDispatch, useAppSelector} from '../redux/hooks';
-import { handleCompleteLogout } from '../utils/auth';
+import {useAppDispatch, useAppSelector} from '../redux/hooks';
+import {handleCompleteLogout} from '../utils/auth';
 
 const CustomDrawer = (props: DrawerContentComponentProps) => {
   const {userInfo} = useAppSelector(state => state.auth);
   const dispatch = useAppDispatch();
   const handleLogout = async () => {
     try {
-      await handleCompleteLogout(dispatch);  
+      await handleCompleteLogout(dispatch);
       props.navigation.navigate('SignIn');
     } catch (error) {
       console.error('Error logging out: ', error);

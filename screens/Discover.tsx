@@ -41,8 +41,7 @@ const Discover = ({navigation}: DiscoverProps) => {
       {text: 'YES', onPress: () => BackHandler.exitApp()},
     ]);
     return false;
-  }
-  );
+  });
 
   const applyFilters = (filterResult: {
     brands: string[];

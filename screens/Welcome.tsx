@@ -1,4 +1,11 @@
-import {BackHandler, Dimensions, Image, StyleSheet, Text, View} from 'react-native';
+import {
+  BackHandler,
+  Dimensions,
+  Image,
+  StyleSheet,
+  Text,
+  View,
+} from 'react-native';
 import React from 'react';
 import Topbar from '../components/Verification/Topbar';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
@@ -8,16 +15,16 @@ import Header from '../components/Splash/Header';
 import CustomButton from '../components/Auth/SignIn/CustomButton';
 import {useAppDispatch, useAppSelector} from '../redux/hooks';
 import Assets from '../constants/images';
-import { GoogleSignin } from '@react-native-google-signin/google-signin';
-import { LoginManager } from 'react-native-fbsdk-next';
-import { logOut } from '../redux/feature/Auth';
+import {GoogleSignin} from '@react-native-google-signin/google-signin';
+import {LoginManager} from 'react-native-fbsdk-next';
+import {logOut} from '../redux/feature/Auth';
 
 type WelcomeProps = NativeStackScreenProps<RootStackParamList, 'Welcome'>;
 
 const Welcome = ({navigation}: WelcomeProps) => {
   const {userInfo} = useAppSelector(state => state.auth);
   const dispatch = useAppDispatch();
-const handleLogout = async () => {
+  const handleLogout = async () => {
     try {
       await GoogleSignin.signOut();
       await LoginManager.logOut();
@@ -27,13 +34,13 @@ const handleLogout = async () => {
       console.error('Error logging out: ', error);
     }
     return true;
-  }
+  };
 
   BackHandler.addEventListener('hardwareBackPress', () => {
     handleLogout();
     return true;
   });
-  
+
   return (
     <SafeAreaView style={styles.container}>
       <Topbar text="Welcome" navigation={navigation} />

@@ -5,10 +5,10 @@ import {
   isSuccessResponse,
   statusCodes,
 } from '@react-native-google-signin/google-signin';
-import { AccessToken, LoginManager, Profile } from 'react-native-fbsdk-next';
-import { AuthState, logOut } from '../redux/feature/Auth';
-import { ThunkDispatch, UnknownAction } from '@reduxjs/toolkit';
-import { CartState } from '../constants/types';
+import {AccessToken, LoginManager, Profile} from 'react-native-fbsdk-next';
+import {AuthState, logOut} from '../redux/feature/Auth';
+import {ThunkDispatch, UnknownAction} from '@reduxjs/toolkit';
+import {CartState} from '../constants/types';
 
 export const signIn = async () => {
   try {
@@ -24,7 +24,7 @@ export const signIn = async () => {
           photo: response.data.user.photo || '',
         },
       };
-      
+
       return userInfo;
     } else {
       console.log('Sign-in was canceled by the user');
@@ -54,7 +54,10 @@ export const signIn = async () => {
 
 export const facebookLogin = async () => {
   try {
-    const result = await LoginManager.logInWithPermissions(['public_profile','email']);
+    const result = await LoginManager.logInWithPermissions([
+      'public_profile',
+      'email',
+    ]);
     if (result.isCancelled) {
       throw new Error('User canceled the login process');
     }
@@ -62,29 +65,32 @@ export const facebookLogin = async () => {
     if (!data) {
       throw new Error('Something went wrong obtaining access token');
     }
-    const profile=await Profile.getCurrentProfile();
-    const userInfo={
+    const profile = await Profile.getCurrentProfile();
+    const userInfo = {
       idToken: data.accessToken,
       user: {
         email: profile?.email || '',
         id: profile?.userID || '',
         name: profile?.name || '',
-        photo: profile?.imageURL|| '',
+        photo: profile?.imageURL || '',
       },
     };
     return userInfo;
-  }
-  catch (error) {
+  } catch (error) {
     console.log(error);
   }
+};
 
-}
-
-
-export const handleCompleteLogout = async (dispatch:ThunkDispatch<{
-  cart: CartState;
-  auth: AuthState;
-}, undefined, UnknownAction>) => {
+export const handleCompleteLogout = async (
+  dispatch: ThunkDispatch<
+    {
+      cart: CartState;
+      auth: AuthState;
+    },
+    undefined,
+    UnknownAction
+  >,
+) => {
   try {
     await GoogleSignin.signOut();
     await LoginManager.logOut();
@@ -92,4 +98,4 @@ export const handleCompleteLogout = async (dispatch:ThunkDispatch<{
   } catch (error) {
     console.error('Error logging out: ', error);
   }
-}
+};
