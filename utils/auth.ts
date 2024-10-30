@@ -11,7 +11,7 @@ import {ThunkDispatch, UnknownAction} from '@reduxjs/toolkit';
 import {CartState} from '../constants/types';
 // import { NativeModules } from 'react-native';
 
-// const {TruecallerAuthModule} = NativeModules; 
+// const {TruecallerAuthModule} = NativeModules;
 export const signIn = async () => {
   try {
     await GoogleSignin.hasPlayServices();
@@ -67,9 +67,11 @@ export const facebookLogin = async () => {
     if (!data) {
       throw new Error('Something went wrong obtaining access token');
     }
-    const response = await fetch(`https://graph.facebook.com/me?access_token=${data.accessToken}`);
+    const response = await fetch(
+      `https://graph.facebook.com/me?access_token=${data.accessToken}`,
+    );
     const emailData = await response.json();
-    console.log('Email data: ', emailData); 
+    console.log('Email data: ', emailData);
     const profile = await Profile.getCurrentProfile();
     const userInfo = {
       idToken: data.accessToken,

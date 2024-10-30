@@ -12,11 +12,11 @@ import {Product} from '../constants/types';
 import Filter from './Filter';
 
 import {data, menuItems} from '../constants/data';
-import { useFocusEffect } from '@react-navigation/native';
+import {useFocusEffect} from '@react-navigation/native';
 
 type DiscoverProps = NativeStackScreenProps<DiscoverStackParams, 'Home'>;
 
-const Discover = ({navigation,route}: DiscoverProps) => {
+const Discover = ({navigation, route}: DiscoverProps) => {
   const [selected, setSelected] = useState(0);
   const [filteredData, setFilteredData] = useState<Product[]>(data);
   const [modalVisible, setModalVisible] = useState(false);
@@ -29,17 +29,16 @@ const Discover = ({navigation,route}: DiscoverProps) => {
   }, []);
 
   const onBackPress = () => {
-      Alert.alert('Exit App', 'Do you want to exit?', [
-        {
-          text: 'Cancel',
-          onPress: () => null,
-          style: 'cancel',
-        },
-        {text: 'YES', onPress: () => BackHandler.exitApp()},
-      ]);
-      return true;
-    
-  }
+    Alert.alert('Exit App', 'Do you want to exit?', [
+      {
+        text: 'Cancel',
+        onPress: () => null,
+        style: 'cancel',
+      },
+      {text: 'YES', onPress: () => BackHandler.exitApp()},
+    ]);
+    return true;
+  };
 
   useFocusEffect(
     React.useCallback(() => {
@@ -48,9 +47,8 @@ const Discover = ({navigation,route}: DiscoverProps) => {
         return () =>
           BackHandler.removeEventListener('hardwareBackPress', onBackPress);
       }
-    }, [route.name])
+    }, [route.name]),
   );
-  
 
   const applyFilters = (filterResult: {
     brands: string[];

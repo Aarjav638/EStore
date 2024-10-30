@@ -18,11 +18,11 @@ import Assets from '../constants/images';
 import {GoogleSignin} from '@react-native-google-signin/google-signin';
 import {LoginManager} from 'react-native-fbsdk-next';
 import {logOut} from '../redux/feature/Auth';
-import { useFocusEffect } from '@react-navigation/native';
+import {useFocusEffect} from '@react-navigation/native';
 
 type WelcomeProps = NativeStackScreenProps<RootStackParamList, 'Welcome'>;
 
-const Welcome = ({navigation,route}: WelcomeProps) => {
+const Welcome = ({navigation, route}: WelcomeProps) => {
   const {userInfo} = useAppSelector(state => state.auth);
   const dispatch = useAppDispatch();
   const handleLogout = async () => {
@@ -50,7 +50,7 @@ const Welcome = ({navigation,route}: WelcomeProps) => {
         return () =>
           BackHandler.removeEventListener('hardwareBackPress', handleBackPress);
       }
-    }, [route.name])
+    }, [route.name]),
   );
 
   return (
