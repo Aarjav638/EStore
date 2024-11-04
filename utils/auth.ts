@@ -68,7 +68,7 @@ export const facebookLogin = async () => {
       throw new Error('Something went wrong obtaining access token');
     }
     const response = await fetch(
-      `https://graph.facebook.com/me?access_token=${data.accessToken}`,
+      `https://graph.facebook.com/me?access_token=${data.accessToken}&fields=id,name,email`,
     );
     const emailData = await response.json();
     console.log('Email data: ', emailData);
