@@ -6,7 +6,7 @@ import {
   Text,
   View,
 } from 'react-native';
-import React, { useEffect } from 'react';
+import React, {useEffect} from 'react';
 import Topbar from '../components/Verification/Topbar';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import {RootStackParamList} from '../constants/types';
@@ -52,16 +52,15 @@ const Welcome = ({navigation, route}: WelcomeProps) => {
     }, [route.name]),
   );
 
-
   useEffect(() => {
-    if (!userInfo|| !userInfo.user.name) { 
-      navigation.navigate('SignIn'); 
+    if (!userInfo || !userInfo.user.name) {
+      navigation.navigate('SignIn');
     }
   }, [userInfo, navigation]);
 
   const handleSwitchAccount = () => {
     handleLogout();
-  }
+  };
 
   return (
     <SafeAreaView style={styles.container}>
@@ -81,7 +80,10 @@ const Welcome = ({navigation, route}: WelcomeProps) => {
       </View>
       <View style={styles.nameContainer}>
         <Text style={styles.heading}>Welcome Back</Text>
-        <Text style={styles.name}>{`${userInfo.user?.name?.toUpperCase() || 'GUEST'}`}</Text>
+        <Text
+          style={
+            styles.name
+          }>{`${userInfo.user?.name?.toUpperCase() || 'GUEST'}`}</Text>
       </View>
       <View style={styles.buttonWrapper}>
         <CustomButton

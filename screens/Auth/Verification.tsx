@@ -10,8 +10,8 @@ import VerificationText from '../../components/Verification/VerificationText';
 import Otp from '../../components/Verification/Otp';
 import CustomButton from '../../components/Auth/SignIn/CustomButton';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
-import { useAppDispatch } from '../../redux/hooks';
-import { setUserInfo } from '../../redux/feature/Auth';
+import {useAppDispatch} from '../../redux/hooks';
+import {setUserInfo} from '../../redux/feature/Auth';
 
 type VerificationProps = NativeStackScreenProps<
   RootStackParamList,
@@ -19,18 +19,18 @@ type VerificationProps = NativeStackScreenProps<
 >;
 
 const Verification = ({navigation}: VerificationProps) => {
-
   const dispatch = useAppDispatch();
-  
-  const handleGuestLogin = () => {
-    dispatch(setUserInfo({
-      user: {
-        name: 'Guest',
-      },
 
-    }))
+  const handleGuestLogin = () => {
+    dispatch(
+      setUserInfo({
+        user: {
+          name: 'Guest',
+        },
+      }),
+    );
     navigation.navigate('Welcome');
-  }
+  };
 
   return (
     <SafeAreaView style={styles.container}>
@@ -42,10 +42,7 @@ const Verification = ({navigation}: VerificationProps) => {
         <Image source={Assets.questionMark} style={styles.Image} />
         <VerificationText />
         <Otp />
-        <CustomButton
-          onPress={handleGuestLogin}
-          text="Continue"
-        />
+        <CustomButton onPress={handleGuestLogin} text="Continue" />
         <Text style={styles.accountText}>
           Don&apos;t Have an Account?{' '}
           <Text style={styles.subText} onPress={() => console.log('signUp')}>

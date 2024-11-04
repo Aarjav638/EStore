@@ -1,5 +1,5 @@
 import {Alert, StyleSheet, Text, View} from 'react-native';
-import React, { useEffect } from 'react';
+import React, {useEffect} from 'react';
 import CustomButton from './CustomButton';
 import Assets from '../../../constants/images';
 import {facebookLogin, signIn} from '../../../utils/auth';
@@ -7,53 +7,54 @@ import {useAppDispatch} from '../../../redux/hooks';
 import {setUserInfo} from '../../../redux/feature/Auth';
 import {RootStackParamList} from '../../../constants/types';
 import {NavigationProp} from '@react-navigation/native';
-import { useTruecaller, TRUECALLER_ANDROID_CUSTOMIZATIONS } from '@kartikbhalla/react-native-truecaller';
+import {
+  useTruecaller,
+  TRUECALLER_ANDROID_CUSTOMIZATIONS,
+} from '@kartikbhalla/react-native-truecaller';
 type socialProps = NavigationProp<RootStackParamList>;
 
 const SocialLogin = ({navigation}: {navigation: socialProps}) => {
-
-
   const dispatch = useAppDispatch();
-  const { initializeTruecaller, openTruecallerModal, user } = useTruecaller({
+  const {initializeTruecaller, openTruecallerModal, user} = useTruecaller({
     androidButtonColor: '#FF0000',
     androidButtonStyle: TRUECALLER_ANDROID_CUSTOMIZATIONS.BUTTON_STYLES.ROUND,
     androidButtonText: TRUECALLER_ANDROID_CUSTOMIZATIONS.BUTTON_TEXTS.CONTINUE,
     androidButtonTextColor: '#FFFFFF',
     androidClientId: 'jjjn2jlevwdyh4imnvtxc2pfrnshswyrhjnrbs5wgym',
-    androidConsentHeading: TRUECALLER_ANDROID_CUSTOMIZATIONS.CONSENT_HEADING_TEXTS.LOG_IN_TO,
-    androidFooterButtonText: TRUECALLER_ANDROID_CUSTOMIZATIONS.FOOTER_BUTTON_TEXTS.SKIP,
-});
+    androidConsentHeading:
+      TRUECALLER_ANDROID_CUSTOMIZATIONS.CONSENT_HEADING_TEXTS.LOG_IN_TO,
+    androidFooterButtonText:
+      TRUECALLER_ANDROID_CUSTOMIZATIONS.FOOTER_BUTTON_TEXTS.SKIP,
+  });
 
+  useEffect(() => {
+    initializeTruecaller();
+  }, []);
 
-useEffect(() => {
-  initializeTruecaller();
-}, []);
-
-
-
-const handleTruecallerLogin = async () => {
+  const handleTruecallerLogin = async () => {
     try {
-     openTruecallerModal();
+      openTruecallerModal();
     } catch (error) {
       console.error('Error signing in:', (error as Error).message);
       Alert.alert(`Sign-in failed: ${(error as Error).message}`);
     }
-    
-  }
-  console.log(user)
+  };
+  console.log(user);
 
   useEffect(() => {
     console.log(user);
     if (user) {
       console.log(user);
-      dispatch(setUserInfo({
-        idToken: '',
-        user: {
-          email: user.email,
-          name: user.firstName + ' ' + user.lastName,
-          mobile: user.mobileNumber,
-        },
-      }));
+      dispatch(
+        setUserInfo({
+          idToken: '',
+          user: {
+            email: user.email,
+            name: user.firstName + ' ' + user.lastName,
+            mobile: user.mobileNumber,
+          },
+        }),
+      );
       navigation.navigate('Welcome');
     }
   }, [user]);
