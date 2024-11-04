@@ -76,7 +76,7 @@ export const facebookLogin = async () => {
     const userInfo = {
       idToken: data.accessToken,
       user: {
-        email: profile?.email || '',
+        email: emailData.email || '',
         id: profile?.userID || '',
         name: profile?.name || '',
         photo: profile?.imageURL || '',
@@ -106,7 +106,3 @@ export const handleCompleteLogout = async (
     console.error('Error logging out: ', error);
   }
 };
-
-// export const truecallerLogin = async () => {
-//   await TruecallerAuthModule.authenticate();
-// };

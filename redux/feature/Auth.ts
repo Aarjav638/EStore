@@ -1,32 +1,32 @@
 import {createSlice} from '@reduxjs/toolkit';
 export interface UserAuthData {
-  idToken: string;
+  idToken?: string;
   user: {
     email?: string;
-    id: string;
-    name: string;
-    photo: string;
+    id?: string;
+    name?: string;
+    photo?: string;
+    mobile?: string;
   };
 }
 
 export type AuthState = {
   userInfo: UserAuthData;
   error: string;
-  loading: boolean;
 };
 
 const initialCartState: AuthState = {
   userInfo: {
-    idToken: '',
+    idToken: undefined,
     user: {
       email: undefined,
       id: '',
       name: '',
-      photo: '',
+      photo: undefined,
+      mobile: undefined,
     },
   },
   error: '',
-  loading: false,
 };
 
 const authSlice = createSlice({
@@ -34,11 +34,9 @@ const authSlice = createSlice({
   initialState: initialCartState,
   reducers: {
     setUserInfo: (state, action) => {
-      state.loading = true;
       try {
         state.userInfo = action.payload;
         state.error = '';
-        state.loading = false;
       } catch (error) {
         state.error = error as string;
       }
@@ -46,12 +44,13 @@ const authSlice = createSlice({
     logOut: state => {
       console.log('Logging out');
       state.userInfo = {
-        idToken: '',
+        idToken: undefined,
         user: {
-          email: '',
-          id: '',
-          name: '',
-          photo: '',
+          email: undefined,
+          id: undefined,
+          name: undefined,
+          photo: undefined,
+          mobile: undefined,
         },
       };
     },

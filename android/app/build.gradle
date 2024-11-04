@@ -130,7 +130,6 @@ targetCompatibility JavaVersion.VERSION_1_8
 
 dependencies {
     implementation("com.facebook.react:react-android")
-    implementation "com.truecaller.android.sdk:truecaller-sdk:3.0.0"
     if (hermesEnabled.toBoolean()) {
         implementation("com.facebook.react:hermes-android")
     } else {

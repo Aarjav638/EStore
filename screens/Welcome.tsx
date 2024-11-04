@@ -6,7 +6,7 @@ import {
   Text,
   View,
 } from 'react-native';
-import React from 'react';
+import React, { useEffect } from 'react';
 import Topbar from '../components/Verification/Topbar';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import {RootStackParamList} from '../constants/types';
@@ -30,7 +30,6 @@ const Welcome = ({navigation, route}: WelcomeProps) => {
       LoginManager.logOut();
       await GoogleSignin.signOut();
       dispatch(logOut());
-      navigation.goBack();
       return true;
     } catch (error) {
       console.error('Error logging out: ', error);
@@ -53,6 +52,17 @@ const Welcome = ({navigation, route}: WelcomeProps) => {
     }, [route.name]),
   );
 
+
+  useEffect(() => {
+    if (!userInfo|| !userInfo.user.name) { 
+      navigation.navigate('SignIn'); 
+    }
+  }, [userInfo, navigation]);
+
+  const handleSwitchAccount = () => {
+    handleLogout();
+  }
+
   return (
     <SafeAreaView style={styles.container}>
       <Topbar text="Welcome" navigation={navigation} />
@@ -71,15 +81,15 @@ const Welcome = ({navigation, route}: WelcomeProps) => {
       </View>
       <View style={styles.nameContainer}>
         <Text style={styles.heading}>Welcome Back</Text>
-        <Text style={styles.name}>{userInfo.user.name}</Text>
+        <Text style={styles.name}>{`${userInfo.user?.name?.toUpperCase() || 'GUEST'}`}</Text>
       </View>
       <View style={styles.buttonWrapper}>
         <CustomButton
           onPress={() => navigation.navigate('Drawer')}
-          text={`CONTINUE AS ${userInfo.user.name.toUpperCase()}`}
+          text={`CONTINUE AS ${userInfo.user?.name?.toUpperCase() || 'GUEST'}`}
         />
         <CustomButton
-          onPress={() => navigation.navigate('SignIn')}
+          onPress={handleSwitchAccount}
           text="SWITCH ACCOUNT"
           customStyles={styles.button2}
           textStyle={{color: '#151515'}}

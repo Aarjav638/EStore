@@ -10,6 +10,8 @@ import VerificationText from '../../components/Verification/VerificationText';
 import Otp from '../../components/Verification/Otp';
 import CustomButton from '../../components/Auth/SignIn/CustomButton';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
+import { useAppDispatch } from '../../redux/hooks';
+import { setUserInfo } from '../../redux/feature/Auth';
 
 type VerificationProps = NativeStackScreenProps<
   RootStackParamList,
@@ -17,6 +19,19 @@ type VerificationProps = NativeStackScreenProps<
 >;
 
 const Verification = ({navigation}: VerificationProps) => {
+
+  const dispatch = useAppDispatch();
+  
+  const handleGuestLogin = () => {
+    dispatch(setUserInfo({
+      user: {
+        name: 'Guest',
+      },
+
+    }))
+    navigation.navigate('Welcome');
+  }
+
   return (
     <SafeAreaView style={styles.container}>
       <StatusBar barStyle="dark-content" />
@@ -28,7 +43,7 @@ const Verification = ({navigation}: VerificationProps) => {
         <VerificationText />
         <Otp />
         <CustomButton
-          onPress={() => navigation.navigate('Welcome')}
+          onPress={handleGuestLogin}
           text="Continue"
         />
         <Text style={styles.accountText}>
