@@ -1,20 +1,77 @@
 import {Alert, StyleSheet, Text, View} from 'react-native';
-import React from 'react';
+import React, {useEffect} from 'react';
 import CustomButton from './CustomButton';
 import Assets from '../../../constants/images';
-import {signIn} from '../../../utils/auth';
+import {facebookLogin, signIn} from '../../../utils/auth';
 import {useAppDispatch} from '../../../redux/hooks';
 import {setUserInfo} from '../../../redux/feature/Auth';
 import {RootStackParamList} from '../../../constants/types';
 import {NavigationProp} from '@react-navigation/native';
-
+import {
+  useTruecaller,
+  TRUECALLER_ANDROID_CUSTOMIZATIONS,
+} from '@kartikbhalla/react-native-truecaller';
 type socialProps = NavigationProp<RootStackParamList>;
 
 const SocialLogin = ({navigation}: {navigation: socialProps}) => {
   const dispatch = useAppDispatch();
-  const handleSignIn = async () => {
+  const {initializeTruecaller, openTruecallerModal, user} = useTruecaller({
+    androidButtonColor: '#FF0000',
+    androidButtonStyle: TRUECALLER_ANDROID_CUSTOMIZATIONS.BUTTON_STYLES.ROUND,
+    androidButtonText: TRUECALLER_ANDROID_CUSTOMIZATIONS.BUTTON_TEXTS.CONTINUE,
+    androidButtonTextColor: '#FFFFFF',
+    androidClientId: 'jjjn2jlevwdyh4imnvtxc2pfrnshswyrhjnrbs5wgym',
+    androidConsentHeading:
+      TRUECALLER_ANDROID_CUSTOMIZATIONS.CONSENT_HEADING_TEXTS.LOG_IN_TO,
+    androidFooterButtonText:
+      TRUECALLER_ANDROID_CUSTOMIZATIONS.FOOTER_BUTTON_TEXTS.SKIP,
+  });
+
+  useEffect(() => {
+    initializeTruecaller();
+  }, []);
+
+  const handleTruecallerLogin = async () => {
+    try {
+      openTruecallerModal();
+    } catch (error) {
+      console.error('Error signing in:', (error as Error).message);
+      Alert.alert(`Sign-in failed: ${(error as Error).message}`);
+    }
+  };
+  console.log(user);
+
+  useEffect(() => {
+    console.log(user);
+    if (user) {
+      console.log(user);
+      dispatch(
+        setUserInfo({
+          idToken: '',
+          user: {
+            email: user.email,
+            name: user.firstName + ' ' + user.lastName,
+            mobile: user.mobileNumber,
+          },
+        }),
+      );
+      navigation.navigate('Welcome');
+    }
+  }, [user]);
+
+  const handleGoogleSignIn = async () => {
     try {
       const response = await signIn();
+      dispatch(setUserInfo(response));
+      navigation.navigate('Welcome');
+    } catch (error) {
+      console.error('Error signing in:', (error as Error).message);
+      Alert.alert(`Sign-in failed: ${(error as Error).message}`);
+    }
+  };
+  const handleFaceBookSignIN = async () => {
+    try {
+      const response = await facebookLogin();
       dispatch(setUserInfo(response));
       navigation.navigate('Welcome');
     } catch (error) {
@@ -29,17 +86,24 @@ const SocialLogin = ({navigation}: {navigation: socialProps}) => {
       <View style={styles.buttonContainer}>
         <CustomButton
           customStyles={styles.button}
+          text="Sign In with Truecaller"
+          textStyle={styles.buttonTextStyle}
+          icon={Assets.truecaller}
+          onPress={handleTruecallerLogin}
+        />
+        <CustomButton
+          customStyles={styles.button}
           text="Sign In with Google"
           icon={Assets.google}
           textStyle={styles.buttonTextStyle}
-          onPress={handleSignIn}
+          onPress={handleGoogleSignIn}
         />
         <CustomButton
           customStyles={styles.button}
           text="Sign In with Facebook"
           textStyle={styles.buttonTextStyle}
           icon={Assets.facebook}
-          onPress={() => console.log('pressed >>')}
+          onPress={handleFaceBookSignIN}
         />
       </View>
       <Text style={styles.accountText}>
@@ -75,8 +139,7 @@ const styles = StyleSheet.create({
     top: 100,
     width: '100%',
     alignItems: 'center',
-    rowGap: 10,
-    marginBottom: 20,
+    marginBottom: 10,
   },
   button: {
     backgroundColor: '#fff',

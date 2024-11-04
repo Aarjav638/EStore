@@ -39,6 +39,7 @@ const Assets: Images = {
   home: require('../assets/home.png'),
   catalog: require('../assets/catalog.png'),
   gps: require('../assets/gps.png'),
+  truecaller: require('../assets/truecaller.png'),
 };
 
 export default Assets;

@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {SafeAreaView} from 'react-native-safe-area-context';
-import {Dimensions, Modal, StyleSheet} from 'react-native';
+import {Alert, BackHandler, Dimensions, Modal, StyleSheet} from 'react-native';
 import Header from '../components/Discover/Header';
 import Assets from '../constants/images';
 import MenuSection from '../components/Discover/MenuSection';
@@ -8,16 +8,17 @@ import Items from '../components/Discover/Items';
 import FilterView from '../components/Discover/FilterView';
 import {DiscoverStackParams} from '../constants/types';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
-import {Item} from '../constants/types';
+import {Product} from '../constants/types';
 import Filter from './Filter';
 
 import {data, menuItems} from '../constants/data';
+import {useFocusEffect} from '@react-navigation/native';
 
 type DiscoverProps = NativeStackScreenProps<DiscoverStackParams, 'Home'>;
 
-const Discover = ({navigation}: DiscoverProps) => {
+const Discover = ({navigation, route}: DiscoverProps) => {
   const [selected, setSelected] = useState(0);
-  const [filteredData, setFilteredData] = useState<Item[]>(data);
+  const [filteredData, setFilteredData] = useState<Product[]>(data);
   const [modalVisible, setModalVisible] = useState(false);
   const [loading, setLoading] = useState(true);
 
@@ -26,6 +27,28 @@ const Discover = ({navigation}: DiscoverProps) => {
       setLoading(false);
     }, 2000);
   }, []);
+
+  const onBackPress = () => {
+    Alert.alert('Exit App', 'Do you want to exit?', [
+      {
+        text: 'Cancel',
+        onPress: () => null,
+        style: 'cancel',
+      },
+      {text: 'YES', onPress: () => BackHandler.exitApp()},
+    ]);
+    return true;
+  };
+
+  useFocusEffect(
+    React.useCallback(() => {
+      if (route.name === 'Home') {
+        BackHandler.addEventListener('hardwareBackPress', onBackPress);
+        return () =>
+          BackHandler.removeEventListener('hardwareBackPress', onBackPress);
+      }
+    }, [route.name]),
+  );
 
   const applyFilters = (filterResult: {
     brands: string[];

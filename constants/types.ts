@@ -92,6 +92,7 @@ export type Images = {
   collection: ImageSourcePropType;
   products: ImageSourcePropType;
   gps: ImageSourcePropType;
+  truecaller: ImageSourcePropType;
 };
 
 export type Product = {

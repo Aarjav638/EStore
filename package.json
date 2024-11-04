@@ -14,6 +14,7 @@
     "commit": "commit"
   },
   "dependencies": {
+    "@kartikbhalla/react-native-truecaller": "^0.1.12",
     "@ptomasroos/react-native-multi-slider": "^2.2.2",
     "@react-native-community/blur": "^4.4.1",
     "@react-native-firebase/app": "^21.2.0",
@@ -24,9 +25,11 @@
     "@react-navigation/native-stack": "^6.11.0",
     "@reduxjs/toolkit": "^2.3.0",
     "@types/node": "^22.7.9",
+    "axios": "^1.7.7",
     "react": "18.3.1",
     "react-native": "0.75.4",
     "react-native-credit-card-input": "^1.0.0",
+    "react-native-fbsdk-next": "^13.1.3",
     "react-native-gesture-handler": "^2.20.0",
     "react-native-keyboard-aware-scroll-view": "^0.9.5",
     "react-native-otp-entry": "^1.7.2",

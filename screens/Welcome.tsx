@@ -1,19 +1,67 @@
-import {Dimensions, Image, StyleSheet, Text, View} from 'react-native';
-import React from 'react';
+import {
+  BackHandler,
+  Dimensions,
+  Image,
+  StyleSheet,
+  Text,
+  View,
+} from 'react-native';
+import React, {useEffect} from 'react';
 import Topbar from '../components/Verification/Topbar';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import {RootStackParamList} from '../constants/types';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import Header from '../components/Splash/Header';
 import CustomButton from '../components/Auth/SignIn/CustomButton';
-import {useAppSelector} from '../redux/hooks';
+import {useAppDispatch, useAppSelector} from '../redux/hooks';
 import Assets from '../constants/images';
+import {GoogleSignin} from '@react-native-google-signin/google-signin';
+import {LoginManager} from 'react-native-fbsdk-next';
+import {logOut} from '../redux/feature/Auth';
+import {useFocusEffect} from '@react-navigation/native';
 
 type WelcomeProps = NativeStackScreenProps<RootStackParamList, 'Welcome'>;
 
-const Welcome = ({navigation}: WelcomeProps) => {
+const Welcome = ({navigation, route}: WelcomeProps) => {
   const {userInfo} = useAppSelector(state => state.auth);
-  console.log(userInfo);
+  const dispatch = useAppDispatch();
+  const handleLogout = async () => {
+    try {
+      LoginManager.logOut();
+      await GoogleSignin.signOut();
+      dispatch(logOut());
+      return true;
+    } catch (error) {
+      console.error('Error logging out: ', error);
+      return false;
+    }
+  };
+
+  const handleBackPress = () => {
+    handleLogout();
+    return true;
+  };
+
+  useFocusEffect(
+    React.useCallback(() => {
+      if (route.name === 'Welcome') {
+        BackHandler.addEventListener('hardwareBackPress', handleBackPress);
+        return () =>
+          BackHandler.removeEventListener('hardwareBackPress', handleBackPress);
+      }
+    }, [route.name]),
+  );
+
+  useEffect(() => {
+    if (!userInfo || !userInfo.user.name) {
+      navigation.navigate('SignIn');
+    }
+  }, [userInfo, navigation]);
+
+  const handleSwitchAccount = () => {
+    handleLogout();
+  };
+
   return (
     <SafeAreaView style={styles.container}>
       <Topbar text="Welcome" navigation={navigation} />
@@ -21,7 +69,7 @@ const Welcome = ({navigation}: WelcomeProps) => {
       <View style={styles.image}>
         <Image
           source={
-            userInfo.user.photo ? {uri: userInfo?.user.photo} : Assets.avatar
+            userInfo.user.photo ? {uri: userInfo.user.photo} : Assets.avatar
           }
           onError={e => console.log(e)}
           onLoadStart={() => console.log('loading')}
@@ -32,15 +80,18 @@ const Welcome = ({navigation}: WelcomeProps) => {
       </View>
       <View style={styles.nameContainer}>
         <Text style={styles.heading}>Welcome Back</Text>
-        <Text style={styles.name}>{userInfo.user.name}</Text>
+        <Text
+          style={
+            styles.name
+          }>{`${userInfo.user?.name?.toUpperCase() || 'GUEST'}`}</Text>
       </View>
       <View style={styles.buttonWrapper}>
         <CustomButton
           onPress={() => navigation.navigate('Drawer')}
-          text={`CONTINUE AS ${userInfo.user.name.toUpperCase()}`}
+          text={`CONTINUE AS ${userInfo.user?.name?.toUpperCase() || 'GUEST'}`}
         />
         <CustomButton
-          onPress={() => navigation.navigate('SignIn')}
+          onPress={handleSwitchAccount}
           text="SWITCH ACCOUNT"
           customStyles={styles.button2}
           textStyle={{color: '#151515'}}
