@@ -1,6 +1,6 @@
-import { type ColorValue } from 'react-native';
+import {type ColorValue} from 'react-native';
 
-import type { TRUECALLER_ANDROID_CUSTOMIZATIONS } from './truecallerConstant';
+import type {TRUECALLER_ANDROID_CUSTOMIZATIONS} from './truecallerConstant';
 
 export type IButtonTextKey =
   keyof typeof TRUECALLER_ANDROID_CUSTOMIZATIONS.BUTTON_TEXTS;
@@ -56,7 +56,6 @@ export interface IAndroidUserResponse {
   gender: IGender | null;
   email: string | null;
   picture: string | null;
-
 }
 
 export interface IIOSGender {

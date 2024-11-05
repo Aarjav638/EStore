@@ -1,9 +1,5 @@
-import { useEffect, useState } from 'react';
-import {
-  NativeModules,
-  DeviceEventEmitter,
-  Platform,
-} from 'react-native';
+import {useEffect, useState} from 'react';
+import {NativeModules, DeviceEventEmitter, Platform} from 'react-native';
 import axios from 'axios';
 
 import {
@@ -41,12 +37,10 @@ const initialize = ({
       androidFooterButtonText ||
         TRUECALLER_ANDROID_CUSTOMIZATIONS.FOOTER_BUTTON_TEXTS.ANOTHER_METHOD,
       androidConsentHeading ||
-        TRUECALLER_ANDROID_CUSTOMIZATIONS.CONSENT_HEADING_TEXTS.CHECKOUT_WITH
+        TRUECALLER_ANDROID_CUSTOMIZATIONS.CONSENT_HEADING_TEXTS.CHECKOUT_WITH,
     );
-  
   else {
     //TODO error handling
-
   }
 };
 
@@ -54,13 +48,13 @@ const openTruecallerModal = () => {
   if (Platform.OS === 'android') TruecallerAndroid.invoke();
   else if (Platform.OS === 'ios') {
     //TODO IOS modal
-    console.log('IOS modal')
+    console.log('IOS modal');
   }
 };
 
 const isTruecallerSupported = () => {
   if (Platform.OS === 'android') return TruecallerAndroid.isUsable();
-  
+
   return false;
 };
 
@@ -83,7 +77,7 @@ export const useTrueCaller = ({
 
     DeviceEventEmitter.addListener(
       TRUECALLER_ANDROID_EVENTS.TRUECALLER_SUCCESS,
-      ({ authorizationCode, codeVerifier }) => {
+      ({authorizationCode, codeVerifier}) => {
         axios
           .post(
             'https://oauth-account-noneu.truecaller.com/v1/token',
@@ -98,11 +92,11 @@ export const useTrueCaller = ({
               headers: {
                 'Content-Type': 'application/x-www-form-urlencoded',
               },
-            }
+            },
           )
-          .then((response) => {
+          .then(response => {
             const accessToken = response.data.access_token;
-            console.log('accessToken', accessToken)
+            console.log('accessToken', accessToken);
             axios
               .get<IAndroidUserResponse>(
                 'https://oauth-account-noneu.truecaller.com/v1/userinfo',
@@ -111,10 +105,10 @@ export const useTrueCaller = ({
                   headers: {
                     Authorization: `Bearer ${accessToken}`,
                   },
-                }
+                },
               )
-              .then((resp) => {
-                console.log('resp', resp.data)
+              .then(resp => {
+                console.log('resp', resp.data);
                 setUser({
                   firstName: resp.data.given_name,
                   lastName: resp.data.family_name || null,
@@ -123,28 +117,25 @@ export const useTrueCaller = ({
                   gender: resp.data.gender || null,
                   email: resp.data.email || null,
                   profilePicture: resp.data.picture || null,
-                })
+                });
               });
 
             //TODO create fixed user interface.
-
           })
           .catch(() => {
             //TODO error handling
-
           });
-      }
+      },
     );
 
     DeviceEventEmitter.addListener(
       TRUECALLER_ANDROID_EVENTS.TRUECALLER_FAILURE,
-      ({ errorMessage: errorMessageAndroid, errorCode: errorCodeAndroid }) => {
+      ({errorMessage: errorMessageAndroid, errorCode: errorCodeAndroid}) => {
         setError(errorMessageAndroid);
         setErrorCode(errorCodeAndroid);
-      }
+      },
     );
   }, [androidClientId]);
-
 
   //TODO IOS implementation
 
@@ -198,8 +189,6 @@ export {
   TRUECALLER_ANDROID_CUSTOMIZATIONS,
   TRUECALLER_ANDROID_EVENTS,
 } from '../constants/truecallerConstant';
-
-
 
 // import { useEffect, useState } from 'react';
 // import { NativeModules, DeviceEventEmitter, Platform } from 'react-native';

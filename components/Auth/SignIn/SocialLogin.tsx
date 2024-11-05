@@ -7,7 +7,10 @@ import {useAppDispatch} from '../../../redux/hooks';
 import {setUserInfo} from '../../../redux/feature/Auth';
 import {RootStackParamList} from '../../../constants/types';
 import {NavigationProp} from '@react-navigation/native';
-import {TRUECALLER_ANDROID_CUSTOMIZATIONS, useTrueCaller} from '../../../utils/useTrueCaller';
+import {
+  TRUECALLER_ANDROID_CUSTOMIZATIONS,
+  useTrueCaller,
+} from '../../../utils/useTrueCaller';
 type socialProps = NavigationProp<RootStackParamList>;
 
 import {AppEventsLogger} from 'react-native-fbsdk-next';
