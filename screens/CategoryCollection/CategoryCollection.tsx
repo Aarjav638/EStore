@@ -17,7 +17,7 @@ import Arrow from '../../assets/chevron-right.svg';
 import CategorySkeleton from './CategorySkeleton';
 export type CategoryCollectionProps = NativeStackScreenProps<
   CategoryStackParams,
-  'Category1'
+  'Category2'
 >;
 const data = [
   {

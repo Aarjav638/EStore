@@ -44,14 +44,15 @@ export type CheckoutParam = {
 };
 
 export type CategoryStackParams = {
-  Category: undefined;
-  Category1: {
+  Category1: undefined;
+  Category2: {
     title: string;
   };
   Products: {
     title: string;
   };
   Search: undefined;
+  Cart: undefined;
 };
 
 export type Images = {

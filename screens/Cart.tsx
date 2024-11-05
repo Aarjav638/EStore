@@ -5,13 +5,14 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import React from 'react';
+import React, { useMemo } from 'react';
 import CartHeader from '../components/Cart/CartHeader';
 import CartItem from '../components/Cart/CartItem';
-import {NativeStackScreenProps} from '@react-navigation/native-stack';
-import {CheckoutParam} from '../constants/types';
+import { CheckoutParam} from '../constants/types';
 import {useAppDispatch, useAppSelector} from '../redux/hooks';
-import {removeFromCart} from '../redux/feature/Cart';
+import { removeItem} from '../redux/feature/Cart';
+import { NavigationProp } from '@react-navigation/native';
+import { AppEventsLogger } from 'react-native-fbsdk-next';
 
 // const data: CartProps[] = [
 //   {
@@ -45,18 +46,48 @@ import {removeFromCart} from '../redux/feature/Cart';
 //   quantity: number;
 // };
 
-export type CartParam = NativeStackScreenProps<CheckoutParam, 'cart'>;
+export type CartParam =NavigationProp<CheckoutParam, 'cart'>;
 
-const Cart = ({navigation, route}: CartParam) => {
+
+const Cart = ({navigation}: {
+  navigation:CartParam
+}) => {
   const handleDelete = (id: number) => {
-    dispatch(removeFromCart({id: id}));
+    dispatch(removeItem({id: id}));
   };
   const dispatch = useAppDispatch();
   const CartItems = useAppSelector(state => state.cart.cartItems);
+  const subTotal = useMemo(() => {
+    return CartItems.reduce((acc, item) => {
+      return acc + item.price * (item.quantity ?? 1);
+    }, 0);
+  }, [CartItems]);
+
+  const handleCheckout = () => {
+    AppEventsLogger.logEvent(
+      AppEventsLogger.AppEvents.InitiatedCheckout,
+      {
+        [
+          AppEventsLogger.AppEventParams.Currency
+        ]: 'USD',
+        [
+          AppEventsLogger.AppEventParams.NumItems
+        ]: CartItems.length,
+        [
+          AppEventsLogger.AppEventParams.Content
+        ]:'products',
+        [
+          AppEventsLogger.AppEventParams.ContentID
+        ]: CartItems.map(item => item.id).join(','),
+        total_Value: subTotal,
+      }
+    )
+    navigation.navigate('Checkout');
+  }
 
   return (
     <View style={styles.container}>
-      <CartHeader navigation={navigation} route={route} />
+      <CartHeader navigation={navigation}  />
       {CartItems.length > 0 ? (
         <>
           <View
@@ -69,7 +100,7 @@ const Cart = ({navigation, route}: CartParam) => {
           <TouchableOpacity
             style={styles.checkout}
             activeOpacity={0.8}
-            onPress={() => navigation.navigate('Checkout')}>
+            onPress={() => handleCheckout()}>
             <Text
               style={{
                 color: 'white',
@@ -84,8 +115,9 @@ const Cart = ({navigation, route}: CartParam) => {
           </TouchableOpacity>
           <TouchableOpacity
             style={styles.continue}
-            activeOpacity={0.9}
-            onPress={() => console.log('Continue')}>
+            activeOpacity={1}
+            
+            onPress={() => navigation.goBack()}>
             <Text
               style={{
                 color: 'black',

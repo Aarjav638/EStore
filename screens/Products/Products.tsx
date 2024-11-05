@@ -16,15 +16,19 @@ import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import {CategoryStackParams, DrawerParamList} from '../../constants/types';
 import CustomButton from '../../components/Auth/SignIn/CustomButton';
 import ProductsSkeleton from './ProductsSkeleton';
-import {DrawerActions} from '@react-navigation/native';
-import {useAppDispatch} from '../../redux/hooks';
+import {DrawerActions, useNavigation, useRoute} from '@react-navigation/native';
+import {useAppDispatch, useAppSelector} from '../../redux/hooks';
 import {addToCart} from '../../redux/feature/Cart';
+import { AppEventsLogger } from 'react-native-fbsdk-next';
 
-type ProductsProps = NativeStackScreenProps<CategoryStackParams, 'Products'>;
-type ProductsDrawer = NativeStackScreenProps<DrawerParamList, 'Products'>;
+// type ProductsProps = NativeStackScreenProps<CategoryStackParams, 'Products'>;
+// type ProductsDrawer = NativeStackScreenProps<DrawerParamList, 'Products'>;
 const {height: SCREEN_HEIGHT} = Dimensions.get('window');
-const Products = ({navigation, route}: ProductsProps | ProductsDrawer) => {
+const Products = () => {
+  const navigation = useNavigation<NativeStackScreenProps<CategoryStackParams>['navigation']>();
+  const route = useRoute<NativeStackScreenProps<CategoryStackParams, 'Products'>['route']>();
   const dispatch = useAppDispatch();
+  const {cartItems}=useAppSelector(state=>state.cart)
   const [heartClicked, setHeartClicked] = React.useState(false);
   const [quantity, setQuantity] = React.useState(1);
   const title = route.params?.title ?? 'Products';
@@ -67,20 +71,58 @@ const Products = ({navigation, route}: ProductsProps | ProductsDrawer) => {
     return <ProductsSkeleton title={title} />;
   }
 
+
+  const handleAddedToCart = () => {
+    const checkItem = cartItems.find((item) => item.id === 1);
+    if (checkItem) {
+      return true;
+    }
+    return false;
+  }
+
+  const AddedToCart = handleAddedToCart();
+  
   const handleAddToCart = () => {
-    dispatch(
-      addToCart({
-        id: 1,
-        name: 'Gucci Sunglasses',
-        price: 45,
-        image_url: 'https://dummyimage.com/200x200/000/fff&text=Sunglasses',
-        category: 'Sunglasses',
-        brand: 'Gucci',
-        rating: 5,
-        quantity: quantity,
-      }),
-    );
+    if (AddedToCart) {
+      navigation.navigate('Cart');
+    } else {
+      dispatch(
+        addToCart({
+          id: 1,
+          name: 'Gucci Sunglasses',
+          price: 45,
+          image_url: 'https://dummyimage.com/200x200/000/fff&text=Sunglasses',
+          category: 'Sunglasses',
+          brand: 'Gucci',
+          rating: 5,
+          quantity: quantity,
+        }),
+      );
+      AppEventsLogger.logProductItem(
+        '1',
+        'in_stock',
+        'new',
+        'Gucci Sunglasses',
+        'Guuci Sunglasses',
+        'https://dummyimage.com/200x200/000/fff&text=Sunglasses',
+        'https://dummyimage.com/200x200/000/fff&text=Sunglasses',
+        4500,
+        'INR',
+        'Gucci'
+      );
+      AppEventsLogger.logEvent(
+        'AddedToCart',
+        {
+          content_type: 'product',
+          content_id: '1',
+          currency: 'INR',
+          description:'Gucci Sunglasses',
+          value: 4500,
+        }
+      );
+    }
   };
+  
 
   return (
     <SafeAreaView style={styles.container}>
@@ -293,12 +335,14 @@ const Products = ({navigation, route}: ProductsProps | ProductsDrawer) => {
             marginTop: '15%',
             opacity: oldContentOpacity,
           }}>
-          <CustomButton
-            onPress={handleAddToCart}
-            customStyles={styles.button}
-            text="Add To Cart"
-            textStyle={styles.buttonText}
-          />
+           <CustomButton
+                onPress={handleAddToCart}
+                customStyles={styles.button}
+                text={
+                  AddedToCart ? 'Go To Cart' : 'Add To Cart'
+                }
+                textStyle={styles.buttonText}
+              />
           <View style={{flexDirection: 'row', columnGap: 8}}>
             <TouchableOpacity
               style={{
@@ -455,7 +499,9 @@ const Products = ({navigation, route}: ProductsProps | ProductsDrawer) => {
               <CustomButton
                 onPress={handleAddToCart}
                 customStyles={styles.button}
-                text="Add To Cart"
+                text={
+                  AddedToCart ? 'Go To Cart' : 'Add To Cart'
+                }
                 textStyle={styles.buttonText}
               />
               <View

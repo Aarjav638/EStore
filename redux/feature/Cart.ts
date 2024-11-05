@@ -42,8 +42,17 @@ const cartSlice = createSlice({
         }
       }
     },
+    removeItem: (state: CartState, action: PayloadAction<{id: number}>) => {
+      const existingItemIndex = state.cartItems.findIndex(
+        item => item.id === action.payload.id,
+      );
+
+      if (existingItemIndex !== -1) {
+        state.cartItems.splice(existingItemIndex, 1);
+      }
+    }
   },
 });
 
-export const {addToCart, removeFromCart} = cartSlice.actions;
+export const {addToCart, removeFromCart,removeItem} = cartSlice.actions;
 export default cartSlice.reducer;

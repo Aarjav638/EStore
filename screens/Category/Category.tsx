@@ -43,7 +43,7 @@ const data = [
   },
 ];
 
-type CategoryProps = NativeStackScreenProps<CategoryStackParams, 'Category'>;
+type CategoryProps = NativeStackScreenProps<CategoryStackParams, 'Category1'>;
 
 const Category = ({navigation}: CategoryProps) => {
   const [loading, setLoading] = React.useState(true);
@@ -80,7 +80,7 @@ const Category = ({navigation}: CategoryProps) => {
               justifyContent: 'space-between',
             }}
             onPress={() =>
-              navigation.navigate('Category1', {
+              navigation.navigate('Category2', {
                 title: item.title,
               })
             }>
@@ -114,7 +114,7 @@ const Category = ({navigation}: CategoryProps) => {
                 </Text>
                 <TouchableOpacity
                   onPress={() =>
-                    navigation.navigate('Category1', {title: item.title})
+                    navigation.navigate('Category2', {title: item.title})
                   }
                   style={{
                     width: 40,
