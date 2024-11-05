@@ -7,17 +7,14 @@ import {useAppDispatch} from '../../../redux/hooks';
 import {setUserInfo} from '../../../redux/feature/Auth';
 import {RootStackParamList} from '../../../constants/types';
 import {NavigationProp} from '@react-navigation/native';
-import {
-  useTruecaller,
-  TRUECALLER_ANDROID_CUSTOMIZATIONS,
-} from '@kartikbhalla/react-native-truecaller';
+import {TRUECALLER_ANDROID_CUSTOMIZATIONS, useTrueCaller} from '../../../utils/useTrueCaller';
 type socialProps = NavigationProp<RootStackParamList>;
 
 import {AppEventsLogger} from 'react-native-fbsdk-next';
 
 const SocialLogin = ({navigation}: {navigation: socialProps}) => {
   const dispatch = useAppDispatch();
-  const {initializeTruecaller, openTruecallerModal, user} = useTruecaller({
+  const {initializeTruecaller, openTruecallerModal, user} = useTrueCaller({
     androidButtonColor: '#FF0000',
     androidButtonStyle: TRUECALLER_ANDROID_CUSTOMIZATIONS.BUTTON_STYLES.ROUND,
     androidButtonText: TRUECALLER_ANDROID_CUSTOMIZATIONS.BUTTON_TEXTS.CONTINUE,
@@ -65,6 +62,7 @@ const SocialLogin = ({navigation}: {navigation: socialProps}) => {
             email: user.email,
             name: user.firstName + ' ' + user.lastName,
             mobile: user.mobileNumber,
+            photo: user.profilePicture,
           },
         }),
       );

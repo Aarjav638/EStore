@@ -81,13 +81,7 @@ def enableProguardInReleaseBuilds = false
 def jscFlavor = 'org.webkit:android-jsc:+'
 
 android {
-    compileOptions{
-
-sourceCompatibility JavaVersion.VERSION_1_8
-
-targetCompatibility JavaVersion.VERSION_1_8
-
-}
+    
     ndkVersion rootProject.ext.ndkVersion
     buildToolsVersion rootProject.ext.buildToolsVersion
     compileSdk rootProject.ext.compileSdkVersion
@@ -126,6 +120,10 @@ targetCompatibility JavaVersion.VERSION_1_8
             proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
         }
     }
+    compileOptions{
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
 }
 
 dependencies {
@@ -137,4 +135,5 @@ dependencies {
     }
     implementation platform('com.google.firebase:firebase-bom:33.5.1')
     implementation 'com.google.firebase:firebase-analytics'
+    implementation "com.truecaller.android.sdk:truecaller-sdk:3.0.0"
 }

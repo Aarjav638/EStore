@@ -14,7 +14,6 @@
     "commit": "commit"
   },
   "dependencies": {
-    "@kartikbhalla/react-native-truecaller": "^0.1.12",
     "@ptomasroos/react-native-multi-slider": "^2.2.2",
     "@react-native-community/blur": "^4.4.1",
     "@react-native-firebase/app": "^21.2.0",
