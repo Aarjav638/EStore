@@ -1,5 +1,5 @@
-import { useEffect, useState } from 'react';
-import { NativeModules, DeviceEventEmitter, Platform } from 'react-native';
+import {useEffect, useState} from 'react';
+import {NativeModules, DeviceEventEmitter, Platform} from 'react-native';
 import axios from 'axios';
 
 import {
@@ -30,14 +30,18 @@ const initialize = ({
     TruecallerAndroid.initialize(
       androidButtonColor || DEFAULT_BUTTON_COLOR,
       androidButtonTextColor || DEFAULT_BUTTON_TEXT_COLOR,
-      androidButtonText || TRUECALLER_ANDROID_CUSTOMIZATIONS.BUTTON_TEXTS.ACCEPT,
-      androidButtonStyle || TRUECALLER_ANDROID_CUSTOMIZATIONS.BUTTON_STYLES.ROUND,
-      androidFooterButtonText || TRUECALLER_ANDROID_CUSTOMIZATIONS.FOOTER_BUTTON_TEXTS.ANOTHER_METHOD,
-      androidConsentHeading || TRUECALLER_ANDROID_CUSTOMIZATIONS.CONSENT_HEADING_TEXTS.CHECKOUT_WITH
+      androidButtonText ||
+        TRUECALLER_ANDROID_CUSTOMIZATIONS.BUTTON_TEXTS.ACCEPT,
+      androidButtonStyle ||
+        TRUECALLER_ANDROID_CUSTOMIZATIONS.BUTTON_STYLES.ROUND,
+      androidFooterButtonText ||
+        TRUECALLER_ANDROID_CUSTOMIZATIONS.FOOTER_BUTTON_TEXTS.ANOTHER_METHOD,
+      androidConsentHeading ||
+        TRUECALLER_ANDROID_CUSTOMIZATIONS.CONSENT_HEADING_TEXTS.CHECKOUT_WITH,
     );
   } else {
     // Handle non-Android platform errors
-    console.error("Truecaller initialization is only available on Android.");
+    console.error('Truecaller initialization is only available on Android.');
   }
 };
 
@@ -49,9 +53,14 @@ const openTruecallerModal = () => {
   }
 };
 
-const isTruecallerSupported = () => Platform.OS === 'android' && TruecallerAndroid.isUsable();
+const isTruecallerSupported = () =>
+  Platform.OS === 'android' && TruecallerAndroid.isUsable();
 
-const getAccessToken = async (androidClientId, authorizationCode, codeVerifier) => {
+const getAccessToken = async (
+  androidClientId,
+  authorizationCode,
+  codeVerifier,
+) => {
   try {
     const response = await axios.post(
       'https://oauth-account-noneu.truecaller.com/v1/token',
@@ -62,8 +71,8 @@ const getAccessToken = async (androidClientId, authorizationCode, codeVerifier) 
         code_verifier: codeVerifier,
       },
       {
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-      }
+        headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+      },
     );
     return response.data.access_token;
   } catch (error) {
@@ -72,13 +81,13 @@ const getAccessToken = async (androidClientId, authorizationCode, codeVerifier) 
   }
 };
 
-const getUserInfo = async (accessToken) => {
+const getUserInfo = async accessToken => {
   try {
     const response = await axios.get<IAndroidUserResponse>(
       'https://oauth-account-noneu.truecaller.com/v1/userinfo',
       {
-        headers: { Authorization: `Bearer ${accessToken}` },
-      }
+        headers: {Authorization: `Bearer ${accessToken}`},
+      },
     );
     return response.data;
   } catch (error) {
@@ -103,9 +112,13 @@ export const useTrueCaller = ({
   useEffect(() => {
     if (Platform.OS !== 'android' || !androidClientId) return;
 
-    const onSuccess = async ({ authorizationCode, codeVerifier }) => {
+    const onSuccess = async ({authorizationCode, codeVerifier}) => {
       try {
-        const accessToken = await getAccessToken(androidClientId, authorizationCode, codeVerifier);
+        const accessToken = await getAccessToken(
+          androidClientId,
+          authorizationCode,
+          codeVerifier,
+        );
         const userInfo = await getUserInfo(accessToken);
 
         setUser({
@@ -122,14 +135,22 @@ export const useTrueCaller = ({
       }
     };
 
-    const onFailure = ({ errorMessage: errorMessageAndroid, errorCode: errorCodeAndroid }) => {
+    const onFailure = ({
+      errorMessage: errorMessageAndroid,
+      errorCode: errorCodeAndroid,
+    }) => {
       setError(errorMessageAndroid);
       setErrorCode(errorCodeAndroid);
     };
 
-    DeviceEventEmitter.addListener(TRUECALLER_ANDROID_EVENTS.TRUECALLER_SUCCESS, onSuccess);
-    DeviceEventEmitter.addListener(TRUECALLER_ANDROID_EVENTS.TRUECALLER_FAILURE, onFailure);
-
+    DeviceEventEmitter.addListener(
+      TRUECALLER_ANDROID_EVENTS.TRUECALLER_SUCCESS,
+      onSuccess,
+    );
+    DeviceEventEmitter.addListener(
+      TRUECALLER_ANDROID_EVENTS.TRUECALLER_FAILURE,
+      onFailure,
+    );
   }, [androidClientId]);
 
   return {
