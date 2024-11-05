@@ -5,14 +5,14 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import React, { useMemo } from 'react';
+import React, {useMemo} from 'react';
 import CartHeader from '../components/Cart/CartHeader';
 import CartItem from '../components/Cart/CartItem';
-import { CheckoutParam} from '../constants/types';
+import {CheckoutParam} from '../constants/types';
 import {useAppDispatch, useAppSelector} from '../redux/hooks';
-import { removeItem} from '../redux/feature/Cart';
-import { NavigationProp } from '@react-navigation/native';
-import { AppEventsLogger } from 'react-native-fbsdk-next';
+import {removeItem} from '../redux/feature/Cart';
+import {NavigationProp} from '@react-navigation/native';
+import {AppEventsLogger} from 'react-native-fbsdk-next';
 
 // const data: CartProps[] = [
 //   {
@@ -46,12 +46,9 @@ import { AppEventsLogger } from 'react-native-fbsdk-next';
 //   quantity: number;
 // };
 
-export type CartParam =NavigationProp<CheckoutParam, 'cart'>;
+export type CartParam = NavigationProp<CheckoutParam, 'cart'>;
 
-
-const Cart = ({navigation}: {
-  navigation:CartParam
-}) => {
+const Cart = ({navigation}: {navigation: CartParam}) => {
   const handleDelete = (id: number) => {
     dispatch(removeItem({id: id}));
   };
@@ -64,30 +61,21 @@ const Cart = ({navigation}: {
   }, [CartItems]);
 
   const handleCheckout = () => {
-    AppEventsLogger.logEvent(
-      AppEventsLogger.AppEvents.InitiatedCheckout,
-      {
-        [
-          AppEventsLogger.AppEventParams.Currency
-        ]: 'USD',
-        [
-          AppEventsLogger.AppEventParams.NumItems
-        ]: CartItems.length,
-        [
-          AppEventsLogger.AppEventParams.Content
-        ]:'products',
-        [
-          AppEventsLogger.AppEventParams.ContentID
-        ]: CartItems.map(item => item.id).join(','),
-        total_Value: subTotal,
-      }
-    )
+    AppEventsLogger.logEvent(AppEventsLogger.AppEvents.InitiatedCheckout, {
+      [AppEventsLogger.AppEventParams.Currency]: 'USD',
+      [AppEventsLogger.AppEventParams.NumItems]: CartItems.length,
+      [AppEventsLogger.AppEventParams.Content]: 'products',
+      [AppEventsLogger.AppEventParams.ContentID]: CartItems.map(
+        item => item.id,
+      ).join(','),
+      total_Value: subTotal,
+    });
     navigation.navigate('Checkout');
-  }
+  };
 
   return (
     <View style={styles.container}>
-      <CartHeader navigation={navigation}  />
+      <CartHeader navigation={navigation} />
       {CartItems.length > 0 ? (
         <>
           <View
@@ -116,7 +104,6 @@ const Cart = ({navigation}: {
           <TouchableOpacity
             style={styles.continue}
             activeOpacity={1}
-            
             onPress={() => navigation.goBack()}>
             <Text
               style={{

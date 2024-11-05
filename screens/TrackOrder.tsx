@@ -1,34 +1,30 @@
 import {Dimensions, Image, StyleSheet, Text, View} from 'react-native';
-import React, { useEffect } from 'react';
+import React, {useEffect} from 'react';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import Header from '../components/Discover/Header';
 import Assets from '../constants/images';
 import CustomButton from '../components/Auth/SignIn/CustomButton';
 import {useNavigation} from '@react-navigation/native';
-import { AppEventsLogger } from 'react-native-fbsdk-next';
+import {AppEventsLogger} from 'react-native-fbsdk-next';
 
 const TrackOrder = () => {
   const navigation = useNavigation();
 
-
   useEffect(() => {
     // Track the event that the user has placed an order
-    AppEventsLogger.logPurchase(4500, 'INR',{
+    AppEventsLogger.logPurchase(4500, 'INR', {
       order_id: '123-456',
       product_name: 'Gucci Sunglasses',
       product_category: 'Sunglasses',
-      product_id:1,
-
+      product_id: 1,
     });
     AppEventsLogger.logEvent('Order Placed', 1, {
       order_id: '123-456',
       product_name: 'Gucci Sunglasses',
       product_category: 'Sunglasses',
-      product_id:1,
+      product_id: 1,
     });
-
-  }
-, []);
+  }, []);
 
   return (
     <SafeAreaView style={styles.container}>

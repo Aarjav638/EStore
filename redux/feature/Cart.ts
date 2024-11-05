@@ -50,9 +50,9 @@ const cartSlice = createSlice({
       if (existingItemIndex !== -1) {
         state.cartItems.splice(existingItemIndex, 1);
       }
-    }
+    },
   },
 });
 
-export const {addToCart, removeFromCart,removeItem} = cartSlice.actions;
+export const {addToCart, removeFromCart, removeItem} = cartSlice.actions;
 export default cartSlice.reducer;

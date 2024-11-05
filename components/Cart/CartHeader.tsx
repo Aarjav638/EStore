@@ -4,9 +4,7 @@ import Assets from '../../constants/images';
 import {CartParam} from '../../screens/Cart';
 import {DrawerActions} from '@react-navigation/native';
 
-const CartHeader = ({navigation}: {
-  navigation:CartParam
-}) => {
+const CartHeader = ({navigation}: {navigation: CartParam}) => {
   return (
     <View style={styles.container}>
       <View

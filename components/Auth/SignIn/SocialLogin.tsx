@@ -13,7 +13,7 @@ import {
 } from '@kartikbhalla/react-native-truecaller';
 type socialProps = NavigationProp<RootStackParamList>;
 
-import { AppEventsLogger } from 'react-native-fbsdk-next';
+import {AppEventsLogger} from 'react-native-fbsdk-next';
 
 const SocialLogin = ({navigation}: {navigation: socialProps}) => {
   const dispatch = useAppDispatch();
@@ -29,15 +29,16 @@ const SocialLogin = ({navigation}: {navigation: socialProps}) => {
       TRUECALLER_ANDROID_CUSTOMIZATIONS.FOOTER_BUTTON_TEXTS.SKIP,
   });
 
-
- const trackSignIN=() => {
-  console.log('trackSignIN');
-    AppEventsLogger.logEvent(AppEventsLogger.AppEvents.CompletedRegistration,1,
+  const trackSignIN = () => {
+    console.log('trackSignIN');
+    AppEventsLogger.logEvent(
+      AppEventsLogger.AppEvents.CompletedRegistration,
+      1,
       {
-        [AppEventsLogger.AppEventParams.RegistrationMethod]:'Facebook',
-      }
+        [AppEventsLogger.AppEventParams.RegistrationMethod]: 'Facebook',
+      },
     );
-  }
+  };
 
   useEffect(() => {
     initializeTruecaller();
@@ -84,7 +85,7 @@ const SocialLogin = ({navigation}: {navigation: socialProps}) => {
   const handleFaceBookSignIN = async () => {
     try {
       const response = await facebookLogin();
-      
+
       dispatch(setUserInfo(response));
       trackSignIN();
       navigation.navigate('Welcome');

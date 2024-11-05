@@ -13,22 +13,24 @@ import React, {useEffect, useState} from 'react';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import Assets from '../../constants/images';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
-import {CategoryStackParams, DrawerParamList} from '../../constants/types';
+import {CategoryStackParams} from '../../constants/types';
 import CustomButton from '../../components/Auth/SignIn/CustomButton';
 import ProductsSkeleton from './ProductsSkeleton';
 import {DrawerActions, useNavigation, useRoute} from '@react-navigation/native';
 import {useAppDispatch, useAppSelector} from '../../redux/hooks';
 import {addToCart} from '../../redux/feature/Cart';
-import { AppEventsLogger } from 'react-native-fbsdk-next';
+import {AppEventsLogger} from 'react-native-fbsdk-next';
 
-// type ProductsProps = NativeStackScreenProps<CategoryStackParams, 'Products'>;
-// type ProductsDrawer = NativeStackScreenProps<DrawerParamList, 'Products'>;
 const {height: SCREEN_HEIGHT} = Dimensions.get('window');
 const Products = () => {
-  const navigation = useNavigation<NativeStackScreenProps<CategoryStackParams>['navigation']>();
-  const route = useRoute<NativeStackScreenProps<CategoryStackParams, 'Products'>['route']>();
+  const navigation =
+    useNavigation<NativeStackScreenProps<CategoryStackParams>['navigation']>();
+  const route =
+    useRoute<
+      NativeStackScreenProps<CategoryStackParams, 'Products'>['route']
+    >();
   const dispatch = useAppDispatch();
-  const {cartItems}=useAppSelector(state=>state.cart)
+  const {cartItems} = useAppSelector(state => state.cart);
   const [heartClicked, setHeartClicked] = React.useState(false);
   const [quantity, setQuantity] = React.useState(1);
   const title = route.params?.title ?? 'Products';
@@ -71,17 +73,16 @@ const Products = () => {
     return <ProductsSkeleton title={title} />;
   }
 
-
   const handleAddedToCart = () => {
-    const checkItem = cartItems.find((item) => item.id === 1);
+    const checkItem = cartItems.find(item => item.id === 1);
     if (checkItem) {
       return true;
     }
     return false;
-  }
+  };
 
   const AddedToCart = handleAddedToCart();
-  
+
   const handleAddToCart = () => {
     if (AddedToCart) {
       navigation.navigate('Cart');
@@ -108,21 +109,17 @@ const Products = () => {
         'https://dummyimage.com/200x200/000/fff&text=Sunglasses',
         4500,
         'INR',
-        'Gucci'
+        'Gucci',
       );
-      AppEventsLogger.logEvent(
-        'AddedToCart',
-        {
-          content_type: 'product',
-          content_id: '1',
-          currency: 'INR',
-          description:'Gucci Sunglasses',
-          value: 4500,
-        }
-      );
+      AppEventsLogger.logEvent('AddedToCart', {
+        content_type: 'product',
+        content_id: '1',
+        currency: 'INR',
+        description: 'Gucci Sunglasses',
+        value: 4500,
+      });
     }
   };
-  
 
   return (
     <SafeAreaView style={styles.container}>
@@ -335,14 +332,12 @@ const Products = () => {
             marginTop: '15%',
             opacity: oldContentOpacity,
           }}>
-           <CustomButton
-                onPress={handleAddToCart}
-                customStyles={styles.button}
-                text={
-                  AddedToCart ? 'Go To Cart' : 'Add To Cart'
-                }
-                textStyle={styles.buttonText}
-              />
+          <CustomButton
+            onPress={handleAddToCart}
+            customStyles={styles.button}
+            text={AddedToCart ? 'Go To Cart' : 'Add To Cart'}
+            textStyle={styles.buttonText}
+          />
           <View style={{flexDirection: 'row', columnGap: 8}}>
             <TouchableOpacity
               style={{
@@ -499,9 +494,7 @@ const Products = () => {
               <CustomButton
                 onPress={handleAddToCart}
                 customStyles={styles.button}
-                text={
-                  AddedToCart ? 'Go To Cart' : 'Add To Cart'
-                }
+                text={AddedToCart ? 'Go To Cart' : 'Add To Cart'}
                 textStyle={styles.buttonText}
               />
               <View

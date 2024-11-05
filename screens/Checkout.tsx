@@ -18,7 +18,7 @@ import AddressForm from '../components/Checkout/AddressForm';
 import CustomButton from '../components/Auth/SignIn/CustomButton';
 import Payment from '../components/Checkout/Payment/Payment';
 import Summary from '../components/Checkout/Summary/Summary';
-import { AppEventsLogger } from 'react-native-fbsdk-next';
+import {AppEventsLogger} from 'react-native-fbsdk-next';
 
 type CheckoutProps = NativeStackScreenProps<CheckoutParam, 'Checkout'>;
 
@@ -85,14 +85,10 @@ const Checkout = ({navigation}: CheckoutProps) => {
       }
     }
     if (currentStep === 3) {
-      AppEventsLogger.logEvent(AppEventsLogger.AppEvents.AddedPaymentInfo,{
-        [
-          AppEventsLogger.AppEventParams.PaymentInfoAvailable
-        ]: 'true',
-
+      AppEventsLogger.logEvent(AppEventsLogger.AppEvents.AddedPaymentInfo, {
+        [AppEventsLogger.AppEventParams.PaymentInfoAvailable]: 'true',
       });
       navigation.navigate('trackOrder');
-
     }
   };
 
