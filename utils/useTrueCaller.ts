@@ -57,9 +57,9 @@ const isTruecallerSupported = () =>
   Platform.OS === 'android' && TruecallerAndroid.isUsable();
 
 const getAccessToken = async (
-  androidClientId,
-  authorizationCode,
-  codeVerifier,
+  androidClientId: string,
+  authorizationCode: string,
+  codeVerifier: string,
 ) => {
   try {
     const response = await axios.post(
@@ -81,7 +81,7 @@ const getAccessToken = async (
   }
 };
 
-const getUserInfo = async accessToken => {
+const getUserInfo = async (accessToken: string) => {
   try {
     const response = await axios.get<IAndroidUserResponse>(
       'https://oauth-account-noneu.truecaller.com/v1/userinfo',
@@ -112,7 +112,10 @@ export const useTrueCaller = ({
   useEffect(() => {
     if (Platform.OS !== 'android' || !androidClientId) return;
 
-    const onSuccess = async ({authorizationCode, codeVerifier}) => {
+    const onSuccess = async ({authorizationCode, codeVerifier}:{
+      authorizationCode: string;
+      codeVerifier: string;
+    }) => {
       try {
         const accessToken = await getAccessToken(
           androidClientId,
@@ -131,13 +134,16 @@ export const useTrueCaller = ({
           profilePicture: userInfo.picture || null,
         });
       } catch (e) {
-        setError(e);
+        setError(e as string);
       }
     };
 
     const onFailure = ({
       errorMessage: errorMessageAndroid,
       errorCode: errorCodeAndroid,
+    }: {
+      errorMessage: string;
+      errorCode: number;
     }) => {
       setError(errorMessageAndroid);
       setErrorCode(errorCodeAndroid);

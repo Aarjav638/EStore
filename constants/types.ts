@@ -50,6 +50,7 @@ export type CategoryStackParams = {
   };
   Products: {
     title: string;
+    id?: number;
   };
   Search: undefined;
   Cart: undefined;
@@ -94,6 +95,7 @@ export type Images = {
   products: ImageSourcePropType;
   gps: ImageSourcePropType;
   truecaller: ImageSourcePropType;
+  share: ImageSourcePropType;
 };
 
 export type Product = {

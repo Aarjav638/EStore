@@ -40,6 +40,7 @@ const Assets: Images = {
   catalog: require('../assets/catalog.png'),
   gps: require('../assets/gps.png'),
   truecaller: require('../assets/truecaller.png'),
+  share: require('../assets/share.png'),
 };
 
 export default Assets;

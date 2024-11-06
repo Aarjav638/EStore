@@ -2,6 +2,7 @@ import {
   Dimensions,
   FlatList,
   Image,
+  Share,
   StyleSheet,
   Text,
   TouchableOpacity,
@@ -78,6 +79,24 @@ const CategoryCollection = ({route, navigation}: CategoryCollectionProps) => {
     return <CategorySkeleton title={title} />;
   }
 
+  console.log('CategoryCollection', title);
+
+
+  const handleShare = async() => {
+    try {
+
+      const deepLink = `estore://drawer/category/collection/${title}`;
+      const result = await Share.share({
+        message: deepLink,
+        title: 'Share this collection',
+      });
+      console.log('Result', result);
+    } catch (error) {
+      console.log('Error in sharing', error);
+      
+    }
+  }
+
   return (
     <SafeAreaView style={styles.container}>
       <Header
@@ -89,6 +108,15 @@ const CategoryCollection = ({route, navigation}: CategoryCollectionProps) => {
         textStyle={{color: 'white'}}
       />
       <View style={styles.offerView}>
+        <TouchableOpacity onPress={handleShare} style={{
+          alignSelf: 'flex-end',
+          padding: 10,
+        }}>
+          <Image
+            source={Assets.share}
+            style={{width: 20, height: 20, tintColor: 'white'}}
+          />
+        </TouchableOpacity>
         <Text style={styles.offerText}>Up to 20% Off</Text>
         <Text style={styles.headerText}>{title} Collection</Text>
       </View>
@@ -108,6 +136,7 @@ const CategoryCollection = ({route, navigation}: CategoryCollectionProps) => {
               onPress={() =>
                 navigation.navigate('Products', {
                   title: title,
+                  id:1
                 })
               }>
               <Image

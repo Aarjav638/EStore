@@ -11,13 +11,35 @@ import Welcome from '../../screens/Welcome';
 import MyDrawer from './Drawer';
 import {Provider} from 'react-redux';
 import {store} from '../../redux/store';
+import { Text } from 'react-native';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
-
+const linking = {
+  prefixes: ['estore://'],
+  config: {
+    screens: {
+      Drawer: {
+        path: 'drawer',
+        screens: {
+          Discover:'discover',
+          Category: {
+            path: 'category',
+            screens: {
+              Category2: 'collection/:title',
+              Products: 'products/:id',
+            },
+          },
+        },
+      },
+    },
+  },
+};
 const Navigation = () => {
   return (
     <Provider store={store}>
-      <NavigationContainer>
+      <NavigationContainer linking={linking} fallback={
+        <Text> Loading....  </Text>
+      }>
         <Stack.Navigator
           screenOptions={{
             animation: 'slide_from_right',

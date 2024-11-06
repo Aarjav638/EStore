@@ -7,9 +7,12 @@ import {
   StatusBar,
   TouchableOpacity,
   Image,
+  Share,
   TextInput,
+  Platform,
 } from 'react-native';
 import React, {useEffect, useState} from 'react';
+
 import {SafeAreaView} from 'react-native-safe-area-context';
 import Assets from '../../constants/images';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
@@ -34,6 +37,7 @@ const Products = () => {
   const [heartClicked, setHeartClicked] = React.useState(false);
   const [quantity, setQuantity] = React.useState(1);
   const title = route.params?.title ?? 'Products';
+  const id = route.params?.id ;
   const [loading, setLoading] = useState(true);
   const scrollY = new Animated.Value(0);
   useEffect(() => {
@@ -89,7 +93,7 @@ const Products = () => {
     } else {
       dispatch(
         addToCart({
-          id: 1,
+          id: id? id : 1,
           name: 'Gucci Sunglasses',
           price: 45,
           image_url: 'https://dummyimage.com/200x200/000/fff&text=Sunglasses',
@@ -121,6 +125,30 @@ const Products = () => {
     }
   };
 
+  const handleShare = async () => {
+    try {
+      const deepUrl = `estore://drawer/category/products/${id}`;
+      Platform.OS === 'ios'? Share.share({
+        message: 'Gucci Sunglasses',
+        url: deepUrl,
+      }).then(result=>
+        console.log('result',result)
+      ): Share.share({
+        message: `
+        Click the link to view the product
+        Gucci Sunglasses
+        ${deepUrl}
+        `,
+        title: 'Gucci Sunglasses',
+      }).then(result=>
+        console.log('result',result)
+        );
+    } catch (error) {
+      console.log('error', error);
+      
+    }
+  };
+console.log('id',id)
   return (
     <SafeAreaView style={styles.container}>
       <StatusBar barStyle="light-content" backgroundColor="#808080" />
@@ -359,6 +387,7 @@ const Products = () => {
               />
             </TouchableOpacity>
             <TouchableOpacity
+            onPress={handleShare}
               style={{
                 borderRadius: 50,
                 backgroundColor: '#FA4248',
@@ -368,7 +397,7 @@ const Products = () => {
                 width: 40,
               }}>
               <Image
-                source={Assets.back}
+                source={Assets.share}
                 style={{
                   height: 20,
                   width: 20,
