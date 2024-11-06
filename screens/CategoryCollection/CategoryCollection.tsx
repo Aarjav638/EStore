@@ -81,10 +81,8 @@ const CategoryCollection = ({route, navigation}: CategoryCollectionProps) => {
 
   console.log('CategoryCollection', title);
 
-
-  const handleShare = async() => {
+  const handleShare = async () => {
     try {
-
       const deepLink = `estore://drawer/category/collection/${title}`;
       const result = await Share.share({
         message: deepLink,
@@ -93,9 +91,8 @@ const CategoryCollection = ({route, navigation}: CategoryCollectionProps) => {
       console.log('Result', result);
     } catch (error) {
       console.log('Error in sharing', error);
-      
     }
-  }
+  };
 
   return (
     <SafeAreaView style={styles.container}>
@@ -108,10 +105,12 @@ const CategoryCollection = ({route, navigation}: CategoryCollectionProps) => {
         textStyle={{color: 'white'}}
       />
       <View style={styles.offerView}>
-        <TouchableOpacity onPress={handleShare} style={{
-          alignSelf: 'flex-end',
-          padding: 10,
-        }}>
+        <TouchableOpacity
+          onPress={handleShare}
+          style={{
+            alignSelf: 'flex-end',
+            padding: 10,
+          }}>
           <Image
             source={Assets.share}
             style={{width: 20, height: 20, tintColor: 'white'}}
@@ -136,7 +135,7 @@ const CategoryCollection = ({route, navigation}: CategoryCollectionProps) => {
               onPress={() =>
                 navigation.navigate('Products', {
                   title: title,
-                  id:1
+                  id: 1,
                 })
               }>
               <Image

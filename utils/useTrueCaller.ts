@@ -112,7 +112,10 @@ export const useTrueCaller = ({
   useEffect(() => {
     if (Platform.OS !== 'android' || !androidClientId) return;
 
-    const onSuccess = async ({authorizationCode, codeVerifier}:{
+    const onSuccess = async ({
+      authorizationCode,
+      codeVerifier,
+    }: {
       authorizationCode: string;
       codeVerifier: string;
     }) => {

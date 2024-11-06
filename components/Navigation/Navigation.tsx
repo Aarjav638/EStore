@@ -11,7 +11,7 @@ import Welcome from '../../screens/Welcome';
 import MyDrawer from './Drawer';
 import {Provider} from 'react-redux';
 import {store} from '../../redux/store';
-import { Text } from 'react-native';
+import {Text} from 'react-native';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 const linking = {
@@ -21,7 +21,7 @@ const linking = {
       Drawer: {
         path: 'drawer',
         screens: {
-          Discover:'discover',
+          Discover: 'discover',
           Category: {
             path: 'category',
             screens: {
@@ -37,9 +37,9 @@ const linking = {
 const Navigation = () => {
   return (
     <Provider store={store}>
-      <NavigationContainer linking={linking} fallback={
-        <Text> Loading....  </Text>
-      }>
+      <NavigationContainer
+        linking={linking}
+        fallback={<Text> Loading.... </Text>}>
         <Stack.Navigator
           screenOptions={{
             animation: 'slide_from_right',
