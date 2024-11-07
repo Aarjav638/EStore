@@ -83,7 +83,7 @@ const CategoryCollection = ({route, navigation}: CategoryCollectionProps) => {
 
   const handleShare = async () => {
     try {
-      const deepLink = `estore://drawer/category/collection/${title}`;
+      const deepLink = `https://estore.com/drawer/category/collection/${title}`;
       const result = await Share.share({
         message: deepLink,
         title: 'Share this collection',

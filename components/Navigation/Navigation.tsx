@@ -1,4 +1,7 @@
-import {NavigationContainer} from '@react-navigation/native';
+import {
+  NavigationContainer,
+  NavigationContainerRef,
+} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 
 import React from 'react';
@@ -12,10 +15,20 @@ import MyDrawer from './Drawer';
 import {Provider} from 'react-redux';
 import {store} from '../../redux/store';
 import {Text} from 'react-native';
+import * as Sentry from '@sentry/react-native';
 
+const navigationIntegration = Sentry.reactNavigationIntegration({
+  enableTimeToInitialDisplay: true,
+});
+
+Sentry.init({
+  dsn: 'https://35b37c59fabcc9c1e737e47500cf1fe9@o4508255419236352.ingest.us.sentry.io/4508255420547072',
+  // integrations: [navigationIntegration],
+  enableTracing: true,
+});
 const Stack = createNativeStackNavigator<RootStackParamList>();
 const linking = {
-  prefixes: ['estore://'],
+  prefixes: ['estore://', 'https://estore.com/', 'http://estore.com/'],
   config: {
     screens: {
       Drawer: {
@@ -35,9 +48,16 @@ const linking = {
   },
 };
 const Navigation = () => {
+  const containerRef =
+    React.useRef<NavigationContainerRef<RootStackParamList> | null>(null);
+
   return (
     <Provider store={store}>
       <NavigationContainer
+        ref={containerRef}
+        onReady={() => {
+          navigationIntegration.registerNavigationContainer(containerRef);
+        }}
         linking={linking}
         fallback={<Text> Loading.... </Text>}>
         <Stack.Navigator
