@@ -1,9 +1,9 @@
 import {StatusBar, StyleSheet, View} from 'react-native';
-import React, { useEffect } from 'react';
+import React, {useEffect} from 'react';
 import Navigation from './components/Navigation/Navigation';
 import {GoogleSignin} from '@react-native-google-signin/google-signin';
 import * as Sentry from '@sentry/react-native';
-import { LogLevel, OneSignal } from 'react-native-onesignal';
+import {LogLevel, OneSignal} from 'react-native-onesignal';
 import Geolocation from '@react-native-community/geolocation';
 
 Sentry.init({
@@ -14,57 +14,49 @@ Sentry.init({
 });
 
 const App = () => {
+  const getGeoLocation = () => {
+    try {
+      Geolocation.getCurrentPosition(
+        position => {
+          console.log(position);
+        },
+        error => {
+          console.log(error.code, error.message);
+        },
+        {enableHighAccuracy: true},
+      );
+    } catch (err) {
+      console.error(err);
+    }
+  };
 
-const getGeoLocation =  () => {
-  try {
-    Geolocation.getCurrentPosition(
-      (position) => {
-        console.log(position);
-      },
-      (error) => {
+  useEffect(() => {
+    Geolocation.requestAuthorization(
+      getGeoLocation,
+      (error: {
+        code: number;
+        message: string;
+        PERMISSION_DENIED: number;
+        POSITION_UNAVAILABLE: number;
+        TIMEOUT: number;
+      }) => {
         console.log(error.code, error.message);
       },
-      {enableHighAccuracy: true, timeout: 15000, maximumAge: 10000
-
-      }
-    )
-  }
-  catch (err) {
-    console.error(err);
-  }
-}
-
-    useEffect(() => {
-
-      Geolocation.requestAuthorization( getGeoLocation, (
-          error: {
-            code: number;
-            message: string;
-            PERMISSION_DENIED: number;
-            POSITION_UNAVAILABLE: number;
-            TIMEOUT: number;
-          }
-        ) => {
-          console.log(error.code, error.message);
-        }
-      )
-
-    }, []);
-
-
+    );
+  }, []);
 
   useEffect(() => {
     OneSignal.Debug.setLogLevel(LogLevel.Verbose);
 
-  OneSignal.initialize("79337893-b987-41db-bdee-07516c730086");
+    OneSignal.initialize('79337893-b987-41db-bdee-07516c730086');
 
-  OneSignal.Notifications.requestPermission(true);
+    OneSignal.Notifications.requestPermission(true);
 
-  OneSignal.Notifications.addEventListener('click', (event) => {
-    console.log('OneSignal: notification clicked:', event);
-  });
-}, []);
-  
+    OneSignal.Notifications.addEventListener('click', event => {
+      console.log('OneSignal: notification clicked:', event);
+    });
+  }, []);
+
   GoogleSignin.configure({
     webClientId:
       '521444591368-3i3ui4dn7cpiuvnmlvd1nhqbkfjrf8ip.apps.googleusercontent.com',
