@@ -37,6 +37,7 @@ const Products = () => {
   const [heartClicked, setHeartClicked] = React.useState(false);
   const [quantity, setQuantity] = React.useState(1);
   const title = route.params?.title ?? 'Products';
+  const productTitle= 'Gucci Sunglasses';
   const id = route.params?.id;
   const [loading, setLoading] = useState(true);
   const scrollY = new Animated.Value(0);
@@ -127,7 +128,7 @@ const Products = () => {
 
   const handleShare = async () => {
     try {
-      const deepUrl = `estore://drawer/category/products/${id}`;
+      const deepUrl = `https://estore.com/drawer/category/products/${id}`;
 
       if (Platform.OS === 'ios') {
         Share.share({
@@ -136,13 +137,16 @@ const Products = () => {
         }).then(result => console.log('result', result));
       } else {
         Share.share({
-          message: `
-            Click the link to view the product
-            Gucci Sunglasses
-            ${deepUrl}
-          `,
-          title: 'Gucci Sunglasses',
-        }).then(result => console.log('result', result));
+          message: `Click the link to explore:\n${productTitle}\n${deepUrl}`,
+          title: productTitle,
+          
+        },{
+          dialogTitle: `Share ${productTitle}`,
+        }).then(result => 
+
+          {console.log('result', result);
+          result.action === Share.sharedAction ? console.log('Shared') : console.log('Not Shared')}
+        );
       }
     } catch (error) {
       console.log('error', error);
