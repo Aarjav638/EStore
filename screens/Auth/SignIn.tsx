@@ -1,5 +1,5 @@
 import {Dimensions, StyleSheet, View} from 'react-native';
-import React, { useEffect } from 'react';
+import React, {useEffect} from 'react';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import Header from '../../components/Splash/Header';
 import SocialLogin from '../../components/Auth/SignIn/SocialLogin';
@@ -14,9 +14,8 @@ import LogRocket from '@logrocket/react-native';
 export type SignInProps = NativeStackScreenProps<RootStackParamList, 'SignIn'>;
 
 const SignIn = ({navigation}: SignInProps) => {
-
- useEffect(() => {
-  LogRocket.startNewSession();
+  useEffect(() => {
+    LogRocket.startNewSession();
   });
 
   return (

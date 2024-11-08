@@ -17,7 +17,12 @@ import {AppEventsLogger} from 'react-native-fbsdk-next';
 
 const SocialLogin = ({navigation}: {navigation: socialProps}) => {
   const dispatch = useAppDispatch();
-  const {initializeTruecaller, openTruecallerModal, user,isTruecallerSupported} = useTrueCaller({
+  const {
+    initializeTruecaller,
+    openTruecallerModal,
+    user,
+    isTruecallerSupported,
+  } = useTrueCaller({
     androidButtonColor: '#FF0000',
     androidButtonStyle: TRUECALLER_ANDROID_CUSTOMIZATIONS.BUTTON_STYLES.ROUND,
     androidButtonText: TRUECALLER_ANDROID_CUSTOMIZATIONS.BUTTON_TEXTS.CONTINUE,
@@ -56,10 +61,8 @@ const SocialLogin = ({navigation}: {navigation: socialProps}) => {
       Alert.alert(`Sign-in failed: ${(error as Error).message}`);
     }
   };
-  console.log(user);
 
   useEffect(() => {
-    console.log(user);
     if (user) {
       console.log(user);
       dispatch(

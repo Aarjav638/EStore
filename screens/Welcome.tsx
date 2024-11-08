@@ -73,15 +73,14 @@ const Welcome = ({navigation, route}: WelcomeProps) => {
         id: userInfo.user.id ?? 'ID not available',
         mobile_number: userInfo.user.mobile ?? 'Mobile number not provided',
       });
-    }
-    else{
-      LogRocket.identify(userInfo.user.id??userInfo.user.name??'Guest',{
+    } else {
+      LogRocket.identify(userInfo.user.id ?? userInfo.user.name ?? 'Guest', {
         id: userInfo.user.id ?? 'ID not available',
         name: userInfo.user.name ?? 'Name not provided',
         email: userInfo.user.email ?? 'Email not provided',
         photo: userInfo.user.photo ?? 'Photo not provided',
         mobile_number: userInfo.user.mobile ?? 'Mobile number not provided',
-      } )
+      });
     }
   }, [userInfo]);
 

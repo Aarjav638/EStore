@@ -14,7 +14,6 @@ Sentry.init({
 });
 
 const App = () => {
-  
   useEffect(() => {
     LogRocket.init('spy6i7/estore');
     console.log('LogRocket initialized');
@@ -24,7 +23,12 @@ const App = () => {
     try {
       Geolocation.getCurrentPosition(
         position => {
-          console.log('lat:',position.coords.latitude,'long:', position.coords.longitude);
+          console.log(
+            'lat:',
+            position.coords.latitude,
+            'long:',
+            position.coords.longitude,
+          );
         },
         error => {
           console.log(error.code, error.message);
