@@ -15,7 +15,7 @@ export type AuthState = {
   error: string;
 };
 
-const initialCartState: AuthState = {
+const initialAuthState: AuthState = {
   userInfo: {
     idToken: undefined,
     user: {
@@ -31,7 +31,7 @@ const initialCartState: AuthState = {
 
 const authSlice = createSlice({
   name: 'Auth',
-  initialState: initialCartState,
+  initialState: initialAuthState,
   reducers: {
     setUserInfo: (state, action) => {
       try {
