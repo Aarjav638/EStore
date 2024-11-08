@@ -6,7 +6,6 @@ import * as Sentry from '@sentry/react-native';
 import {LogLevel, OneSignal} from 'react-native-onesignal';
 import Geolocation from '@react-native-community/geolocation';
 import LogRocket from '@logrocket/react-native';
-
 Sentry.init({
   dsn: 'https://35b37c59fabcc9c1e737e47500cf1fe9@o4508255419236352.ingest.us.sentry.io/4508255420547072',
   enableTracing: true,
@@ -15,17 +14,17 @@ Sentry.init({
 });
 
 const App = () => {
-
-
+  
   useEffect(() => {
     LogRocket.init('spy6i7/estore');
+    console.log('LogRocket initialized');
   }, []);
 
   const getGeoLocation = () => {
     try {
       Geolocation.getCurrentPosition(
         position => {
-          console.log(position);
+          console.log('lat:',position.coords.latitude,'long:', position.coords.longitude);
         },
         error => {
           console.log(error.code, error.message);

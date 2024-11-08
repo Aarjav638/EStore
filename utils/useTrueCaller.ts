@@ -53,8 +53,18 @@ const openTruecallerModal = () => {
   }
 };
 
-const isTruecallerSupported = () =>
-  Platform.OS === 'android' && TruecallerAndroid.isUsable();
+const isTruecallerSupported = async () => {
+  if (Platform.OS === 'android') {
+    try {
+      const supported = await TruecallerAndroid.isUsable();
+      console.log('isUsable', supported);
+      return supported;
+    } catch (error) {
+      console.error('Error checking Truecaller usability:', error);
+      return false;
+    }
+  }
+};
 
 const getAccessToken = async (
   androidClientId: string,

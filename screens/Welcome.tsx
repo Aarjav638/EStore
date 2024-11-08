@@ -64,7 +64,8 @@ const Welcome = ({navigation, route}: WelcomeProps) => {
   };
 
   useEffect(() => {
-    if(userInfo.user.email){
+    if (userInfo.user.email) {
+      console.log('Identifying user');
       LogRocket.identify(userInfo.user.email, {
         name: userInfo.user.name ?? 'Name not provided',
         email: userInfo.user.email ?? 'Email not provided',
@@ -73,8 +74,16 @@ const Welcome = ({navigation, route}: WelcomeProps) => {
         mobile_number: userInfo.user.mobile ?? 'Mobile number not provided',
       });
     }
-  }, [userInfo.user.email]);
-  
+    else{
+      LogRocket.identify(userInfo.user.id??userInfo.user.name??'Guest',{
+        id: userInfo.user.id ?? 'ID not available',
+        name: userInfo.user.name ?? 'Name not provided',
+        email: userInfo.user.email ?? 'Email not provided',
+        photo: userInfo.user.photo ?? 'Photo not provided',
+        mobile_number: userInfo.user.mobile ?? 'Mobile number not provided',
+      } )
+    }
+  }, [userInfo]);
 
   return (
     <SafeAreaView style={styles.container}>

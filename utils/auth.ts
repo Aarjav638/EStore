@@ -104,6 +104,7 @@ export const handleCompleteLogout = async (
     await LoginManager.logOut();
     dispatch(logOut());
     LogRocket.shutdown();
+    console.log('Logged out successfully and session cleared');
   } catch (error) {
     console.error('Error logging out: ', error);
   }

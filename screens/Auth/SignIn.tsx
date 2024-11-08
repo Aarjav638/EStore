@@ -1,5 +1,5 @@
 import {Dimensions, StyleSheet, View} from 'react-native';
-import React from 'react';
+import React, { useEffect } from 'react';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import Header from '../../components/Splash/Header';
 import SocialLogin from '../../components/Auth/SignIn/SocialLogin';
@@ -7,12 +7,18 @@ import Modal from '../../components/Auth/SignIn/Modal';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import {RootStackParamList} from '../../constants/types';
+import LogRocket from '@logrocket/react-native';
 // import CustomButton from '../../components/Auth/SignIn/CustomButton';
 // import { truecallerLogin } from '../../utils/auth';
 
 export type SignInProps = NativeStackScreenProps<RootStackParamList, 'SignIn'>;
 
 const SignIn = ({navigation}: SignInProps) => {
+
+ useEffect(() => {
+  LogRocket.startNewSession();
+  });
+
   return (
     <SafeAreaView style={styles.container}>
       <KeyboardAwareScrollView
@@ -23,10 +29,6 @@ const SignIn = ({navigation}: SignInProps) => {
           <Modal navigation={navigation} />
         </View>
         <SocialLogin navigation={navigation} />
-        {/* <CustomButton
-          text="Login With TrueCaller"
-          onPress={() => truecallerLogin()}
-        /> */}
       </KeyboardAwareScrollView>
     </SafeAreaView>
   );

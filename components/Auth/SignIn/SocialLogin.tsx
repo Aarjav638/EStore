@@ -17,7 +17,7 @@ import {AppEventsLogger} from 'react-native-fbsdk-next';
 
 const SocialLogin = ({navigation}: {navigation: socialProps}) => {
   const dispatch = useAppDispatch();
-  const {initializeTruecaller, openTruecallerModal, user} = useTrueCaller({
+  const {initializeTruecaller, openTruecallerModal, user,isTruecallerSupported} = useTrueCaller({
     androidButtonColor: '#FF0000',
     androidButtonStyle: TRUECALLER_ANDROID_CUSTOMIZATIONS.BUTTON_STYLES.ROUND,
     androidButtonText: TRUECALLER_ANDROID_CUSTOMIZATIONS.BUTTON_TEXTS.CONTINUE,
@@ -46,7 +46,11 @@ const SocialLogin = ({navigation}: {navigation: socialProps}) => {
 
   const handleTruecallerLogin = async () => {
     try {
-      openTruecallerModal();
+      if (await isTruecallerSupported()) {
+        openTruecallerModal();
+      } else {
+        Alert.alert('Truecaller is not supported on this device');
+      }
     } catch (error) {
       console.error('Error signing in:', (error as Error).message);
       Alert.alert(`Sign-in failed: ${(error as Error).message}`);
