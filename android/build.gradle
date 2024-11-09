@@ -1,7 +1,7 @@
 buildscript {
     ext {
         buildToolsVersion = "34.0.0"
-        minSdkVersion = 23
+        minSdkVersion = 25
         compileSdkVersion = 34
         targetSdkVersion = 34
         ndkVersion = "26.1.10909125"
@@ -11,7 +11,6 @@ buildscript {
     repositories {
         google()
         mavenCentral()
-        // maven { url 'https://maven.mappls.com/repository/mappls/'}
     }
     dependencies {
         classpath("com.android.tools.build:gradle")
@@ -20,12 +19,9 @@ buildscript {
         classpath 'com.google.gms:google-services:4.4.2'
     }
 }
-// allprojects{
-//     repositories {
-//         google()
-//         mavenCentral()
-//         maven { url 'https://maven.mappls.com/repository/mappls/'}
-//     }
-// }
-
 apply plugin: "com.facebook.react.rootproject"
+allprojects {
+  repositories {
+    maven { url "https://storage.googleapis.com/logrocket-maven/" }
+  }
+}

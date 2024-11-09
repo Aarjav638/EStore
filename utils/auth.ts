@@ -9,6 +9,7 @@ import {AccessToken, LoginManager, Profile} from 'react-native-fbsdk-next';
 import {AuthState, logOut} from '../redux/feature/Auth';
 import {ThunkDispatch, UnknownAction} from '@reduxjs/toolkit';
 import {CartState} from '../constants/types';
+import LogRocket from '@logrocket/react-native';
 // import { NativeModules } from 'react-native';
 
 // const {TruecallerAuthModule} = NativeModules;
@@ -102,6 +103,8 @@ export const handleCompleteLogout = async (
     await GoogleSignin.signOut();
     await LoginManager.logOut();
     dispatch(logOut());
+    LogRocket.shutdown();
+    console.log('Logged out successfully and session cleared');
   } catch (error) {
     console.error('Error logging out: ', error);
   }

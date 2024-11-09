@@ -2761,6 +2761,21 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@logrocket/react-native@npm:^1.46.1":
+  version: 1.46.1
+  resolution: "@logrocket/react-native@npm:1.46.1"
+  peerDependencies:
+    expo: ">=45.0.0"
+    expo-build-properties: "*"
+    react: "*"
+    react-native: ">=0.60.0-rc.0 <1.0.x"
+  peerDependenciesMeta:
+    expo:
+      optional: true
+  checksum: 320f7ad3965945fd990c02736d41e691dbf1e2f4fbbec2a871a7cbb924d0cc9709165754fa0705dc30ebf4b097cc37c8a454c7224fb5fde8c1541b4ef7a5fca0
+  languageName: node
+  linkType: hard
+
 "@nicolo-ribaudo/eslint-scope-5-internals@npm:5.1.1-v1":
   version: 5.1.1-v1
   resolution: "@nicolo-ribaudo/eslint-scope-5-internals@npm:5.1.1-v1"
@@ -3103,8 +3118,8 @@ __metadata:
   linkType: hard
 
 "@react-native-firebase/app@npm:^21.2.0":
-  version: 21.3.0
-  resolution: "@react-native-firebase/app@npm:21.3.0"
+  version: 21.4.0
+  resolution: "@react-native-firebase/app@npm:21.4.0"
   dependencies:
     firebase: 10.13.2
     superstruct: ^0.6.2
@@ -3115,11 +3130,11 @@ __metadata:
   peerDependenciesMeta:
     expo:
       optional: true
-  checksum: 1119aaad49780fc4171d12bbbdefb20667c698f34a56367feb37cc41d98ddb775289b37aef665cf9d46aa39bb0636c3f93ccd724eab5241776319c3a8547513b
+  checksum: 49a111160190d24623a6fbb694d91717f2e497e6ee3f645a430cbd1f120dad199034865981ce9f20451e1c407526e4dec0e551d5728193408212b47ecc0e3d0a
   languageName: node
   linkType: hard
 
-"@react-native-google-signin/google-signin@npm:latest":
+"@react-native-google-signin/google-signin@latest":
   version: 13.1.0
   resolution: "@react-native-google-signin/google-signin@npm:13.1.0"
   peerDependencies:
@@ -4570,6 +4585,7 @@ __metadata:
     "@commitlint/cli": ^19.5.0
     "@commitlint/config-conventional": ^19.5.0
     "@eslint/js": ^9.12.0
+    "@logrocket/react-native": ^1.46.1
     "@ptomasroos/react-native-multi-slider": ^2.2.2
     "@react-native-community/blur": ^4.4.1
     "@react-native-community/geolocation": ^3.4.0
@@ -5324,9 +5340,9 @@ __metadata:
   linkType: hard
 
 "caniuse-lite@npm:^1.0.30001669":
-  version: 1.0.30001678
-  resolution: "caniuse-lite@npm:1.0.30001678"
-  checksum: b1690df8b306b99a1ec84dc29cbdc893b569fcdc232324a9d3ebd67ce184a353ffdea93270bb6c20e3372bec8b5f6922c04a464fbd1cdeff662d459639f22a53
+  version: 1.0.30001679
+  resolution: "caniuse-lite@npm:1.0.30001679"
+  checksum: 6fca375c6c3a749aaf1246f28c9b182f94b2aa0fb30a98d4c5a3df1a22054fba852df625be50b5ffa1c772a0c53f1aea14dead920d6c5d54030dd4dede0dba98
   languageName: node
   linkType: hard
 
@@ -5803,13 +5819,13 @@ __metadata:
   linkType: hard
 
 "cross-spawn@npm:^7.0.0, cross-spawn@npm:^7.0.2, cross-spawn@npm:^7.0.3":
-  version: 7.0.3
-  resolution: "cross-spawn@npm:7.0.3"
+  version: 7.0.5
+  resolution: "cross-spawn@npm:7.0.5"
   dependencies:
     path-key: ^3.1.0
     shebang-command: ^2.0.0
     which: ^2.0.1
-  checksum: 671cc7c7288c3a8406f3c69a3ae2fc85555c04169e9d611def9a675635472614f1c0ed0ef80955d5b6d4e724f6ced67f0ad1bb006c2ea643488fcfef994d7f52
+  checksum: 55c50004cb6bbea3649784caac6e7b8ddd03fa8c1e14dbd5a1f15896708378006eb7526a52a0f48770c768c9b8aed48a5888eb8e785ff59ff7749e74f66cd96b
   languageName: node
   linkType: hard
 
@@ -6161,9 +6177,9 @@ __metadata:
   linkType: hard
 
 "electron-to-chromium@npm:^1.5.41":
-  version: 1.5.52
-  resolution: "electron-to-chromium@npm:1.5.52"
-  checksum: fd89ec7587726d99d138d0bbe0e26e490284766b2bce29da21298b80b6ecd16db69c6b1a602d33b37129b9e07c8beaef4c9490681ca1a29a4fcd38ecabc327b8
+  version: 1.5.55
+  resolution: "electron-to-chromium@npm:1.5.55"
+  checksum: 7c797418ef30b0021b586d023eec1e87400632add6f37285e993716292f2f3451a36d6266c8502df34c776000bca01ad8e17b736b1f7b3de022a82a45d0dc06f
   languageName: node
   linkType: hard
 

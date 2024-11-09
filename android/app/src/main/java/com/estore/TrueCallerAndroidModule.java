@@ -24,14 +24,15 @@ import com.truecaller.android.sdk.oAuth.TcOAuthData;
 import com.truecaller.android.sdk.oAuth.TcOAuthError;
 import com.truecaller.android.sdk.oAuth.TcSdk;
 import com.truecaller.android.sdk.oAuth.TcSdkOptions;
-
+import com.facebook.react.bridge.Promise;
 import java.math.BigInteger;
 import java.security.SecureRandom;
-
+import android.widget.Toast;
 
 public class TrueCallerAndroidModule extends ReactContextBaseJavaModule {
     private static ReactApplicationContext reactContext;
     private String codeVerifier;
+    private boolean isTruecallerInstalled;
 
     TrueCallerAndroidModule(ReactApplicationContext context) {
         super(context);
@@ -212,16 +213,17 @@ public class TrueCallerAndroidModule extends ReactContextBaseJavaModule {
 
 
     @ReactMethod
-    public boolean isUsable() {
-
-        try {
-            return TcSdk.getInstance().isOAuthFlowUsable();
-        } catch (Exception e) {
-            sendTruecallerFailureEvent(0, e.getMessage());
-
-            return false;
-        }
+public void isUsable(Promise promise) {
+    try {
+        isTruecallerInstalled = TcSdk.getInstance().isOAuthFlowUsable();
+        promise.resolve(isTruecallerInstalled);
+    } catch (Exception e) {
+        sendTruecallerFailureEvent(0, e.getMessage());
+        
+        // Reject the promise with the error message
+        promise.reject("IS_USABLE_ERROR", e.getMessage());
     }
+}
 
     private final ActivityEventListener mActivityEventListener = new BaseActivityEventListener() {
 
