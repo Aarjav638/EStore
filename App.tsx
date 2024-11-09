@@ -13,24 +13,26 @@ Sentry.init({
   // uncomment the line below to enable Spotlight (https://spotlightjs.com)
   // enableSpotlight: __DEV__,
 });
-MapplsGL.setMapSDKKey("386f2ff20a24d854abe3069c6abb76d6");
-MapplsGL.setRestAPIKey("d1c4bc20e6706650ae4c7704faea6f95");
-MapplsGL.setAtlasClientId("96dHZVzsAuvaaOJ5lfB6_G2-dpt_-9BEIkSyGSFAlN_cNUtOL_lIJjNGJBExWfem70TgswNKWEnw1rnGWEEuEVNAwc9lOClA");
-MapplsGL.setAtlasClientSecret("lrFxI-iSEg_rZyNbofv1NEW4eor28ZH9E1VXQdOcwY7anvdC94Tt-ts1n3Qb4WLHyp4J27PZjKsNdA-JaMs9_uDGj7laxZ4MSvsLz2OLqU0=");
+MapplsGL.setMapSDKKey('386f2ff20a24d854abe3069c6abb76d6');
+MapplsGL.setRestAPIKey('d1c4bc20e6706650ae4c7704faea6f95');
+MapplsGL.setAtlasClientId(
+  '96dHZVzsAuvaaOJ5lfB6_G2-dpt_-9BEIkSyGSFAlN_cNUtOL_lIJjNGJBExWfem70TgswNKWEnw1rnGWEEuEVNAwc9lOClA',
+);
+MapplsGL.setAtlasClientSecret(
+  'lrFxI-iSEg_rZyNbofv1NEW4eor28ZH9E1VXQdOcwY7anvdC94Tt-ts1n3Qb4WLHyp4J27PZjKsNdA-JaMs9_uDGj7laxZ4MSvsLz2OLqU0=',
+);
 const App = () => {
   useEffect(() => {
     LogRocket.init('spy6i7/estore');
     console.log('LogRocket initialized');
   }, []);
 
-  
-
   useEffect(() => {
     Geolocation.requestAuthorization(
       () => {
         console.log('Got location permission:', 'granted');
       },
-      (error) => {
+      error => {
         console.log('Error getting location permission:', error);
       },
     );

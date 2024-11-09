@@ -6,14 +6,11 @@ import Assets from '../constants/images';
 import CustomButton from '../components/Auth/SignIn/CustomButton';
 import {NavigationProp} from '@react-navigation/native';
 import {AppEventsLogger} from 'react-native-fbsdk-next';
-import { CheckoutParam } from '../constants/types';
+import {CheckoutParam} from '../constants/types';
 
 type Props = NavigationProp<CheckoutParam, 'trackOrder'>;
 
-const TrackOrder = ({navigation}:{
-  navigation:Props
-}) => {
-
+const TrackOrder = ({navigation}: {navigation: Props}) => {
   useEffect(() => {
     // Track the event that the user has placed an order
     AppEventsLogger.logPurchase(4500, 'INR', {
@@ -63,7 +60,10 @@ const TrackOrder = ({navigation}:{
       </View>
       <CustomButton
         text="Track Order"
-        onPress={() => {console.log('navigating') ;navigation.navigate('TrackingOrderMap')}}
+        onPress={() => {
+          console.log('navigating');
+          navigation.navigate('TrackingOrderMap');
+        }}
         customStyles={{
           width: '80%',
           alignSelf: 'center',

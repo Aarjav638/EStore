@@ -41,7 +41,7 @@ const Assets: Images = {
   gps: require('../assets/gps.png'),
   truecaller: require('../assets/truecaller.png'),
   share: require('../assets/share.png'),
-  airplane:require('../assets/airplane.png')
+  airplane: require('../assets/airplane.png'),
 };
 
 export default Assets;
