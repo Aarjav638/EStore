@@ -2,6 +2,7 @@ import {Image, StyleSheet, Text, View} from 'react-native';
 import React from 'react';
 
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+
 import Home from '../../assets/home.svg';
 import CartSvg from '../../assets/cart.svg';
 import Gear from '../../assets/Settings.svg';
@@ -107,6 +108,7 @@ const BottomTabNavigation = () => {
                 <Image
                   // eslint-disable-next-line @typescript-eslint/no-require-imports
                   source={require('../../assets/people.png')}
+
                   style={{width: 20, height: 20, tintColor: color}}
                 />
                 <Text style={{color: color, fontSize: 12}}>

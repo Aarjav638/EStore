@@ -10,6 +10,7 @@ import {CheckoutParam} from '../constants/types';
 
 type Props = NavigationProp<CheckoutParam, 'trackOrder'>;
 
+
 const TrackOrder = ({navigation}: {navigation: Props}) => {
   useEffect(() => {
     // Track the event that the user has placed an order
@@ -60,10 +61,12 @@ const TrackOrder = ({navigation}: {navigation: Props}) => {
       </View>
       <CustomButton
         text="Track Order"
+
         onPress={() => {
           console.log('navigating');
           navigation.navigate('TrackingOrderMap');
         }}
+
         customStyles={{
           width: '80%',
           alignSelf: 'center',
