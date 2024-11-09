@@ -2,15 +2,16 @@ import {Image, StyleSheet, Text, View} from 'react-native';
 import React from 'react';
 
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import Home from '../assets/home.svg';
-import CartSvg from '../assets/cart.svg';
-import Gear from '../assets/Settings.svg';
-import Settings from '../screens/Settings';
-import {BottomNavigationList} from '../constants/types';
-import Account from '../screens/Account';
-import DiscoverStack from './Navigation/DiscoverStack';
-import CartStack from './Navigation/CartStack';
-import {useAppSelector} from '../redux/hooks';
+
+import Home from '../../assets/home.svg';
+import CartSvg from '../../assets/cart.svg';
+import Gear from '../../assets/Settings.svg';
+import Settings from '../../screens/Settings';
+import {BottomNavigationList} from '../../constants/types';
+import Account from '../../screens/Account';
+import CartStack from '../Navigation/CartStack';
+import {useAppSelector} from '../../redux/hooks';
+import DiscoverStack from './DiscoverStack';
 
 const Tab = createBottomTabNavigator<BottomNavigationList>();
 const BottomTabNavigation = () => {
@@ -106,7 +107,8 @@ const BottomTabNavigation = () => {
                 }}>
                 <Image
                   // eslint-disable-next-line @typescript-eslint/no-require-imports
-                  source={require('../assets/people.png')}
+                  source={require('../../assets/people.png')}
+
                   style={{width: 20, height: 20, tintColor: color}}
                 />
                 <Text style={{color: color, fontSize: 12}}>
