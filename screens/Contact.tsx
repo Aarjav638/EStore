@@ -1,4 +1,5 @@
 import {
+  Dimensions,
   Image,
   ScrollView,
   StatusBar,
@@ -7,17 +8,57 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import React from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import Assets from '../constants/images';
 import {DrawerParamList} from '../constants/types';
 import {DrawerActions, NavigationProp} from '@react-navigation/native';
 import CustomButton from '../components/Auth/SignIn/CustomButton';
+import MapplsGL from 'mappls-map-react-native';
+import Geolocation from '@react-native-community/geolocation';
 
 const Contact = ({
   navigation,
 }: {
   navigation: NavigationProp<DrawerParamList, 'Products'>;
 }) => {
+  const [location, setLocation] = useState<[number, number] | null>(null);
+  const cameraRef = useRef<MapplsGL.Camera>(null);
+  // const START_COORDINATE: [number, number][] = [[76.984480, 29.691969], [77.202660, 29.456141]];
+  
+  
+  // const [routeCoordinates,setRouteCoordinates] = useState<[number,number][]|null>(START_COORDINATE);
+
+
+
+  useEffect(() => {
+
+    const watchId = Geolocation.watchPosition(
+      (position) => {
+        const { latitude, longitude } = position.coords;
+        setLocation([longitude, latitude]);
+        console.log('Got position:', latitude,longitude);
+        // setRouteCoordinates([...START_COORDINATE,[longitude,latitude]]);
+      },
+      (error) => console.log('Error getting position:', error),
+      { enableHighAccuracy: true, distanceFilter: 0.5 }
+
+    );
+
+    return () => Geolocation.clearWatch(watchId);
+  }, []);
+
+  useEffect(() => {
+    if (location && cameraRef.current) {
+      cameraRef.current.setCamera({
+        centerCoordinate: location,
+        zoomLevel: 10,
+        pitch: 50,
+        animationDuration: 500,
+        animationMode:'easeTo'
+        
+      });
+    }
+  }, [location]);
   return (
     <View style={styles.maincontainer}>
       <StatusBar barStyle="light-content" backgroundColor={'transparent'} />
@@ -47,14 +88,53 @@ const Contact = ({
         </View>
       </View>
       <View style={styles.mapPlaceholder}>
-        <Text
-          style={{
-            fontSize: 24,
-            fontWeight: 'medium',
-            color: '#757575',
-          }}>
-          Map Placeholder
-        </Text>
+      <MapplsGL.MapView
+      style={{height: '100%', width: '100%'}}
+        compassEnabled={true}
+        zoomEnabled={true}
+        compassViewMargins={{ x: Dimensions.get('screen').width*0.05, y: Dimensions.get('screen').height*0.3 }}
+      >
+        <MapplsGL.Camera ref={cameraRef} followZoomLevel={16 }followPitch={50}  />
+{/* 
+        <MapplsGL.Animated.ShapeSource
+    id="routeSource"
+    shape={{
+        type: 'Feature',
+        geometry: {
+            type: 'LineString',
+            coordinates: routeCoordinates,
+        },
+    }}
+>
+    <MapplsGL.Animated.LineLayer
+        id="routeLayer"
+        style={{
+            lineColor: '#Fa4248',
+            lineWidth: 2,
+            lineCap: 'round',
+            lineJoin: 'round',
+            lineOpacity: 0.7,
+        }}
+    />
+</MapplsGL.Animated.ShapeSource> */}
+
+        {location && <MapplsGL.UserLocation visible={true} renderMode="normal" showsUserHeadingIndicator={true}/  >}
+        {/* {location && (
+    <MapplsGL.UserLocation>
+        <LottieView
+            source={require('../assets/ripple.json')}
+            autoPlay
+            loop
+            duration={8000}
+            style={{
+                width: 50,
+                height: 50,
+            }}
+        />
+</MapplsGL.UserLocation>
+  )} */}
+        
+      </MapplsGL.MapView>
       </View>
       <View style={styles.storeWrapper}>
         <ScrollView

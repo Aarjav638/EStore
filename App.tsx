@@ -6,51 +6,32 @@ import * as Sentry from '@sentry/react-native';
 import {LogLevel, OneSignal} from 'react-native-onesignal';
 import Geolocation from '@react-native-community/geolocation';
 import LogRocket from '@logrocket/react-native';
+import MapplsGL from 'mappls-map-react-native';
 Sentry.init({
   dsn: 'https://35b37c59fabcc9c1e737e47500cf1fe9@o4508255419236352.ingest.us.sentry.io/4508255420547072',
   enableTracing: true,
   // uncomment the line below to enable Spotlight (https://spotlightjs.com)
   // enableSpotlight: __DEV__,
 });
-
+MapplsGL.setMapSDKKey("386f2ff20a24d854abe3069c6abb76d6");
+MapplsGL.setRestAPIKey("d1c4bc20e6706650ae4c7704faea6f95");
+MapplsGL.setAtlasClientId("96dHZVzsAuvaaOJ5lfB6_G2-dpt_-9BEIkSyGSFAlN_cNUtOL_lIJjNGJBExWfem70TgswNKWEnw1rnGWEEuEVNAwc9lOClA");
+MapplsGL.setAtlasClientSecret("lrFxI-iSEg_rZyNbofv1NEW4eor28ZH9E1VXQdOcwY7anvdC94Tt-ts1n3Qb4WLHyp4J27PZjKsNdA-JaMs9_uDGj7laxZ4MSvsLz2OLqU0=");
 const App = () => {
   useEffect(() => {
     LogRocket.init('spy6i7/estore');
     console.log('LogRocket initialized');
   }, []);
 
-  const getGeoLocation = () => {
-    try {
-      Geolocation.getCurrentPosition(
-        position => {
-          console.log(
-            'lat:',
-            position.coords.latitude,
-            'long:',
-            position.coords.longitude,
-          );
-        },
-        error => {
-          console.log(error.code, error.message);
-        },
-        {enableHighAccuracy: true},
-      );
-    } catch (err) {
-      console.error(err);
-    }
-  };
+  
 
   useEffect(() => {
     Geolocation.requestAuthorization(
-      getGeoLocation,
-      (error: {
-        code: number;
-        message: string;
-        PERMISSION_DENIED: number;
-        POSITION_UNAVAILABLE: number;
-        TIMEOUT: number;
-      }) => {
-        console.log(error.code, error.message);
+      () => {
+        console.log('Got location permission:', 'granted');
+      },
+      (error) => {
+        console.log('Error getting location permission:', error);
       },
     );
   }, []);

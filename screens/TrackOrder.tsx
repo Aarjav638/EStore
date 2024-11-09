@@ -4,11 +4,15 @@ import {SafeAreaView} from 'react-native-safe-area-context';
 import Header from '../components/Discover/Header';
 import Assets from '../constants/images';
 import CustomButton from '../components/Auth/SignIn/CustomButton';
-import {useNavigation} from '@react-navigation/native';
+import {NavigationProp} from '@react-navigation/native';
 import {AppEventsLogger} from 'react-native-fbsdk-next';
+import { CheckoutParam } from '../constants/types';
 
-const TrackOrder = () => {
-  const navigation = useNavigation();
+type Props = NavigationProp<CheckoutParam, 'trackOrder'>;
+
+const TrackOrder = ({navigation}:{
+  navigation:Props
+}) => {
 
   useEffect(() => {
     // Track the event that the user has placed an order
@@ -59,7 +63,7 @@ const TrackOrder = () => {
       </View>
       <CustomButton
         text="Track Order"
-        onPress={() => navigation.navigate('Products')}
+        onPress={() => {console.log('navigating') ;navigation.navigate('TrackingOrderMap')}}
         customStyles={{
           width: '80%',
           alignSelf: 'center',

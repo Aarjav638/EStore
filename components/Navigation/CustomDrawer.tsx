@@ -12,9 +12,9 @@ import {
   DrawerContentComponentProps,
   DrawerItemList,
 } from '@react-navigation/drawer';
-import Assets from '../constants/images';
-import {useAppDispatch, useAppSelector} from '../redux/hooks';
-import {handleCompleteLogout} from '../utils/auth';
+import Assets from '../../constants/images';
+import {useAppDispatch, useAppSelector} from '../../redux/hooks';
+import {handleCompleteLogout} from '../../utils/auth';
 
 const CustomDrawer = (props: DrawerContentComponentProps) => {
   const {userInfo} = useAppSelector(state => state.auth);

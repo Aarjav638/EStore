@@ -41,6 +41,7 @@ export type CheckoutParam = {
   cart: undefined;
   trackOrder: undefined;
   Search: undefined;
+  TrackingOrderMap: undefined;
 };
 
 export type CategoryStackParams = {
@@ -96,6 +97,7 @@ export type Images = {
   gps: ImageSourcePropType;
   truecaller: ImageSourcePropType;
   share: ImageSourcePropType;
+  airplane: ImageSourcePropType;
 };
 
 export type Product = {

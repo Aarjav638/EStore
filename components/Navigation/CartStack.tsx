@@ -6,6 +6,7 @@ import Search from '../../screens/Search/Search';
 import Cart from '../../screens/Cart';
 import Checkout from '../../screens/Checkout';
 import TrackOrder from '../../screens/TrackOrder';
+import TrackingOrderMap from '../../screens/TrackingOrderMap';
 
 const Stack = createNativeStackNavigator<CheckoutParam>();
 
@@ -20,6 +21,7 @@ const CartStack = () => {
       <Stack.Screen name="Checkout" component={Checkout} />
       <Stack.Screen name="Search" component={Search} />
       <Stack.Screen name="trackOrder" component={TrackOrder} />
+      <Stack.Screen name="TrackingOrderMap" component={TrackingOrderMap} />
     </Stack.Navigator>
   );
 };
